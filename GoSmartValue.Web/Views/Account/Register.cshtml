@@ -1,0 +1,133 @@
+﻿@using AV.Common.Entities
+@using AV.Contracts.Enums
+@model AV.Contracts.Models.Users.UserModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "User Registration";
+    var accountTypes = Enum.GetValues(typeof(UserAccountType))
+        .Cast<UserAccountType>()
+        .Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() })
+        .ToList();
+}
+
+<style>
+
+</style>
+<script src="~/js/bootstrap-select.js"></script>
+
+
+<!-- MultiStep Form -->
+<div class="container-fluid" style="background-image:url(/team.jpg);background-size:cover;height:100vh">
+    <div class="container-fluid" id="multistep-form">
+        <div class="container-fluid row">
+            <div class="col-sm-12 container-fluid text-center p-0 mt-3 mb-2">
+                <div class="container-fluid px-0 pt-4 pb-0 mt-3 mb-3">
+                    <div class="container-fluid row">
+
+                        <form id="msform" method="post" style="background:none!important">
+                            <div class="col-sm-12 container-fluid form-row">
+                                <div class="col-sm-8 mx-0 container-fluid">
+
+                                    <fieldset style="background:none!important">
+                                        <div class="form-card">
+                                            <h2 class="fs-title">Basic account setup</h2>
+                                            <div class="alert alert-dark" style="color:black">
+                                                <h6>Pricing</h6>
+                                                <ul>
+                                                    <li>Quick Valuation:<strong> Free</strong></li>
+                                                    <li>Print/download instant report:<strong> BWP 750</strong></li>
+                                                    <li>Detailed valuation:<strong> as per valuer charge</strong></li>
+                                                </ul>
+                                            </div>
+                                            <input type="text" asp-for="FirstName" placeholder="First Name" />
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                                            <input type="text" asp-for="LastName" placeholder="Last Name" />
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+
+                                            <input type="text" asp-for="PhoneNumber" placeholder="Cell Number" />
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+                                            <input type="email" asp-for="UserName" placeholder="Email" />
+                                            <span asp-validation-for="UserName" class="text-danger"></span>
+
+                                            <input type="password" asp-for="Password" placeholder="Password" />
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+
+                                            <input type="password" asp-for="PasswordConfirm" placeholder="Confirm Password" />
+                                            <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                                            <div class="row col-sm-12">
+                                                @*<input type="submit" name="basic" class="next action-button" value="Create Standard account" />*@
+                                                <button type="submit" name="basic" class="next action-button btn btn-blue">Create Standard account</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <input hidden="hidden" asp-for="ReturnUrl" value="@ViewBag.ReturnUrl" />
+
+                                </div>
+                                <div class="col-sm-4 container-fluid">
+                                    <div class="card mt-3">
+                                        <div class="form-group card-title">
+                                            <div class="card-title p-2">
+                                                <div class="card-title">Register as a <b>Sales Agent</b> or <b>Property valuer professional</b>.</div>
+                                            </div>
+                                            <div class="container-fluid card-footer col-sm-12">
+                                                <div class="container-fluid">
+                                                    <a asp-controller="Account" asp-action="RegisterValuer" class="btn btn-blue">
+                                                        Professional
+                                                    </a>
+                                                </div>
+
+                                                @*<button class="btn btn-blue">
+                                                        @Html.ActionLink("Property Professional", "RegisterValuer", "Account", null
+                                                    , new { @class = "btn btn-blue  register-profession-btn" })
+                                                    </button>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mt-3">
+                                        <div class="form-group card-title">
+                                            <div class="card-title p-2">Create a corporate account for your organisation.</div>
+                                            <div class="card-footer">
+
+                                                <div class="container-fluid col-sm-12">
+                                                    <a asp-controller="Account" asp-action="RegisterCorporate" class="btn btn-blue">
+                                                        Corporate
+                                                    </a>
+                                                </div>
+
+                                                @*@Html.ActionLink("Corporate", "RegisterCorporate", "Account", null
+                                                    , new { @class = "btn btn-primary  register-profession-btn" })*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('.radio-group .radio').click(function () {
+            $(this).parent().find('.radio').removeClass('selected');
+            $(this).addClass('selected');
+        });
+
+        $(".submit").click(function() {
+            return false;
+        });
+
+    });
+
+
+
+</script>

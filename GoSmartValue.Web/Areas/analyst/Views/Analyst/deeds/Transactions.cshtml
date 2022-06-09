@@ -1,0 +1,116 @@
+﻿@using GoSmartValue.Web.Services
+@model IEnumerable<AV.Contracts.Models.Valuation.ComparableViewModel>
+@inject CachedStorageService CachedStorageService
+
+
+@{
+    ViewBag.Title = "Deeds Property Transactions";
+    Layout = "Layouts/_BackOffice";
+}
+<div class="container-fluid">
+    <h3 class="card-title">Most Recent Deeds Office Transactions</h3>
+    <div class="row">
+        <a asp-area="analyst" asp-controller="Analyst" asp-action="CreateNewDeedsTransaction" class="btn btn-primary btn-lg right">Add Transaction</a>
+    </div>
+    <div class="row" style="height: 100%; margin-left: auto; margin-right: auto;">
+        <table id="valuations" class="table-responsive table-striped bg-light table-hover dataTable no-footer">
+            <thead>
+                <tr>
+                    <th scope="col">Requested On</th>
+                    <th scope="col">DataState</th>
+                    <th scope="col">Sold On</th>
+                    <th scope="col">Price Sold (Pula)</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Ward</th>
+                    <th scope="col">Street</th>
+                    <th scope="col">PlotNo</th>
+                    <th scope="col">PlotSize</th>
+                    <th scope="col">LandUse</th>
+                    <th scope="col">PropertyType</th>
+                    <th scope="col">BandClass</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            @if (Model.Any())
+            {
+                foreach (var valuation in Model)
+                {
+                    <tr>
+                        <th>@Html.DisplayFor(m => valuation.AddedOn)</th>
+                        <th>@valuation.DataState</th>
+                        <th>@Html.DisplayFor(m => valuation.DateOfSale)</th>
+                        <th>@Html.DisplayFor(m => valuation.SalePrice)</th>
+                        <th>
+                            @if (CachedStorageService.Cities.ContainsKey(@valuation.LocationId))
+                            {
+                                @CachedStorageService.Cities[@valuation.LocationId]
+                            }
+                        </th>
+                        <th>
+                            @if (@valuation.LocalityId != null && CachedStorageService.Localities.ContainsKey(@valuation.LocalityId.Value))
+                            {
+                                @CachedStorageService.Localities[@valuation.LocalityId.Value]
+                            }
+                        </th>
+                        <th>@Html.DisplayFor(m => valuation.StreetName)</th>
+                        <th>@Html.DisplayFor(m => valuation.PlotNo)</th>
+                        <th>@Html.DisplayFor(m => valuation.PlotSize)</th>
+                        <th>@Html.DisplayFor(m => valuation.LandUse)</th>
+                        <th>@Html.DisplayFor(m => valuation.PropertyType)</th>
+                        <th>
+                            @Html.DisplayFor(m => valuation.BandClass.BandName)
+                        </th>
+                        <th scope="row">
+
+                            <a class="d-inline-block"
+                               asp-area="analyst" asp-controller="Analyst"
+                               asp-action="EditDeedsTransaction" asp-route-id="@valuation.Id">
+                                <i class="fa fa-pencil-alt"></i> Edit
+                            </a>
+                            @using(Html.BeginForm("VerifyTransaction","Analyst", new { area="analyst", id = @valuation.Id}))
+                            {
+                                <input type="submit" name="verify" value="Verify"
+                                       onclick="return confirm('Are you sure you wish to verify this transaction?');"
+                                       formaction=@Url.Action("VerifyTransaction", "Analyst",new { area="analyst", id = @valuation.Id })
+                                       formmethod="post" class="btn btn-outline-success btn-sm" />
+                             } 
+                        
+                            @using(Html.BeginForm("DeleteTransaction","Analyst", new { area="analyst", id = @valuation.Id}))
+                            {
+                                <input type="submit" name="delete" value="Delete"
+                                       onclick="return confirm('Are you sure you wish to delete this transaction?');"
+                                       formaction=@Url.Action("DeleteTransaction", "Analyst", new { area="analyst", id = @valuation.Id })
+                                       formmethod="post" class="btn btn-danger btn-sm" />
+                            }
+                        </th>
+                    </tr>
+                }
+            }
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>Action</th>
+                <th>Requested On</th>
+                <th>DataState</th>
+                <th>Sold On</th>
+                <th>Price Sold (Pula)</th>
+                <th>City</th>
+                <th>Ward</th>
+                <th>Street</th>
+                <th>PlotNo</th>
+                <th>PlotSize</th>
+                <th>LandUse</th>
+                <th>PropertyType</th>
+                <th>BandClass</th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready( function () {
+        $('#valuations').DataTable();
+    } );
+</script>

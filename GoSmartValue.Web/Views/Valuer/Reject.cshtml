@@ -1,0 +1,119 @@
+﻿@model AV.Contracts.Models.Valuation.InstructionModel
+
+@{
+	ViewData["Title"] = "Instruction - Rejected";
+
+	Layout = "Layouts/_ValuerLayout";
+}
+@{
+	var parms = new Dictionary<string, object>
+{
+		{ "id", Model.Id },
+		{ "reason", Model.Comment },
+		{"instruction", Model}
+	};
+}
+
+<div class="outer container-fluid" style="background-image: url(/reject.jpg); background-size: cover; height: 100vh">
+	<div class="middle container-fluid" style="padding-top: ">
+		<div class=" inner container-fluid my-auto">
+			@using (Html.BeginForm("Reject", "Valuer", FormMethod.Post, new
+			{ style = "background-color:transparent!important", @class = "" }))
+			{
+				<div class="row">
+					<div class="col-12">
+						<fieldset>
+							<div class="col-8 offset-2 shadow" style="background-color:#fff">
+
+								@*<div class="alert alert-warning">
+									You about to reject the instruction detailed below
+								</div>*@
+								<div class="form-row">
+									<div class="col-sm-12">
+										<h6>Client Information</h6>
+										<div class="row form-group">
+											<div class="col-sm-4">
+												<label>From</label>
+												<input value="@Model.Issuer?.FirstName @Model.Issuer?.LastName" readonly="readonly" class="form-control" />
+											</div>
+											<div class="col-sm-4">
+												<label>Client Name</label>
+												<input asp-for="@Model.ClientName" readonly="readonly" class="form-control" />
+											</div>
+											<div class="col-sm-4">
+												<label>Client Phone</label>
+												<input asp-for="@Model.ClientMobileNumber " readonly="readonly" class="form-control" />
+											</div>
+										</div>
+										<div class="row form-group">
+											<div class="col-sm-4">
+												<label>Town/City</label>
+												<input value="@Model.Location?.Name" readonly="readonly" class="form-control" />
+											</div>
+											<div class="col-sm-4">
+												<label>Ward/Locality</label>
+												<input value="@Model.Locality?.Name" readonly="readonly" class="form-control" />
+											</div>
+											<div class="col-sm-4">
+												<label>Plot Number</label>
+												<input asp-for="@Model.PlotNumber" readonly="readonly" class="form-control" />
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-12">
+										<h6>Access Information</h6>
+										<div class="row form-group">
+											<div class="col-sm-4">
+												<label>Contact Name</label>
+												<input asp-for="@Model.AccessContactName" readonly="readonly" class="form-control" />
+											</div>
+											<div class="col-sm-4">
+												<label>Phone</label>
+												<input asp-for="@Model.AccessContactMobileNumber" readonly="readonly" class="form-control" />
+											</div>
+											<div class="col-sm-4">
+												<label>Access Date</label>
+												<input value="@Model.PreferredAccessDate?.ToString("d")" readonly="readonly" class="form-control" />
+											</div>
+										</div>
+										<div class="row form-group">
+											<div class="col-sm-4">
+
+												<label>Time</label>
+												<input value="@Model.PreferredAccessDate?.ToString("t")" readonly="readonly" class="form-control" />
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-title p-2" style="background-color:#b71c1c;color:#fff">
+										<h5>Are you sure you want to reject this instruction?</h5>
+									</div>
+									<div class="card-body">
+										<textarea type="text" required="required" placeholder="Please state why you are rejecting this instructions."
+												  maxlength="150"
+												  asp-for="Comment" class="form-control"></textarea>
+									</div>
+									<input hidden="hidden" asp-for="IssuerId" />
+									<input hidden="hidden" asp-for="LocationId" />
+									<input hidden="hidden" asp-for="LocalityId" />
+									<input hidden="hidden" asp-for="ValuerId" />
+									<input hidden="hidden" asp-for="PreferredAccessDate" />
+
+									<div class="card-footer">
+										<input type="submit" asp-controller="Valuer" asp-action="Reject" class="btn btn-red" value="Confirm">
+										<a type="button" asp-controller="Valuer" asp-action="NewInstructions" class="btn btn-black">No</a>
+									</div>
+								</div>
+							</div>
+
+						</fieldset>
+					</div>
+				</div>
+			}
+
+
+		</div>
+	</div>
+</div>

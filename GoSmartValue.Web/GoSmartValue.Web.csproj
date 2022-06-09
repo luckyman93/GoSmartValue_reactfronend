@@ -1,0 +1,267 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <!--<Target Name="MyPreCompileTarget" BeforeTargets="Build">
+    <Exec Command="gulp min" />
+  </Target>-->
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+
+    <UserSecretsId>aspnet-AutoValutions.Site-83E98DAC-747F-418B-996B-3A47CC7174B0</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <StartupObject>GoSmartValue.Web.Program</StartupObject>
+    <AssemblyName>GoSmartValue.Web</AssemblyName>
+    <ApplicationInsightsResourceId>/subscriptions/61aeff15-39ec-4639-84ad-37c29485e60b/resourcegroups/VantageProperties/providers/microsoft.insights/components/GoSmartValue.Web</ApplicationInsightsResourceId>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+	  <TypeScriptTarget>ES2019</TypeScriptTarget>
+	  <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+	  <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+	  <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+	  <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+	  <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+	  <TypeScriptOutFile />
+	  <TypeScriptOutDir />
+	  <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+	  <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+	  <TypeScriptSourceMap>True</TypeScriptSourceMap>
+	  <TypeScriptMapRoot />
+	  <TypeScriptSourceRoot />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <PlatformTarget>AnyCPU</PlatformTarget>
+	  <DocumentationFile>GoSmartValue.Web.xml</DocumentationFile>
+	  <NoWarn>1701;1702,1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	  <InternalsVisibleTo Include="Gosmartvalue.Integration.Tests" />
+  </ItemGroup>
+    <ItemGroup>
+     <!--Don't publish the SPA source files, but do show them in the project files list--> 
+    <Content Remove="$(SpaRoot)**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <Compile Remove="Areas\admin\Data\**" />
+    <Compile Remove="Areas\admin\Models\**" />
+    <Compile Remove="Areas\admin\Views\NewFolder\**" />
+    <Compile Remove="Areas\api\Data\**" />
+    <Compile Remove="Areas\api\Views\**" />
+    <Compile Remove="Data\**" />
+    <Compile Remove="helpers\**" />
+    <Compile Remove="Security\**" />
+    <Compile Remove="web-app\**" />
+    <Compile Remove="wwwroot\css\images\**" />
+    <Content Remove="Areas\admin\Data\**" />
+    <Content Remove="Areas\admin\Models\**" />
+    <Content Remove="Areas\admin\Views\NewFolder\**" />
+    <Content Remove="Areas\api\Data\**" />
+    <Content Remove="Areas\api\Views\**" />
+    <Content Remove="Data\**" />
+    <Content Remove="helpers\**" />
+    <Content Remove="Security\**" />
+    <Content Remove="web-app\**" />
+    <Content Remove="wwwroot\css\images\**" />
+    <EmbeddedResource Remove="Areas\admin\Data\**" />
+    <EmbeddedResource Remove="Areas\admin\Models\**" />
+    <EmbeddedResource Remove="Areas\admin\Views\NewFolder\**" />
+    <EmbeddedResource Remove="Areas\api\Data\**" />
+    <EmbeddedResource Remove="Areas\api\Views\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <EmbeddedResource Remove="helpers\**" />
+    <EmbeddedResource Remove="Security\**" />
+    <EmbeddedResource Remove="web-app\**" />
+    <EmbeddedResource Remove="wwwroot\css\images\**" />
+    <None Remove="Areas\admin\Data\**" />
+    <None Remove="Areas\admin\Models\**" />
+    <None Remove="Areas\admin\Views\NewFolder\**" />
+    <None Remove="Areas\api\Data\**" />
+    <None Remove="Areas\api\Views\**" />
+    <None Remove="Data\**" />
+    <None Remove="helpers\**" />
+    <None Remove="Security\**" />
+    <None Remove="web-app\**" />
+    <None Remove="wwwroot\css\images\**" />
+    <TypeScriptCompile Remove="helpers\**" />
+    <TypeScriptCompile Remove="Security\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Areas\admin\Views\Organisation\Create.cshtml" />
+    <Content Remove="compilerconfig.json" />
+    <Content Remove="package.json" />
+    <Content Remove="wwwroot\css\material-kit.css" />
+    <Content Remove="wwwroot\css\material-kit.css.map" />
+    <Content Remove="wwwroot\css\site.min.css" />
+    <Content Remove="wwwroot\InstantReport.jpg" />
+    <Content Remove="wwwroot\js\dataTables.editor.min.js" />
+    <Content Remove="wwwroot\js\jquery.circle-progress.bare.min.js" />
+    <Content Remove="wwwroot\js\jquery.circle-progress.min.js" />
+    <Content Remove="wwwroot\js\material-kit.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Areas\admin\Controllers\OrganisationController.cs~RF515559.TMP" />
+    <None Remove="assets\css\site.scss" />
+    <None Remove="Content\css\bootstrap-select.css" />
+    <None Remove="Content\css\datatables.css" />
+    <None Remove="Content\css\font-awesome.css" />
+    <None Remove="Content\css\site.css" />
+    <None Remove="Scripts\bootstrap-select.js" />
+    <None Remove="Scripts\datatables.js" />
+    <None Remove="Scripts\js\popper.js" />
+    <None Remove="Scripts\site.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\admin\Views\Organisation\Create.cshtml" />
+    <None Include="compilerconfig.json" />
+    <None Include="package.json" />
+    <None Include="Pages\Shared\_CookieConsentPartial.cshtml" />
+    <None Include="Pages\Shared\_LoginPartial.cshtml" />
+    <None Include="Pages\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="wwwroot\js\*" />
+    <None Include="wwwroot\lib\*" />
+    <None Include="wwwroot\css\*" />
+    <None Include="wwwroot\*.JPG" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="SynchronizedConverter.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="*.env" CopyToOutputDirectory="Always" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.3.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="bootstrap-select" Version="1.13.18" />
+    <PackageReference Include="Bootstrap.Datepicker" Version="1.8.0.1" />
+    <PackageReference Include="ClosedXML" Version="0.95.4" />
+    <PackageReference Include="dotenv.net" Version="3.1.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
+    <PackageReference Include="font-awesome" Version="4.7.0" />
+    <PackageReference Include="jasmine" Version="2.6.4" />
+    <PackageReference Include="jasmine.TypeScript.DefinitelyTyped" Version="2.3.5" />
+    <PackageReference Include="jQuery.UI.Combined" Version="1.13.0" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="3.1.22" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.113" />
+    <PackageReference Include="MySql.Data" Version="8.0.27" />
+    <PackageReference Include="NETCore.MailKit" Version="2.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Node.js" Version="5.3.0" />
+    <PackageReference Include="popper.js" Version="1.16.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\user\Data\" />
+    <Folder Include="Areas\user\Models\" />
+    <Folder Include="Areas\user\Pages\" />
+    <Folder Include="assets\css\layouts\" />
+    <Folder Include="assets\images\" />
+    <Folder Include="assets\icons\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AV.Common\AV.Common.csproj" />
+    <ProjectReference Include="..\AV.Contracts\AV.Contracts.csproj" />
+    <ProjectReference Include="..\AV.Persistence.EntityFramework\AV.Persistence.EntityFramework.csproj" />
+    <ProjectReference Include="..\AV.Handlers\AV.Handlers.csproj" />
+    <ProjectReference Include="..\AV.Infrastructure.Services\AV.Infrastructure.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\admin\Views\Organisation\Create.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\admin\Views\Organisation\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="compilerconfig.json" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\site.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\jquery.circle-progress.bare.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\jquery.circle-progress.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="assets\css\site.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Content\css\bootstrap-select.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Content\css\datatables.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Content\css\font-awesome.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Content\css\site.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\js\bootstrap-select.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\js\datatables.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\js\popper.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\js\site.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Update="Areas\admin\Views\_ViewImports.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\analyst\Views\valuations\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+</Project>

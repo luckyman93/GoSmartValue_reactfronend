@@ -1,0 +1,8 @@
+﻿@model AV.Contracts.Models.Users.UserModel
+
+@{
+    ViewBag.Title = $"{Model.FirstName} {Model.LastName}";
+    Layout = "_Layout";
+}
+
+<h2>@Model.FirstName @Model.LastName</h2>

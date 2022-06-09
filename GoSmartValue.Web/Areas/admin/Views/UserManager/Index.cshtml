@@ -1,0 +1,94 @@
+﻿@using AV.Contracts.Models.Users
+@model IList<UserModel>
+
+@{
+    Layout = "_Layout";
+}
+
+    <div class="outer container-fluid image-container set-full-height" style="background-image:url(/valuationsIndex.jpg);">
+        <div class="middle container-fluid" style="padding-top:75px">
+            <div class=" inner container-fluid">
+
+                <div class="shadow col-md-12 container-fluid">
+                    <div class="container-fluid" style="padding:10px">
+                        <div style="padding:0;width:100%">
+                            <i class="card-title">All Users</i>
+
+                            <table id="users" class="table  table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Datetime</th>
+                                        <th scope="col">Account Type</th>
+                                        <th scope="col">LastName</th>
+                                        <th scope="col">FirstName</th>
+                                        <th scope="col">UserName</th>
+                                        <th scope="col">AccountEnabled</th>
+                                        <th scope="col">LockoutEnabled</th>
+                                        <th scope="col">AccessFailedCount</th>
+                                        <th scope="col">Reset Password</th>
+                                        <th scope="col">Active</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var user in Model)
+                                    {
+                                        @foreach (var account in user.Accounts.OrderByDescending(ac => ac.AddedOn))
+                                        {
+                                            <tr>
+                                                <td>@Html.ActionLink("Details",  "Details",  "UserManager", new {Id = user.Id})</td>
+                                                <td>@account.AddedOn</td>
+                                                <td>@account.AccountType</td>
+                                                <td scope="row">
+                                                    @user.LastName
+                                                </td>
+                                                <td>
+                                                    @user.FirstName
+                                                </td>
+                                                <td>
+                                                    @(((UserLoginViewModel)user).UserName)
+                                                </td>
+                                                <td>
+                                                    @user.EmailConfirmed
+                                                </td>
+                                                <td>
+                                                    @user.LockoutEnabled
+                                                </td>
+                                                <td>
+                                                    @user.AccessFailedCount
+                                                </td>
+                                                <td>
+                                                    @if (!string.IsNullOrEmpty(@user.PasswordResetLink) && user.PasswordResetExpiresOn > DateTimeOffset.UtcNow)
+                                                    {
+                                                        <a href="@user.PasswordResetLink" class="alert-link">Reset User Password</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.ActionLink("ForgotPassword", "ForgotPassword", "Account")
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @user.Active
+                                                </td>
+                                            </tr>
+                                        }
+                                }
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                            <script>
+                                $(document).ready(function () {
+                                    $('#users').DataTable({
+                                        responsive: true
+                                    });
+                                    $('.dataTables_length').addClass('bs-select');
+
+                                });
+                            </script>

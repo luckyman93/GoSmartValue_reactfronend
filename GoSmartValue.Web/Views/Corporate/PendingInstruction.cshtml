@@ -1,0 +1,118 @@
+﻿@using GoSmartValue.Web.Services
+@model IEnumerable<AV.Contracts.Models.Valuation.InstructionModel>
+@inject CachedStorageService CachedStorage
+@{
+    ViewData["Title"] = "Pending instruction";
+
+    Layout = "Layouts/_CorporateLayout";
+}
+
+<div class="outer container-fluid" style="background-image:url(/valuationsIndex.jpg);background-size:cover;height:100vh">
+    <div class="middle container-fluid" style="padding-top:85px">
+        <div class="inner container-fluid" style="">
+            <div class="shadow col-md-12 container-fluid">
+                <div class="container-fluid " style="padding:10px">
+                    <div style="padding:0;width:100%">
+                        <table id="instructions" class="table  table-hover">
+                            <thead>
+                                <tr>
+                                    <th>City</th>
+                                    <th>Client Name</th>
+                                    <th>Client Number</th>
+                                    <th>Plot Number</th>
+                                    <th>Ward</th>
+                                    <th>Valuer</th>
+                                    <th>Preferred Access Date</th>
+                                    <th>Preferred Access Time</th>
+                                    <th>Progress</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var instruction in Model.OrderByDescending(i => i.CreatedDate))
+                                {
+                                    {
+                                        var localityName = instruction.LocalityId.HasValue ? CachedStorage.GetLocalityName(instruction.LocalityId.Value) : null;
+                                        
+                                        <tr>
+                                            <th scope="row">@await CachedStorage.GetLocationName(instruction.LocationId)</th>
+                                            <td>@instruction.ClientName</td>
+                                            <td>@instruction.ClientMobileNumber</td>
+                                            <td>@instruction.PlotNumber</td>
+                                            <td>@localityName?.Result</td>
+                                            <td>@instruction.Valuer?.FullName</td>
+                                            <td>
+                                                @if (instruction.PreferredAccessDate.HasValue)
+                                                {
+                                                    @instruction.PreferredAccessDate.Value.ToString("dd/MM/yyyy")
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (instruction.PreferredAccessDate.HasValue)
+                                                {
+                                                    @instruction.PreferredAccessDate.Value.ToString("HH:mm")
+                                                }
+                                            </td>
+                                            <td>
+                                                <span class="">
+                                                    <strong>@instruction.Status.ToString()</strong>
+                                                </span>
+                                                @*<div class="circle" id="circle-c">
+
+                                            </div>*@
+
+                                            </td>
+                                        </tr>
+
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                        
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+       $('#instructions').DataTable({
+           responsive: true
+       });
+
+        $('.dataTables_length').addClass('bs-select');
+
+        var progressBarOptions = {
+            startAngle: -1.55,
+            size: 10,
+            value: 0.25,
+            fill: {
+                color: "#b71c1c"
+            }
+        }
+
+        $(".circle").circleProgress(progressBarOptions).on("circle-animation-progress", function (event, progress, stepValue) {
+            //$(this).find('strong').text(String(stepValue.toFixed(2)).substr(1));
+        });
+
+
+
+        $("#circle-c").circleProgress({
+            value: 0.25,
+            fill: {
+                color: "#b71c1c"
+            }
+        });
+
+        $(".progress").circleProgress({
+            max: 5,
+            value: 1,
+            textFormat: 'vertical',
+            clockwise: true,
+            size: 10,
+            animation: 'none',
+        });
+    });
+</script>

@@ -1,0 +1,62 @@
+﻿@model AV.Contracts.Models.Payment.Commands.AddCreditCommand
+@{
+    ViewData["Title"] = "Add Credit Payment";
+
+    Layout = "_Layout";
+}
+
+<div class="outer container-fluid image-container set-full-height" style="background-image:url(/valuationsIndex.jpg);background-size:cover;height:100vh">
+    <div class="middle container-fluid" style="padding-top:80px">
+        <div class=" inner container-fluid">
+            <div class="card shadow col-md-12 container-fluid" style="background-color: #ffffff;">
+                <div style="padding:0;width:100%;padding:10px">
+					<form method="get" enctype="multipart/form-data" asp-controller="Payment" asp-action="Payment">
+						<div><h1>Add Credit to Account</h1></div>
+						<div>You do not have enough credit in you account to process this.Please add credit</div>
+						<div class="text-center">
+							<div class="pb-4"><button type="button" id="adjustUp" class="btn btn-blue"><i class="material-icons">keyboard_arrow_up</i></button></div>
+							<div><input id="credit" type="number" min="500" value="500" class="proposedValue pull-right" /></div>
+							<div class="pt-4"><button type="button" id="adjustDown" class="btn btn-blue"><i class="material-icons">keyboard_arrow_down</i></button></div>
+						</div>
+
+						<div class="row col-sm-12">
+							@*@Html.ActionLink("Continue", "MakePayment", new { AccountId = Model.AccountId, Amount = Model.Amount }, new { @class = "button" })*@
+							<button type="submit" class="btn btn-blue">Continue</button>
+						</div>
+
+						<input type="hidden" id="Amount" name="Amount" value="500" />
+						<input type="hidden" id="AccountId" name="AccountId" value="@Model.AccountId" asp-for="AccountId" />
+						
+
+					</form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+	$(document).ready(function () {
+		
+		$("#adjustUp").click(function () {
+			var currentValue = $("#credit").val();
+			var adjustedPrice = parseFloat(currentValue) + parseFloat(100);
+			$(".proposedValue").val(parseFloat(adjustedPrice).toFixed(0));
+			$("#Amount").val(parseFloat(adjustedPrice));
+			console.log($("#Amount").val());
+			
+		});
+
+		$("#adjustDown").click(function () {
+            var currentValue = $("#credit").val();
+			if (parseFloat(currentValue) !== 500)
+            {
+				var adjustedPrice = parseFloat(currentValue) - parseFloat(100);
+				$(".proposedValue").val(parseFloat(adjustedPrice).toFixed(0));
+				$("#credit").val(parseFloat(adjustedPrice));
+            }
+			
+        });
+	});
+</script>
+

@@ -1,0 +1,28 @@
+﻿@{
+	ViewData["Title"] = "Administration";
+
+	Layout = "_Layout";
+}
+
+<div class="container-fluid image-container set-full-height" style="background-image: url(/index.jpg);">
+	<div class="row col-sm-12" style="padding-top:80px;padding-left:100px">
+		<div class="col-sm-6">
+			<div class="row col-sm-12">
+				<a asp-controller="Account" asp-action="ChangePassword" style="font-size: 20px;color:#1a237e;font-family:'Segoe UI';text-decoration:none"><i class="fa fa-chevron-right"></i><span>Change Password</span></a>
+			</div>
+			<div class="row col-sm-12">
+				<a asp-controller="Standard" asp-action="CompleteInstructions" style="font-size: 20px;color:#1a237e;font-family:'Segoe UI';text-decoration:none"><i class="fa fa-chevron-right"></i><span>Complete Instructions </span></a>
+			</div>
+			@*<div class="row col-sm-12">
+				<a asp-controller="Standard" asp-action="" style="font-size: 20px;color:#1a237e;font-family:'Segoe UI';text-decoration:none"><i class="fa fa-chevron-right"></i><span> Account Billing</span></a>
+			</div>*@
+
+		</div>
+		<div class="col-sm-6">
+			<div class="row col-sm-12">
+
+			</div>
+		</div>
+	</div>
+</div>
+

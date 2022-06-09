@@ -1,0 +1,31 @@
+.reports-section{
+  max-width:84%;
+  max-height: 50rem;
+  overflow: hidden;
+  //display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tittle{
+  font: normal normal 200 1.83rem Gilroy Heavy;
+}
+
+.price{
+  font: normal normal 200 1.3rem Gilroy Heavy;
+}
+
+.description{
+  font: normal normal 200 1.4rem Gilroy Regular;
+}
+
+.section-title {
+  text-align: center;
+  font: normal normal 300 50px/65px Gilroy Regular;
+  color: #1A2E49;
+  opacity: 1;
+  text-decoration: underline #FF8800;
+  text-underline-offset: 1rem;
+  margin-top:2rem;
+  margin-bottom: 4rem;
+}

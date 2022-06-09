@@ -1,0 +1,639 @@
+﻿@using AV.Contracts.Enums
+@model AV.Contracts.Models.Valuation.ValuationResultViewModel
+
+<style type="text/css">
+
+	#main {
+		height: fit-content;
+		margin:0;
+	}
+
+	/*.container-card {
+		padding: 15px;
+	}*/
+
+	body {
+		background-color: transparent;
+	}
+
+	.background-color {
+		background-color: white;
+	}
+
+	.document-background {
+		/*background-color: #868383;*/
+	}
+
+	.text-color {
+		color: #1a237e;
+	}
+
+	.red {
+		color: #b71c1c;
+	}
+
+	.heading-new {
+		color:#fff
+	}
+
+	html, body {
+		margin:0;
+		width: 245mm;
+		height: 282mm;
+		font-size: 16px;
+		background: #FFF;
+		/*background-color: #868383;*/
+		font-family:'Times New Roman', Times, serif;
+	}
+	/*html, body {
+		width: 210mm;
+
+		height: 282mm;
+		font-size: 16px;
+		background: #FFF;
+
+		background-color: #868383;
+	}*/
+	/*body {
+		/*padding-top: 15mm;
+		background-color: transparent;
+	}*/
+</style>
+
+@{
+	ViewData["Title"] = "Valuation Report";
+	Layout = "Layouts/_Report";
+
+	var valuerAccount = Model.Valuer.Accounts.FirstOrDefault(ac => ac.AccountType == UserAccountType.Valuer);
+
+}
+@*<link rel="stylesheet" href="/css/print-preview.min.css"/>*@
+@*@model string
+
+	@Html.Raw(Model)*@
+
+
+@*<script src="/js/jquery.print-preview.min.js"></script>*@
+@*<script>
+		$(document).ready(function () {
+			$("%#").remove();
+		});
+	</script>*@
+
+<div class=" d-print-none text-right made-with-mk col-sm-12" onclick="window.print()">
+	<div class="brand"><i class="material-icons">print</i></div>
+	<div class="made-with" ><strong>Print</strong></div>
+</div>
+<div class="background-color" style="margin:0">
+
+	<div style="page-break-after:always;background-image:url(/backgroundImages/report.jpg);border:solid" class="container-fluid image-container set-full-height">
+		<div class="col-sm-12 text-center" style="text-align:center;padding-top:30%">
+			<h1 style="color:#fff;font-weight: 700;">VALUATION</h1>
+		</div>
+		<div class="col-sm-12 text-center" style="text-align:center">
+			<h1 style="color:#fff;font-weight: 700;">REPORT</h1>
+		</div>
+		<div class="col-sm-12 text-center" style="text-align:center;padding-top:45%">
+			
+				@if (valuerAccount != null)
+				{					
+					<img src="@Url.Action("GetDocumentByAccountId", "Document", new { accountId = valuerAccount.Id })" width="200" height="200" alt="Company Logo" />
+					<h2 style="color:#fff;font-weight: 700"> @valuerAccount.CompanyName</h2>
+					
+				}
+			
+		</div>
+		<div class="col-sm-12 text-center" style="text-align:center">
+			<h4 class="" style="font-style: italic;font-weight: 200;color:#fff">processsed through www.gosmartvalue.com</h4>
+		</div>
+		<div class="col-sm-12 text-center" style="text-align:center;margin-top:5%">
+			<h4 style="font-weight: 700;color:#fff">REGISTERED VALUER</h4>
+			<h5 style="color:#fff;font-weight: 700">@Model.Valuer.FirstName @Model.Valuer.LastName</h5>
+		</div>
+		<div class="col-sm-12 text-center" style="text-align:center;margin-top:5%">
+			<h4 style="		font-weight: 700;
+		color: #fff">DATE OF VALUATION</h4>
+			<h5 style="color:#fff;font-weight: 700">@Model.Valuation?.ValuationDate?.ToString("dd/MM/yyyy")</h5>
+		</div>
+
+		@*<table style="table-layout: fixed;width:100%;font-weight: 900;">
+			<thead>
+				<tr>
+					<th><h4 style="font-weight: 700;color:#fff">REGISTERED VALUER</h4></th>
+					<th class="text-right"><h4 style="font-weight: 700;color:#fff">DATE OF VALUATION</h4></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><h5 style="color:#fff;font-weight: 700">@Model.Valuer.FirstName @Model.Valuer.LastName</h5></td>
+					<td class="text-right"><h5 style="color:#fff;font-weight: 700">@Model.Valuation?.ValuationDate?.ToString("dd/MM/yyyy")</h5></td>
+				</tr>
+			</tbody>
+
+		</table>*@
+	</div>
+	<div style="page-break-after:always;">
+		<div style="padding-top:10%;padding:15px;">
+			<div class="col-sm-12">
+
+				<table style="table-layout: fixed; width: 100%">
+					<tr>
+						<th><h2 class="text-color">Property Information</h2></th>
+
+						<th class="bg-primary p-2">
+							<h2 class=" heading-new">Market Information</h2>
+							@if (@Model.Valuation.Rating == 1)
+							{
+								<p class="heading-new">Property Rating: Fair wear & tear </p>
+							}
+							@if (@Model.Valuation.Rating == 2)
+							{
+								<p class="heading-new">Property Rating: Slightly Fair </p>
+							}
+							@if (@Model.Valuation.Rating == 3)
+							{
+								<p class="heading-new">Property Rating: Fair </p>
+							}
+							@if (@Model.Valuation.Rating == 4)
+							{
+								<p class="heading-new">Property Rating: Slightly good </p>
+							}
+							@if (@Model.Valuation.Rating == 5)
+							{
+								<p class="heading-new">Property Rating: Good </p>
+
+							}
+							<hr style="border: 4px solid;color:#1a237e" />
+						</th>
+					</tr>
+					<tr>
+						<td><h4>OWNERSHIP DETAILS</h4></td>
+
+						<td class="bg-primary"><h4 class="heading-new p-2">Market Value</h4></td>
+					</tr>
+					<tr>
+						<td><h6>Title deed:@Model.Valuation.TitleDeedNo</h6></td>
+
+						<td class="bg-primary">
+							<h2 class="heading-new p-2">
+								@Model.Valuation.Value?.ToString("0,00.00") BWP
+
+							</h2>
+							
+						</td>
+					</tr>
+					<tr>
+						<td><h6>Title date:@Model.Valuation?.TitleDeedDate.ToString("dd/MM/yyyy")</h6></td>
+
+						<td class="bg-primary p-2">
+
+							<p class=" heading-new">Average Sales Price in locality</p>
+							<hr style="border: 4px solid;color:#1a237e" />
+						</td>
+					</tr>
+					<tr>
+						<td><h5>PURPOSE OF VALUATION</h5></td>
+
+						<td class="bg-primary">
+							<h2 class="heading-new p-2">
+								@if (Model.Valuation.EstimatedValue > 0)
+								{
+									@Model.Valuation.EstimatedValue?.ToString("0,00.00")
+								}
+							</h2>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Finance/Sale</p>
+							<p>Client:@Model.Valuation.Instruction.ClientName</p>
+						</td>
+
+						<td class="bg-primary p-2">
+							<p class="heading-new">Average Sale Price in location</p>
+							<hr style="border: 4px solid;color:#1a237e" />
+						</td>
+					</tr>
+					<tr>
+						<td><h5>PROPERTY DESCRIPTION</h5></td>
+
+						<td class="bg-primary"><h2 class="text-color"></h2></td>
+					</tr>
+					<tr>
+						<td><p>Land use:@Model.Valuation.LandUse.ToString()</p></td>
+
+						<td class="bg-primary"><p class="p-2 heading-new">Average land rate in locality</p></td>
+					</tr>
+					<tr>
+						<td>
+							<span>
+								@Model.Valuation.Description,@Model.Valuation.CeilingDetails,@Model.Valuation.FloorDetails,
+								@Model.Valuation.Doors,@Model.Valuation.Windows,@Model.Valuation.Walls,@Model.Valuation.ExteriorFinishes
+								@Model.Valuation.ToiletAndBathroom,@Model.Valuation.Roofing,@Model.Valuation.OtherDetails
+							</span>
+
+
+
+						</td>
+
+						<td class="bg-primary"></td>
+					</tr>
+					<tr>
+						<td><span>Plot size: @Model.Valuation.PlotSize.ToString("0.00") ,Built up area: @Model.Valuation.BuiltUpArea.ToString("0.00")</span></td>
+
+						<td class="bg-primary"></td>
+					</tr>
+					<tr>
+						<td>
+
+							<span>Features:</span>
+							<ul>
+								@if (@Model.Valuation.SwimmingPool)
+								{
+									<li>Swimming Pool</li>
+								}
+								@if (@Model.Valuation.MotorizedGate)
+								{
+									<li>Motorized Gate</li>
+								}
+								@if (@Model.Valuation.ElectricFence)
+								{
+									<li>Electric Fence</li>
+								}
+								@if (@Model.Valuation.Paved)
+								{
+									<li>Paved</li>
+								}
+								@if (@Model.Valuation.FirePlace)
+								{
+									<li>Fireplace</li>
+								}
+								@if (@Model.Valuation.BoundaryWall)
+								{
+									<li>Boundary wall</li>
+								}
+								@if (@Model.Valuation.OutdoorEntertainmentArea)
+								{
+									<li>Outdoor Entertainment Area</li>
+								}
+								@if (@Model.Valuation.OtherSpecialFeatures != null)
+								{
+									<li>@Model.Valuation.OtherSpecialFeatures</li>
+								}
+							</ul>
+
+						</td>
+
+						<td class="bg-primary"></td>
+					</tr>
+					<tr>
+					<tr>
+						<td><h5>PROPERTY LOCATION INFORMATION</h5></td>
+
+						<td class="bg-primary"></td>
+					</tr>
+					<tr>
+						<td><p>Plot @Model.Valuation.Instruction.PlotNumber located in @Model.Valuation.Instruction.LocalityName, @Model.Valuation.Instruction.LocationName</p></td>
+
+						<td class="bg-primary p-2">
+							<hr style="border: 4px solid;color:#1a237e" />
+						</td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+	</div>
+	<div style="page-break-after:always;">
+		<div style="padding-top:10%;padding:15px">
+			<div class="row col-sm-12" style="padding-bottom: 20px;">
+				<h2 class="text-color">Sales Comparables</h2>
+
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<p>
+						Top 3 most recent property sales, similar to your property conducted in the last 6-12 months.
+						Within close proximity to your property
+					</p>
+				</div>
+			</div>
+			<div class="row col-sm-12">
+				<table class="table table-hover table-sm">
+					<thead>
+						<tr>
+							<th scope="col">Plot</th>
+							<th scope="col">Value</th>
+							<th scope="col">Date of Sale</th>
+						</tr>
+					</thead>
+					<tbody>
+						@if (Model.Comparables != null)
+						{
+							@foreach (var comparable in Model.Comparables.OrderByDescending(c => c.DateOfSale))
+							{
+								<tr class="table-dark" style="color:#000">
+									<td>@comparable.PlotNo</td>
+									<td>@comparable.SalePrice.ToString("0,00.00")</td>
+									<td>@comparable.DateOfSale?.ToString("dd/MM/yyyy")</td>
+								</tr>
+							}
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div style="page-break-after:always;">
+		<div style="padding-top:10%;padding:15px">
+			@if (Model.Valuation.SitePictures.Any())
+			{
+				<h2>Site Pictures</h2>
+				@foreach (var item in Model.Valuation.SitePictures)
+				{
+					<img src="@Url.Action("Download", "Document", new { documentId = item.Id })" width="200" height="200" alt="Company Logo" />
+				}
+			}
+
+			<div class="col-sm-12 form-group">
+				<div class="row">
+					<h2>ZONING/PLANNING</h2>
+				</div>
+				<div class="row">
+					<p>
+						Planning:@Model.Valuation.Zoning.ToString()
+					</p>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="row">
+					<h2>Market Commentary</h2>
+				</div>
+				<div class="row">
+					<p>
+
+					</p>
+				</div>
+				<div class="row">
+					<h4>Valuer Commentary</h4>
+				</div>
+				<div class="row">
+					<p>
+						@Model.Valuation.MarketCommentary;
+					</p>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="row">
+					<h2>DISCLAIMERS</h2>
+				</div>
+				<div class="row">
+					<p>Environmental matters:</p>
+				</div>
+				<div class="row">
+					<p>Flooding: Unknown</p>
+				</div>
+				<div class="row">
+					<p>Radom gas: Unknown</p>
+				</div>
+				<div class="row">
+					<p>Sustainability: Unknown</p>
+				</div>
+				<div class="row">
+					<p>Source of information: provided by @Model.Valuation.Instruction.ClientName, deeds registry</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div style="page-break-after:always;">
+		<div style="padding-top:10%;padding:15px">
+
+			<p>
+				Vantage Valuations is a division of Vantage Properties under the Consultancy Service offering. We conduct valuations on immovable property across all sectors and purposes including valuation for Property Finance
+				Our approach to Valuation
+			</p>
+			<p>1.0 Any asset has a value in an open market if it possesses four basic economic and legal characteristics viz</p>
+			<ul>
+				<li>(i) Utility</li>
+				<li>(ii)Scarcity</li>
+				<li>(iii) Demand</li>
+				<li>(iv)Transferability</li>
+			</ul>
+			<p>1.1 Utility can be defined as the power of a good or an asset to satisfy human need. Since Value is dependent on degree of satisfaction of need according to perception of an individual, it is subjective and varies from person to person.</p>
+			<p>1.2 Scarcity is a relative term and must be considered in relation to effective demand and effective supply and the alternate uses, present and / or prospective, to which asset can be put to.</p>
+			<p>1.3 Demand implies not only desire to possess a thing in view of presence of need but it must also be supported by efforts to acquire a thing in terms of monetary power. Thus demand must be effective demand and if any of the two i.e. either desire or efforts is lacking, there is no demand.</p>
+			<p>1.4 Transferability is a legal concept which must be considered in determination of value of a property/ asset. If an asset is not transferable, in whole or in part, it will not have value in the market.</p>
+			<p>1.5 The definition of “market value “ viz. “ the price offered by a prudent, willing and able Purchaser and accepted by a prudent, willing and able Vendor “ incorporates all the above four ingredients of value. Prudent means one who has sufficient knowledge of the market and one who can properly think and evaluate merits/ advantages and demerits/ disadvantages in possessing a thing. Willing means one who is not acting under compulsions or extraneous circumstance i.e. one who is not needy. Able means one who has legal right to sell or to purchase an asset and one who has capacity to purchase an asset at a fair market price.</p>
+			<p>The Use of Valuation Methods</p>
+			<p>Value of a property can be estimated by three different approaches or methods viz.</p>
+			<ul>
+				<li>(i) Cost approach</li>
+				<li>(ii) Income approach and</li>
+				<li>(iii) Market approach depending on the types or categories or properties.</li>
+			</ul>
+			<p>Real properties are usually classified according to use they are put to such as residential properties, commercial or industrial properties etc. In the context of selecting appropriate approach for valuation, properties are classified as:</p>
+
+			<p>(1) Investment properties i.e. properties fetching income or rent: In case of such properties. Income Approach i.e. investment, income or rental method of valuation is adopted. Residential, Commercial and business properties etc. yield income and hence the annual income / rent, actual or estimated, forms the basis for valuation. The Investment or Income approach is the normal approach to be adopted for valuation of properties since income or fair rent is decided or estimated after taking into consideration utility or tangible and intangible benefits due to occupation of property, demand for and supply of such properties and thus reflect competitive market conditions.</p>
+			<p>(2) Non – Investment but Marketable properties:</p>
+			<ul><li>Some properties do not fetch income, but are sold and purchased in market. There is no evidence available of income yielded by such or similar properties but evidence of consideration price paid for such and similar properties is available. Open vacant lands in urban areas fall in this category, Value of this type of properties is estimated by Market Approach or comparison method.</li></ul>
+			<p>(3) Non – Investment Non – Market properties:</p>
+			<ul>
+				<li>
+					Some properties neither fetch income nor are they sold in the market. There is therefore no evidence available either of income or of consideration price paid. Religious buildings, public buildings etc. are included in this category. Residential buildings, shops and office buildings in Public Sector Undertakings, situated in far away, remote and isolated places may also fall in this category since evidence of fair market rent (shops may have been rented but at subsidized or concessional rent) or fair market price is not available. In such circumstances value of property is estimated by Cost Approach.
+				</li>
+			</ul>
+
+			<p>(4) Properties like educational buildings, health facility buildings</p>
+		</div>
+	</div>
+	<div style="page-break-after:always;">
+		<div style="padding-top:10%;padding:15px">
+			<ul><li>(e.g. Public hospital) neither fetch income or fair rent nor are they sold for consideration price. These facility building however yield considerable intangible benefits to the society.</li></ul>
+			<h4>Primary security & Collateral security</h4>
+			<p>Broadly the property under valuation for Banking can be categorized into Primary security i.e. the property against which loan is to be availed and collateral security i.e. the additional property to be given along with primary security.</p>
+			<p>Value’s scope: -</p>
+			<p>
+				If it is a primary security, to certify the present value.
+				and if it is collateral security, certify two values, i.e. present value & Distress sale value or the forced sale value. (Forced sale value = Present value – a suitable percentage towards the factors affecting the forced sale).
+				When the borrower approaches the Valuer directly, legal opinion is generally not referred to the Valuer before issuing the report.
+				It is better the bank obtains legal opinion first and then go for the valuation report, to avoid embarrassment at a later date.
+			</p>
+
+			<h5>BANK PURPOSES AND VALUER’S SCOPE</h5>
+			<h6> Type-: LOAN FOR THE CONSTRUCTION OF A NEW BUILDING ON PLOT</h6>
+			<p>Bank Purpose -:</p>
+			<p>i) To certify the genuineness of the estimate provided by the Applicant</p>
+			<p>
+				ii) Stage value of the construction, total cost on completion.
+			</p>
+			<p>
+				iii) To advise the bank on any adverse matters like violation, encroachment, stability of the building etc.
+			</p>
+			<p>
+				Valuer’s scope-:
+			</p>
+			<p>
+				i) Certifying the value depends upon the exact purpose the bank requires- whether to certify estimates (Estimates - it wholly depends upon the amenities fitted in the house likewise flooring, fixtures and fittings, quality of Doors & Windows, plumbing fittings, compound wall etc and Mainly the estimates vary substantially on the type of flooring used i.e. vinyl flooring, ceramic tile flooring, mosaic flooring, kotah flooring, marble flooring, granite flooring, Italian marble flooring etc)
+			</p>
+			<p>
+				ii) it is a stage value, completion certificate i.e. construction cost incurred as on date.
+			</p>
+			<p>
+				iii) Check Violation of Development Code of 2013 rules, encroachments likewise
+			</p>
+			<p>
+				iv) Valuation of land does not fall in the scope of the valuation unless and otherwise land is taken as additional security
+			</p>
+			<p>
+				Zoning of land
+			<p>
+				<ul>
+					<li>Residential zone</li>
+					<li>Commercial zone</li>
+					<li>Industrial zone</li>
+					<li>Green Belt. (Flood affected areas near the bank of Rivers or water bodies)</li>
+					<li>No development zone. (areas remain as it is for future planning. Some developments are allowed as Petrol Filling Station, Agriculture activities, etc.)</li>
+					<li>Aviation zone for airport (Height restriction as per air funnel plans).</li>
+				</ul>
+
+			<p>
+				Any Reservations on land- {areas reserved under Reservations, Planning authority specified in Development Plan}
+			</p>
+			<h6> Type-: LOANS FOR THE PURCHASE OF READY BUILT PROPERTY FROM BUILDER/DEVELOPER</h6>
+			<p>Bank Purpose -:</p>
+			<p>i) To certify the present market value</p>
+			<p>ii) To certify the stability of the building and to advise the further life of the building.</p>
+
+			<p>
+				Valuer’s scope-:
+			</p>
+			<p>
+				Present value = Value of land, building and services by adopting the principles of valuation. Analyse the factors favouring for a positive or negative value.
+				Present Market value = Present value + a % age towards the factors affecting the marketability
+				Where a servitude is provided, which is to be certified by the Valuer.
+			</p>
+			<p>ii) Identification of the property is important, check the four boundaries of the agreement with actual site condition.</p>
+			<p>iii) Verify whether it is authorized or unauthorized construction.</p>
+			
+
+		</div>
+	</div>
+	<div style="page-break-after:always;">
+		<div style="padding-top:10%;padding:15px">
+			<p>iv) Also verify for Development Code rules applicable as mentioned above in clause 1 (iv). If violations are within accepted limit, ascertain whether there is any chance for demolition by the local Authorities.</p>
+			<h6>
+				Type -: HOUSING LOANS FOR THE CONSTRUCTION OF UPPER FLOOR OVER THE
+				EXISTING GROUND FLOOR OR EXTENSION OF G. FLOOR.
+			</h6>
+			<p>Bank Purpose -:</p>
+			<ul>
+				<li>
+					i) To certify the present market value of existing property
+				</li>
+				<li>
+					ii) To certify the cost of new construction in stages or the cost on completion
+				</li>
+			</ul>
+			<p>Valuer’s scope-:</p>
+			<ul>
+				<li> i) Certify Present Value of the property.
+				<li> ii) Cost of new upper floors construction alone is to be considered with genuineness of the estimate provided by the Applicant.</li>
+				<li>
+					iii) Also check for any new reservations proposed, any new Development Plan road alignment is proposed which may affect the existing development, etc
+				</li>
+			</ul>
+			<h6> Type -: LOAN AGAINST PROPERTY OR MORTGAGE LOAN</h6>
+			<p>Bank Purpose -: To certify the present value of the property along with value for land considering depreciation of building and services.</p>
+			<p>Valuer’s scope-:</p>
+			<ul>
+				<li>
+					i) Value No.: I To certify the present market value
+				</li>
+				<li>
+					ii) Value No.: II To certify the Distress Sale Value
+				</li>
+			</ul>
+			<h6>Type -: LOAN FOR IMPROVEMENT OF PROPERTY (FLAT OR HOUSE)</h6>
+			<p>Bank Purpose -: To certify the improvement estimates given by the applicant</p>
+			<p>Valuer’s scope-</p>
+			<ul>
+				<li>
+					i) To certify the present market value of existing property.
+				</li>
+				<li>
+					ii) To certify the improvement estimate, whether it is concurrent with the property
+				</li>
+			</ul>
+			<p>
+				Likewise, existing flooring area should match with improvement flooring area provided in estimate or number of doors to be replaced should correlate with the existing building plan or quantity of colouring proposed should match with the area of existing property etc etc. and also guide Bank that the improvement estimate should not exceed a certain limit of the present value of property.
+			</p>
+			<h6>Type -: LOAN FOR PURCHASE OF PLOT</h6>
+			<p>Bank Purpose -: To certify the present market value.</p>
+			<p>Valuer’s scope-</p>
+			<p>i) The primary security can be valued for present market value considering</p>
+			<ul>
+				<li>
+					a) General
+					<ul>
+						<li>shape of plot</li>
+						<li>plot has non- agricultural permission</li>
+						<li>plot fronting on any specific road</li>
+						<li>plot is on sloping ground or</li>
+						<li>locality around the plot -like slums, high tension electric line, sewer / nala course</li>
+						<li>plot is located near garbage dumping ground</li>
+						<li>plot is near industrial zone</li>
+						<li>plot is located near flood affected areas.,</li>
+					</ul>
+				</li>
+				<li>
+					b) Tenure of Land
+					<ul>
+						<li>
+							Lease hold Land.
+							The Lessor (owner) surrender the rights and occupancy for the term and rental stated in the lease agreement.
+							The LESSEE usually acquires the right of use and occupancy for a period of years in exchange for rentals and subject to other obligation of the as per lease agreement.
+							Retaining the right to repossess the property at the end of lease term called “REVERSION “
+							The LESSEE acquired part of the “Bundle of rights” may create a sub-lease or he may part with the entirely of his interest to someone else (Third Party) the former is known as “SUB LEASE”
+						</li>
+					</ul>
+
+				</li>
+
+
+				<li>
+					Free hold Land
+					<ul>
+						<li> Right to its occupancy and use.</li>
+						<li> Right to sell in whole or Part.</li>
+						<li> Right to Gift.</li>
+						<li> Right to contract for its use to other for periods of time</li>
+						<li> Right to refuse to do any of these thing.</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div style="page-break-after:always;">
+		<div style="padding-top:10%;padding:15px">
+			<h6>Type -: TOP-UP LOAN (WHILE INCREASING THE PRESENT LIMIT TO A HIGHER LIMIT)</h6>
+
+			<p>Bank Purpose -: To certify the present value.</p>
+			<p>Valuer’s scope-: The primary security can be valued for the present value.</p>
+
+			<h6>
+				Type -: BALANCE TRANSFER LOAN (WHILE TRANSFERRING THE EXISTING LOAN
+				FROM PREVIOUS BANK TO ANOTHER BANK)
+			</h6>
+
+
+			<p>Bank Purpose -: If an existing loan of previous bank is to be transferred to another bank for further loan enhancement or for rate of interest benefit, to certify the present value,</p>
+			<p>Valuer’s scope-: The primary security can be valued for the present value.</p>
+
+			<h6>Type -: PERIODICAL REVALUATION OF ASSETS</h6>
+			<p>Bank Purpose -: To check the security cover of previously funded property by bank, certify the market value as on the date of inspection</p>
+			<p>Valuer’s scope-: Depending upon today’s circumstances and conditions the present value is to be certified. Bank’s concern is that the value of the property is sufficient to the outstanding loan with it. Certified value on revaluation need not be always higher than the value certified previously, considering scenario of land recession also.</p>
+		</div>
+	</div>
+</div>
+

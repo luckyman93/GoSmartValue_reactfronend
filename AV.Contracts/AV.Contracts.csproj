@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\Accounts\Queries\**" />
+    <Compile Remove="Models\Comparables\**" />
+    <Compile Remove="Models\Payments\**" />
+    <EmbeddedResource Remove="Models\Accounts\Queries\**" />
+    <EmbeddedResource Remove="Models\Comparables\**" />
+    <EmbeddedResource Remove="Models\Payments\**" />
+    <None Remove="Models\Accounts\Queries\**" />
+    <None Remove="Models\Comparables\**" />
+    <None Remove="Models\Payments\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.15.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.13" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>    
+    <Folder Include="Models\Accounts\Subscriptions\Request\" />
+  </ItemGroup>
+
+</Project>

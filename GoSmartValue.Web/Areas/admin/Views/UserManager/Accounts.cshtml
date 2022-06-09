@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AV.Contracts.Models.Accounts.AccountViewModel>
+
+@{
+    Layout = "_Layout";
+}
+
+<i class="card-title">@ViewBag.Title</i>
+
+<table class="table table-striped bg-light" style="max-width: 1293px; margin:90px auto;">
+    <thead>
+    <tr>
+        <th scope="col">Payment Status</th>
+        <th scope="col">Added On</th>
+        <th scope="col">Account Type</th>
+        <th scope="col">Expired On</th>
+        <th scope="col">Verified By</th>
+        <th scope="col">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var account in Model.OrderBy(ac => ac.AddedOn))
+    {
+        <tr>
+            <td>
+                @if (!account.VerifiedByUserId.HasValue && account.ExpiryDate < DateTimeOffset.UtcNow)
+                {
+                    @Html.ActionLink("Activate", "PaymentReceived", "Account", null, new { id=account.Id})
+                }
+                else
+                {
+                    @Html.DisplayText("Payment Received")
+                }
+            </td>
+            <td scope="row">
+                @account.AddedOn
+            </td>
+            <td>
+                @account.AccountType
+            </td>
+            <td>
+                @account.ExpiryDate
+            </td>
+            <td>
+                @account.VerifiedByUserId.HasValue ??  @account.User.LastName @account.User.FirstName</td>
+            <td>
+                @account.Active
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

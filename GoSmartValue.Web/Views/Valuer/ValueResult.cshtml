@@ -1,0 +1,499 @@
+﻿@model AV.Contracts.Models.Valuation.ValuationResultViewModel
+
+@{
+	ViewData["Title"] = "ValueResult";
+
+	Layout = "Layouts/_ValuerLayout";
+}
+
+<div class="outer container-fluid image-container set-full-height" style="background-image:url(/valuationsIndex.jpg);">
+	<form method="post" style="background-color: transparent !important">
+		<div class="row " style="padding-top:100px;margin:0">
+
+			<div class="col-sm-8 ">
+				<div class="shadow row p-2" style="background-color: #ffffff;margin-bottom:20px;">
+					<div class="col-sm-4">
+						<div class="row"><span>Firm: </span></div>
+						<div class="row"><span>Valuer: @Model.Valuer.LastName @Model.Valuer.FirstName</span></div>
+						<div class="row"><span>Plot: @Model.Valuation.Instruction.PlotNumber</span></div>
+						<div class="row"><span>Title: @Model.Valuation.TitleDeedNo</span></div>
+						<div class="row"><span>Plot size: @Model.Valuation.PlotSize.ToString("0.00")</span></div>
+						<div class="row"><span>Use: @Model.Valuation.LandUse.ToString()</span></div>
+						<div class="row"><span>Zoning: @Model.Valuation.Zoning.ToString()</span></div>
+					</div>
+					<div class="col-sm-4 text-wrap">
+						<span class="row">@Model.Valuation.Description</span>
+					</div>
+					<div class="col-sm-4">
+						<p>Amenities:</p>
+						@*<p>Primary School</p>
+							<p>Shopping Mall</p>
+							<p>Clinic</p>*@
+					</div>
+				</div>
+
+				<div class="shadow row p-2 " style="background-color: #ffffff;margin-bottom:20px;">
+					<div class="col-sm-4  ">
+						<div class="row"><span>Built up area:@Model.Valuation.BuiltUpArea.ToString("0.00")</span></div>
+						<div class="row"><span>Floors: @Model.Valuation.FloorDetails</span></div>
+						<div class="row"><span>Walls:@Model.Valuation.Walls</span></div>
+						<div class="row"><span>Doors: @Model.Valuation.Doors</span></div>
+						<div class="row"><span>Windows: @Model.Valuation.Windows</span></div>
+					</div>
+					<div class="col-sm-8">
+						<div class="row"><span>Ceilings: @Model.Valuation.CeilingDetails</span></div>
+						<div class="row"><span>Fittings and Finishes: @Model.Valuation.FittingsAndFixtures</span></div>
+						<div class="row"><span>Roof: @Model.Valuation.Roofing</span></div>
+					</div>
+				</div>
+
+				<div class="shadow row p-2" style="background-color: #ffffff;margin-bottom:20px;">
+					<div class="col-sm-12 p-2">
+						<div class="row">
+							@*<span>The property is fully serviced, less than 1km from the A1, it enjoys easy access to public transport routes.</span>*@
+						</div>
+						<div class="row">
+							<span>Market Commentary: @Model.Valuation.MarketCommentary</span>
+						</div>
+					</div>
+				</div>
+				<div class="shadow row p-2" style="background-color: #ffffff;">
+					<div class="col-sm-12 p-2">
+						<div class="form-group label-floating">
+							<label class="control-label">Reason for valuation adjustment(if applicable)</label>
+							<textarea type="text" name="adjustmentReason" asp-for="Valuation.AdjustmentReason" maxlength="200" class="form-control"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<button id="landRates" name="landRates" type="button" class="btn btn-blue">Land rate</button>
+					<button id="averagePlotSize" name="averagePlotSize" type="button" class="btn btn-blue">Average plot size</button>
+					<button id="averageSellingPrice" name="averageSalePrice" type="button" class="btn btn-blue">Average sale price</button>
+					<button id="lendingRate" disabled="disabled" type="button" class="btn btn-blue">Lending rate</button>
+					<button id="salesTrends" disabled="disabled" type="button" class="btn btn-blue">Sales Trends</button>
+					<button id="inflationRate"  type="button" class="btn btn-blue">Inflation rate</button>
+					<button id="buildingCosts" disabled="disabled" type="button" class="btn btn-blue">Building costs</button>
+				</div>
+				<div class="row">
+					@if (Model.Valuation.SitePictures.Any())
+					{
+						@foreach (var item in Model.Valuation.SitePictures)
+						{
+							<img src="@Url.Action("Download", "Document", new { documentId = item.Id })" width="150" height="150" alt="Company Logo" />
+						}
+					}
+				</div>
+			</div>
+			<div class="col-sm-4" style="padding-left:50px">
+				<div class=" row col-sm-12">
+
+				   
+				   
+				</div>
+
+				<div class="row">
+					<table class="table table-hover table-sm">
+						<thead>
+						<tr>
+							<th scope="col">Plot</th>
+							<th scope="col">Value</th>
+							<th scope="col">Date of Sale</th>
+						</tr>
+						</thead>
+						<tbody>
+						@if (Model.Comparables != null)
+						{
+							@foreach (var comparable in Model.Comparables.OrderByDescending(c => c.DateOfSale))
+							{
+								<tr>
+									<th>@comparable.PlotNo</th>
+									<td>@comparable.SalePrice.ToString("0.00")</td>
+									<td>@comparable.DateOfSale?.ToString("dd/MM/yyyy")</td>
+								</tr>
+							}
+						}
+						</tbody>
+					</table>
+				</div>
+
+				<div class=" row col-sm-12 badge badge-success">
+					<h4>RECOMMENDED VALUE:<b> @Model.Valuation.Value?.ToString("N0")</b></h4>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-8 " style="border: double; color: #1a237e;">
+						<div class="form-group label-floating">
+							<label class="control-label">Adjustable Value</label>
+							<input name="adjustedValue" asp-for="@Model.Valuation.Value.Value" asp-format="{0:N0}"
+								   class="proposedValue form-control" height="200" style="text-align: right; font-size: 24px; color: #1a237e" />
+						</div>
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-2">
+						<button type="button" id="adjustUp" class="btn btn-blue btn-round" data-toggle="tooltip" data-placement="top" title="Adjust Up">
+							<i class="material-icons">keyboard_arrow_up</i>
+						</button>
+						<button type="button" id="adjustDown" class="btn btn-blue btn-round" data-toggle="tooltip" data-placement="top" title="Adjust down">
+							<i class="material-icons">keyboard_arrow_down</i>
+						</button>
+					</div>
+				</div>
+				
+
+				<div class="row">
+					<div class="success-box">
+						<div class="text-message"></div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				
+				<div class="row card p-2">
+					
+					<div class="form-group label-floating">
+						<label class="control-label badge badge-danger"> Please add your service Fee</label>
+						<input name="serviceFee" asp-for="Valuation.ServiceFee" asp-format="{0:N0}" class="form-control text-right" style="background-color:#fff" />
+					</div>
+				</div>
+				<div class="row">
+					
+				</div>
+
+				<div class="col-sm-12 row">
+					<button type="submit"
+							asp-controller="Valuer" asp-action="AcceptValuation"
+							class="btn btn-blue btn-lg">
+						Accept
+					</button>
+				</div>
+			</div>
+			<input id="originalPrice" hidden="hidden" value="@Model.Valuation.Value" />
+			<input name="valuationId" hidden="hidden" value="@Model.Valuation.Id" />
+			<input type="number" hidden="hidden" name="adjustCount" id="adjustCount" value="0" />
+		</div>
+	</form>
+</div>
+
+<div class="modal fade" id="landRatesModal" tabindex="-1" role="dialog" aria-labelledby="landRatesModal" aria-hidden="true">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="exampleModalLabel">Land Rates</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row container-fluid">
+					<p>
+						@Model.Valuation.Instruction.LocationName,
+												@Model.Valuation.Instruction.LocalityName
+											</p>
+				</div>
+				
+			
+				<div class="row container-fluid">
+					<label >Land Rate: </label> <p id="landRate"></p>
+				</div>
+				<div class="row container-fluid">
+					<label>Zoning: </label> <span id="zoning"></span>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-blue" data-dismiss="modal">Close</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="averagePlotModal" tabindex="-1" role="dialog" aria-labelledby="averagePlotModal" aria-hidden="true">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title">Average Plot Size</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row container-fluid">
+					<p>
+						@Model.Valuation.Instruction.LocationName,
+						@Model.Valuation.Instruction.LocalityName
+					</p>
+				</div>
+
+
+				<div class="row container-fluid">
+					<label>Average Plot Size: </label> <p id="plotSize"></p>
+				</div>
+				<div class="row container-fluid">
+					<label>Metric: </label> <span id="metric"></span>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-blue" data-dismiss="modal">Close</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="averageSellingPriceModal" tabindex="-1" role="dialog" aria-labelledby="sellingPriceModal" aria-hidden="true">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="sellingPriceModal">Average Selling Price</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row container-fluid">
+					<p>
+						@Model.Valuation.Instruction.LocationName,
+						@Model.Valuation.Instruction.LocalityName
+					</p>
+				</div>
+
+
+				<div class="row container-fluid">
+					<label>Price: </label> <p id="price"></p>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-blue" data-dismiss="modal">Close</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="lendingRateModal" tabindex="-1" role="dialog" aria-labelledby="averagePlotModal" aria-hidden="true">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" >Lending rate</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row container-fluid">
+					<p>
+						@Model.Valuation.Instruction.LocationName,
+						@Model.Valuation.Instruction.LocalityName
+					</p>
+				</div>
+
+
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-blue" data-dismiss="modal">Close</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="inflationRateModal" tabindex="-1" role="dialog" aria-labelledby="averagePlotModal" aria-hidden="true">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title">Inflation Rate</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row container-fluid">
+					<p>
+						@Model.Valuation.Instruction.LocationName,
+						@Model.Valuation.Instruction.LocalityName
+					</p>
+				</div>
+
+
+				<div class="row container-fluid">
+					<label>Inflation Rate: </label> <p id="inflationRates"></p>
+				</div>
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-blue" data-dismiss="modal">Close</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="buildingCostsModal" tabindex="-1" role="dialog" aria-labelledby="buildingCostsModal" aria-hidden="true">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" >Building Costs</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col">
+						@Model.Valuation.Instruction.LocationName,
+						@Model.Valuation.Instruction.LocalityName
+					</div>
+					<div class="col"></div>
+				</div>
+				.....
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-blue" data-dismiss="modal">Close</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function GetAdjustedValue() {
+		return $(".proposedValue").val();
+	}
+
+	$(document).ready(function() {
+
+		var originalPrice = $("#originalPrice").val();
+		var counter = $('#adjustCount').val();
+		$("#adjustUp").click(function() {
+			if (counter < 10) {
+				counter++;
+				var adjustedPrice = parseFloat(originalPrice) * parseFloat(1 + counter / 100);
+				$(".proposedValue").val(parseFloat(adjustedPrice).toFixed(0));
+				$('.success-box div.text-message').html("<span>" + counter + "% increase" + "</span>");
+			}
+
+			$('#adjustCount').val(counter);
+		});
+
+		$("#adjustDown").click(function() {
+
+			if (counter > -10) {
+				counter--;
+				var adjustedPrice = parseFloat(originalPrice) * parseFloat(1 + counter / 100); // gives the value for subtract from main value
+				$(".proposedValue").val(parseFloat(adjustedPrice).toFixed(0));
+
+				$('.success-box div.text-message').html("<span>" + counter + "% decrease" + "</span>");
+			}
+		});
+
+		$('#landRates').click(function (e) {
+			e.preventDefault(); // <------------------ stop default behaviour of button
+			var element = this;
+			$.get({
+				url: `/api/market/landrates?LocationId=${@Model.Valuation.Instruction.LocationId}&LocalityId=${@Model.Valuation.Instruction.LocalityId}&Zoning=${@Model.Valuation.Zoning}`,
+				success: function(response) {
+
+					$('#landRate').html(response.price + "/"+response.metric);
+					$('#zoning').html(response.zoning);
+					//Call modal
+					$('#landRatesModal').modal();
+					//$(element).closest("form").submit(); //<------------ submit form
+				},
+				error: function() {
+					alert("An error has occured!!!");
+				}
+			});
+
+		});
+
+		$('#averagePlotSize').click(function (e) {
+			
+			e.preventDefault(); // <------------------ stop default behaviour of button
+			var element = this;
+			$.get({
+				url: `/api/market/averageplotsize?locationId=${@Model.Valuation.Instruction.LocationId}&localityId=${@Model.Valuation.Instruction.LocalityId}`,
+				success: function(response) {
+
+					$('#plotSize').html(response.size );
+					$('#metric').html(response.metric);
+					//Call modal
+					$('#averagePlotModal').modal();
+					//$(element).closest("form").submit(); //<------------ submit form
+				},
+				error: function() {
+					alert("An error has occured!!!");
+				}
+			});
+		});
+
+		$('#averageSellingPrice').click(function (e) {
+			e.preventDefault(); // <------------------ stop default behaviour of button
+			var element = this;
+			$.get({
+				url: `/api/market/averagesellingprice?locationId=${@Model.Valuation.Instruction.LocationId}&localityId=${@Model.Valuation.Instruction.LocalityId}`,
+				success: function(response) {
+
+					$('#price').html(response.price);
+					
+					//Call modal
+					$('#averageSellingPriceModal').modal();
+					//$(element).closest("form").submit(); //<------------ submit form
+				},
+				error: function() {
+					alert("An error has occured!!!");
+				}
+			});
+		});
+
+		$('#inflationRate').click(function (e) {
+			e.preventDefault(); // <------------------ stop default behaviour of button
+			var element = this;
+			$.get({
+				url: `/api/market/inflationrate`,
+				success: function(response) {
+
+					$('#inflationRates').html(response.rate);
+					
+					//Call modal
+					$('#inflationRateModal').modal();
+					//$(element).closest("form").submit(); //<------------ submit form
+				},
+				error: function() {
+					alert("An error has occured!!!");
+				}
+			});
+		});
+
+		$('#buildingCosts').click(function (e) {
+			e.preventDefault(); // <------------------ stop default behaviour of button
+
+			$('#buildingCostsModal').modal();
+
+			//var element = this;
+			//$.ajax({
+			// url: "/Home/SaveDetailedInfo",
+			// type: "POST",
+			// data: JSON.stringify({ 'Options': someData}),
+			// dataType: "json",
+			// traditional: true,
+			// contentType: "application/json; charset=utf-8",
+			// success: function (data) {
+			//  if (data.status == "Success") {
+			//   alert("Done");
+			//   $(element).closest("form").submit(); //<------------ submit form
+			//  } else {
+			//   alert("Error occurs on the Database level!");
+			//  }
+			// },
+			// error: function () {
+			//  alert("An error has occured!!!");
+			// }
+			//});
+		});
+
+	});
+
+	function responseMessage(msg) {
+		$('.success-box').fadeIn(200);
+		$('.success-box div.text-message').html("<span>" + msg + "% increase" + "</span>");
+	}
+
+</script>
+<script src="~/js/jquery.price_format.1.8.min.js"></script>

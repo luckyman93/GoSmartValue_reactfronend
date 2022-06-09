@@ -1,0 +1,79 @@
+.product {
+  overflow: hidden;
+}
+
+.card {
+  min-height: 25rem;
+  box-shadow: 0 0 2rem #00000029;
+  border: 1px solid #FFFFFF;
+  overflow:hidden;
+  display: flex;
+}
+
+.card button {
+  align-self:flex-end;
+}
+
+.reports-section{
+  max-width:84%;
+  max-height: 50rem;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header {
+  padding:1rem;
+}
+
+h3{
+  font: normal normal 200 1.83rem Gilroy Heavy;
+  float: left;
+}
+
+.price{
+  font: normal normal 200 1.3rem Gilroy Heavy;
+  background-color:#FF8800;
+  display: inline-block;
+  padding:.3rem;
+  border-radius: 1rem;
+}
+
+.description{
+  font: normal normal 200 1.4rem Gilroy Regular;
+  //white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  float: left;
+  padding: 1rem;
+}
+
+.button-sample {
+  width: 10rem;
+  height: 3rem;
+  font: normal normal 200 1.2rem Gilroy Heavy;
+  color: #2196F3;
+  background: white 0% 0% no-repeat padding-box;
+  border: 1px solid white;
+  border-radius: 14px;
+  opacity: 1;
+  margin-bottom: 1rem;
+}
+
+.button-basket {
+  width: 10rem;
+  height: 3rem;
+  font: normal normal 200 1.2rem Gilroy Heavy;
+  color: #ffffff;
+  background: #FD4F64 0% 0% no-repeat padding-box;
+  border: 1px solid #FEDDE0;
+  border-radius: 14px;
+  opacity: 1;
+  margin-bottom: 1rem;
+}
+
+.action-buttons{
+  display: inline-block;
+  margin-left: auto;
+  margin-right: 0;
+}

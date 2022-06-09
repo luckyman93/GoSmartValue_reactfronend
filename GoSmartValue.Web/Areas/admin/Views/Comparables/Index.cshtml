@@ -1,0 +1,96 @@
+﻿@model IEnumerable<AV.Common.Entities.Comparable>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.DataState)
+            </th>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.DateOfSale)
+            </th>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.SalePrice)
+            </th>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.Locality)
+            </th>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.StreetName)
+            </th>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.PlotSize)
+            </th>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.PlotNo)
+            </th>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.LandUse)
+            </th>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.PropertyType)
+            </th>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.PlotNo)
+            </th>
+            <th cope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <th scope="row">
+            @Html.DisplayFor(modelItem => item.DataState)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfSale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Locality.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StreetName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlotSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlotNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandUse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlotNo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit","Edit","Comparables", new {Id = @item.Id},htmlAttributes:new {@class="btn btn-success"})|
+                @Html.ActionLink("Details","Details","Comparables", new {Id = @item.Id},htmlAttributes:new {@class="btn btn-primary"})|
+                @Html.ActionLink("Delete","Delete","Comparables", new {Id = @item.Id},htmlAttributes:new {@class="btn btn-primary"})|
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,97 @@
+<p-card class="xl:col-6 lg:col-6 md:col-6 sm:col-12': instantValuation.activeIndex == 1}" >
+  <ng-template pTemplate="title">
+    <h3>Location Details</h3>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <div class="p-fluid grid flex flex-column">
+        <div class="p-field col-12">
+          <span class="p-float-label">
+            <p-dropdown id="city" [style]="{'height':'3.5rem'}" panelStyleClass="minWidthOverride" #city="ngModel" [options]="locations" 
+            [(ngModel)]="instantValuationReportRequest.location"
+                        optionLabel="name" [filter]="true" filterBy="name" (onChange)="getLocalities()"
+                        [ngClass]="{'ng-dirty': (city.invalid && submitted) || (city.dirty && city.invalid)}" placeholder="Select a City/Town">
+              <ng-template pTemplate="selectedItem">
+                <div class="location-item location-item-value" *ngIf="instantValuationReportRequest.location">
+                  <div>{{instantValuationReportRequest.location.name}}</div>
+                </div>
+              </ng-template>
+              <ng-template let-city pTemplate="item">
+                <div class="location-item">
+                  <div>{{city.name}}</div>
+                </div>
+              </ng-template>
+            </p-dropdown>
+            <label>City/Town</label>
+        </span>
+          <small *ngIf="(city.invalid && submitted) || (city.dirty && city.invalid)" class="p-error">City is required.</small>
+        </div>
+
+        <div class="p-field col-12" *ngIf="localities.length > 0 || instantValuationReportRequest.localityId">
+          <span class="p-float-label">
+            <p-dropdown #ward="ngModel" [options]="localities" [(ngModel)]="instantValuationReportRequest.locality"
+                  [style]="{'height':'3.5rem'}" optionLabel="name" [filter]="true" filterBy="name"
+                        [ngClass]="{'ng-dirty': (localities.length > 0) && ((ward.invalid && submitted) || (ward.dirty && ward.invalid))}" placeholder="Select a Ward">
+              <ng-template pTemplate="selectedItem">
+                <div class="location-item location-item-value" *ngIf="instantValuationReportRequest.locality">
+                  <div>{{instantValuationReportRequest.locality.name}}</div>
+                </div>
+              </ng-template>
+              <ng-template let-ward pTemplate="item">
+                <div class="locality-item">
+                  <div>{{ward.name}}</div>
+                </div>
+              </ng-template>
+            </p-dropdown>
+            <label>Ward</label>
+          </span>
+          <small *ngIf="(localities.length > 0) && ((ward.invalid && submitted) || (ward.dirty && ward.invalid))" class="p-error">Ward is required.</small>
+        </div>
+     
+        <div class="p-field xl:col-12 sm:col-12">
+          <span class="p-float-label">
+            <input #street="ngModel" id="street" type="text" pInputText [(ngModel)]="instantValuationReportRequest.streetName">
+            <label for="street">Street Name</label>
+          </span>
+        </div>
+  
+        <div class="p-field xl:col-12 sm:col-12">
+          <span class="p-float-label">
+            <input #plotNo="ngModel" id="plotNo" type="text" required pInputText [(ngModel)]="instantValuationReportRequest.plotNo"
+                 [ngClass]="{'ng-dirty': (plotNo.invalid && submitted) || (plotNo.dirty && plotNo.invalid)}">
+            <label for="plotNo">Plot No</label>
+          </span>
+          <small class="p-error" *ngIf="(plotNo.invalid && submitted )|| (plotNo.dirty && plotNo.invalid)">Plot Number is required.</small>
+        </div>
+
+        <div class="p-field xl:col-12 sm:col-12">
+          <span class="p-float-label">
+            <input #plotSize="ngModel" id="plotSize" type="number"  required pInputText [(ngModel)]="instantValuationReportRequest.plotSize"
+                           [ngClass]="{'ng-dirty': (plotSize.invalid && submitted) || (plotSize.dirty && plotSize.invalid)}">
+            <label for="plotSize">Plot Size (Square meters)</label>
+          </span>
+          <small class="p-error" *ngIf="(plotSize.invalid && submitted  ) || (plotSize.dirty && plotSize.invalid)">Plot Size number is required.</small>
+        </div>
+
+        <div class="p-field xl:col-12 sm:col-12">
+         <span class="p-float-label">
+            <p-dropdown [autoDisplayFirst]="false" #developmentStage="ngModel" inputId="developmentStagee" [options]="developmentStages" [(ngModel)]="instantValuationReportRequest.propertyType"
+            [style]="{'height':'3.5rem'}" [ngClass]="{'ng-dirty': (developmentStage.invalid && submitted) || (developmentStage.dirty && developmentStage.invalid)}" placeholder="Select Development Stage">
+              <ng-template let-developmentStage pTemplate="item">
+                <div class="locality-item">
+                  <div>{{developmentStage}}</div>
+                </div>
+              </ng-template>
+            </p-dropdown>
+            <label for="developmentStagee">Development Stage</label>
+          </span>
+        </div>
+
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-end">
+      <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+    </div>
+  </ng-template>
+</p-card>
+<p-toast position="top-center" key="tc"></p-toast>

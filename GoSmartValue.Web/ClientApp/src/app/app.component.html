@@ -1,0 +1,13 @@
+<div class="layout-wrapper " [ngClass]="{'layout-wrapper-menu-active': sidebarActive,
+                                        'layout-overlay-menu': overlay}">
+
+<app-top-nav></app-top-nav>
+    <app-side-nav *ngIf="isAuthenticated()"></app-side-nav>
+    <div class="layout-main" [ngClass]="{'layout-main-logged-in':isAuthenticated()}">
+        <div class="layout-main-content">
+          <p-toast></p-toast>
+          <router-outlet></router-outlet>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

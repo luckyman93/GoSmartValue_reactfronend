@@ -1,0 +1,79 @@
+﻿@using AV.Common
+@model AV.Contracts.Models.Users.UserModel
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "Layouts/_BackOffice";
+}    
+    <form method="get">
+        <div id="content-area" class="row h-100">
+
+            @if (Context.User.IsInRole("analyst") || Context.User.IsInRole("admin"))
+            {
+                <div class="col-12 col-sm-6 col-md-5 col-lg-3">
+                    <div class="card">
+                        <h5 class="card-header">Property Information</h5>
+                        <div class="card-body">
+                            <h1 class="card-title text-center">0</h1>
+                            <p class="card-text">Manage Property Information</p>
+                            <button type="button" class="btn btn-primary btn-block" asp-area="analyst" asp-controller="Valuations" asp-action="Index">
+                                Property Information
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-5 col-lg-3">
+                    <div class="card">
+                        <h5 class="card-header">Market information</h5>
+                        <div class="card-body">
+                            <h1 class="card-title text-center">0</h1>
+                            <p class="card-text">Manage Market information</p>
+                            <a asp-area="analyst" asp-controller="Analyst" asp-action="Locations" class="btn btn-primary btn-block">
+                                Market information
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="col-12  col-sm-6 col-md-5  col-lg-3">
+                <div class="card">
+                    <h5 class="card-header">Valuations</h5>
+                    <div class="card-body">
+                        <h1 class="card-title text-center">0</h1>
+                        <p class="card-text">Manage Valuations information</p>
+                        <button type="button" class="btn btn-primary btn-block" asp-area="user" asp-controller="Valuations" asp-action="Index">
+                            Valuations
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12  col-sm-6 col-md-5  col-lg-3">
+                <div class="card">
+                    <h5 class="card-header">Reports</h5>
+                    <div class="card-body">
+                        <h1 class="card-title text-center">0</h1>
+                        <p class="card-text">Review Reports</p>
+                        <button type="button" href="#" class="btn btn-primary btn-block">
+                            View Reports
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-5  col-lg-3">
+                <div class="card">
+                    <h5 class="card-header">Registrations</h5>
+                    <div class="card-body align-content-center">
+                        <h1 class="card-title text-center">0</h1>
+                        <p class="card-text">Manage your registrations </p>
+                        <button type="button" href="#" class="btn btn-primary btn-block">
+                            Manage
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>

@@ -1,0 +1,86 @@
+﻿@{
+	ViewData["Title"] = "Account History";
+
+	Layout = "Layouts/_ValuerLayout";
+}
+
+
+
+<div class="col-sm-12 container-fluid" style="padding-top: 90px;background-image:url(/inviteuser.jpg);background-size:cover;height:100vh" >
+	
+
+	<div class="row col-sm-12 form-group" style="background-color:#fff;padding:10px;margin:0">
+
+		<div class=" col-sm-12">
+			<div class="col-sm-12 row form-group">
+				<label class="col-sm-3">Agency name</label>
+				<div class="col-sm-7"><input type="email" class="form-control" placeholder="Agency name" /></div>
+			</div>
+		</div>
+
+		<div class="row col-sm-12">
+			<div class="col-sm-4">
+				<p class="col-sm-12" style="text-align:center">User email</p>
+				<div class="row"><input type="email" class="form-control" placeholder="Email" /></div>
+			</div>
+			<div class="col-sm-2" style="text-align:center">
+				<p class="col-sm-12" style="text-align:center">Full Control</p>
+				<input type="checkbox" class="" />
+			</div>
+
+			<div class="col-sm-2" style="text-align:center">
+				<p class="col-sm-12" style="text-align:center">View</p>
+				<input type="checkbox" class="" />
+			</div>
+			<div class="col-sm-2" style="text-align:center">
+				<p class="col-sm-12" style="text-align:center">Processs</p>
+				<input type="checkbox" class="" />
+			</div>
+			<div class="col-sm-2" style="text-align:center">
+				<p class="col-sm-12" style="text-align:center">Value</p>
+				<input type="checkbox" class="" />
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-12" style="text-align:right;padding:0;margin:0">
+		<button type="submit" class="btn btn-blue">Invite</button>
+	</div>
+
+
+	<div class="row container-fluid form-group">
+		<h6>Current Users</h6>
+	</div>
+	<div class="row container-fluid form-group" style="background-color:#fff;margin:0">
+		<table class="table table-hover table-sm">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Email</th>
+					<th scope="col">Full Control</th>
+					<th scope="col">View instructions only</th>
+					<th scope="col">Process instructions only</th>
+					<th scope="col">Complete instructions only</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">1</th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<a class=""><i class="fa fa-eye"></i></a>
+
+
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+
+</div>

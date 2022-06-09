@@ -1,0 +1,22 @@
+.total {
+  overflow:hidden;
+  border-top: .1rem solid grey;
+  margin-top: 1rem;
+  padding-top:1rem;
+}
+
+.total-amount{
+  font: normal normal 200 1.33rem Gilroy Heavy;
+  color:#000000;
+  float: left;
+}
+
+.discount, .vat{
+  font: normal normal 200 1.33rem Gilroy Regular;
+  color:#000000;
+  float: left;
+}
+
+span {
+  margin-left:3rem;
+}

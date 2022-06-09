@@ -1,0 +1,106 @@
+﻿@{
+	Layout = "Layouts/_GraphLayout";
+}
+
+<div class="outer container-fluid">
+	<div class="middle container-fluid" style="padding-top:20px">
+		<div class=" inner container-fluid">
+			<div class="row col-sm-12" style="padding:15px">
+				<div class="col-sm-6">
+						<div id="instructionsSummary" style="width: 500px; height: 400px;"></div>
+				</div>
+				<div class="col-sm-6">
+						<div id="instructionsValuerSummary" style="width: 500px; height: 400px;"></div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function () {
+	ShowProgress();
+	google.charts.load("current", { packages: ["corechart"] });
+	google.setOnLoadCallback(drawVisualization);
+	google.setOnLoadCallback(draw);
+	
+	});
+	function drawVisualization() {
+		$.ajax({
+			url: "/corporate/TotalInstructionsSummary",
+		type: 'POST',
+			success: function (response) {
+				
+				var datas = JSON.stringify(response);
+				var data = JSON.parse(datas);
+				
+			var tdata = new google.visualization.DataTable();
+			tdata.addColumn('string', 'Description');
+			tdata.addColumn('number', 'Count');
+				
+			for (var i = 0; i < data.length; i++) {
+				tdata.addRow([data[i].description, data[i].count]);
+			};
+			var options = {
+				title: 'Total Instructions Summary',
+				is3D: false,
+			};
+			// Create and draw the visualization.
+			var chart = new google.visualization.PieChart(document.getElementById('instructionsSummary'));
+			chart.draw(tdata, options);
+		},
+		error: function (error) {
+			alert("error");
+		},
+		cache: false,
+		contentType: false,
+		processData: false
+	});
+
+	};
+	function draw() {
+		$.ajax({
+			url: "/corporate/InstructionIssuedPerValuer",
+		type: 'POST',
+		success: function (response) {
+			var histogram = JSON.stringify(response);
+			var histogramdata = JSON.parse(histogram);
+			
+			var tabledata = new google.visualization.DataTable();
+			tabledata.addColumn('string', 'Valuer');
+			tabledata.addColumn('number', 'Count');
+
+			for (var i = 0; i < histogramdata.length; i++) {
+				tabledata.addRow([histogramdata[i].valuerName, histogramdata[i].count]);
+			};
+
+			var view = new google.visualization.DataView(tabledata);
+			view.setColumns([0, 1,
+				{
+					calc: "stringify",
+					sourceColumn: 1,
+					type: "string",
+					role: "annotation"
+				}]);
+
+			var options = {
+				title: "Instructions sent per valuer",
+				
+				bar: { groupWidth: "95%" },
+				legend: { position: "none" },
+			};
+
+			var chart = new google.visualization.ColumnChart(document.getElementById('instructionsValuerSummary'));
+			chart.draw(view, options);
+			HideProgress();
+		},
+		error: function (error) {
+			alert("error");
+		},
+		cache: false,
+		contentType: false,
+		processData: false
+	});
+
+	};
+</script>

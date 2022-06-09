@@ -1,0 +1,367 @@
+﻿@using AV.Common.Entities
+@using AV.Contracts.Enums
+@using AV.Common
+@model AV.Contracts.Models.Valuation.ComparableResultViewModel
+
+@functions {
+
+    private int GetIntValue(FeatureType featureType)
+    {
+        return (int)featureType;
+    }
+
+}
+
+@{
+    ViewBag.Title = "Valuation Estimate";
+    Layout = "_Layout";
+}
+<div class="outer col-sm-12 image-container set-full-height" style="background-image:url(/Canva.jpg);">
+    <div class="inner col-sm-12">
+        <div class="col-md-8 offset-md-2" style="padding-top:60px">
+            <!--      Wizard container        -->
+            <div class="wizard-container">
+                <div class="card wizard-card" data-color="red" id="wizard">
+                    <form method="post">
+                        <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
+                        <div class="wizard-header">
+                            <h3 class="wizard-title">Process Report</h3>
+                        </div>
+                        <div class="wizard-navigation">
+                            <ul>
+                                <li><a href="#propertyDetails" data-toggle="tab">Additional Property Details</a></li>
+                                <li><a href="#propertyFeatures" data-toggle="tab">Property Features</a></li>
+                                <li><a href="#reportType" data-toggle="tab">Report Type</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="tab-content">
+                            <div class="tab-pane" id="propertyDetails">
+                                <div class="row">
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="col-md-5 card-title">Number of Bedrooms:</div>
+                                            <div class="col-md-7 card-title">
+                                                <select asp-for="BedRooms" class="form-control" style="display: inline">
+                                                    <option value="0">0</option>
+                                                    <option selected="selected" value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-5 card-title">Number of Kitchens:</div>
+                                            <div class="col-md-7 card-title">
+                                                <select asp-for="Kitchens" class="form-control" style="display: inline">
+                                                    <option value="0">0</option>
+                                                    <option selected="selected" value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-5 card-title">Number of Sitting Rooms:</div>
+                                            <div class="col-md-7 card-title">
+                                                <select asp-for="SittingRooms" class="form-control" style="display: inline">
+                                                    <option value="0">0</option>
+                                                    <option selected="selected" value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-5 card-title">Number of Bathrooms:</div>
+                                            <div class="col-md-7 card-title">
+                                                <select asp-for="BathRooms" class="form-control" style="display: inline">
+                                                    <option selected="selected" value="0">0</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-5 card-title">Number of Toilets:</div>
+                                            <div class="col-md-7 card-title">
+                                                <select asp-for="Toilets" class="form-control" style="display: inline">
+                                                    <option selected="selected" value="0">0</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-5 card-title">Number of Carports/ Garages:</div>
+                                            <div class="col-md-7 card-title">
+                                                <select asp-for="Garages" class="form-control" style="display: inline">
+                                                    <option selected="selected" value="0">0</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @*<p class="range-field">
+                                                <input type="range" id="test5" min="0" max="100" />
+                                            </p>
+                                            <div id="test-slider"></div>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="propertyFeatures">
+                                <h4 class="info-text">Select features available on the property </h4>
+                                <div class="row col-sm-12">
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="10" asp-for="SwimmingPool">
+                                                Swimming pool
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="13" asp-for="ElectricFence">
+                                                Electric Fence
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="16" asp-for="Paved">
+                                                Paved
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="11" asp-for="FirePlace">
+                                                Fire place
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="14" asp-for="MotorizedGate">
+                                                Motorized gate
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Other</label>
+                                                <input type="text" asp-for="OtherSpecialFeatures" tabindex="17" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="12" asp-for="BoundaryWall">
+                                                Boundary Wall
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="15" asp-for="OutdoorEntertainmentArea">
+                                                Outdoor Entertainment area
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="reportType">
+                                <h4 class="info-text">Select report type </h4>
+                                <div class="col-sm-12 row" style="margin:auto">
+
+                                    <div class="col-sm-6">
+                                        @if (Model.EstimatedValue > 0)
+                                        {
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Instant Report</h4>
+                                                    <p class="card-text">Fet an instant report for your property estimate</p>
+                                                    @Html.ActionLink("Get instant report",
+		"InstantReportPayment",
+		"Valuations",new {id = Model.ComparableResultId }
+		,
+		new { @class = "btn btn-blue" })
+                                                    
+                                                </div>
+                                            </div>
+
+                                        }
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Detailed Report</h4>
+                                                <p class="card-text">Issue an instruction to a valuer to perform valuation on your property</p>
+                                                @Html.ActionLink("Get detailed report", "IssueInstruction", "Valuations", new { id = Model.ComparableResultId }
+                                       , new { @class = "btn btn-blue" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid row wizard-footer">
+
+                            <div class="pull-left text-center col-sm-6">
+                                <input type='button' class='btn btn-previous btn-fill btn-black btn-wd' name='previous' value='Previous' />
+                            </div>
+
+                            <div class="pull-right text-center col-sm-6" style="float:right">
+                                <input type='button' class='btn btn-next btn-fill btn-blue btn-wd' name='next' value='Next' />
+                                @*<input id="makeReportRequestBtn" type='submit' name='finish' value='Submit'
+                                       asp-area="user" asp-controller="Valuations" asp-action="FullReportRequestPost"
+                                       class='btn btn-finish btn-fill btn-blue btn-wd' />*@
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <input asp-for="ComparableResultId" hidden="hidden" class="form-control" />
+                            <input asp-for="ReportRequested" hidden="hidden" class="form-control" />
+                            <input asp-for="PaymentStatus" hidden="hidden" value="@PaymentStatus.Pending" class="form-control" />
+                            <input id="EstimatedValue" hidden="hidden" value="@Model.EstimatedValue" class="form-control" />
+                            <input asp-for="ReferenceNumber" hidden="hidden" value="" class="form-control" />
+                            <input name="id" hidden="hidden" value="@Model.ComparableResultId" class="form-control" />
+                            <input asp-for="ComparableId" hidden="hidden" class="form-control" />
+                            <div name="FeatureFields" id="FeatureFields" hidden="hidden" class="form-control">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div> <!-- wizard container -->
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+
+    $(document).ready(function () {
+
+        showTab(currentTab); // Display the current tab
+
+        var slider = document.getElementById('test5');
+        noUiSlider.create(slider, {
+            start: [0, 0],
+            connect: true,
+            step: 1,
+            orientation: 'horizontal', // 'horizontal' or 'vertical'
+            range: {
+                'min': 0,
+                'max': 100
+            },
+            format: wNumb({
+                decimals: 0
+            })
+        });
+    });
+
+    function SetPropertyFeatures() {
+        $('#Features')
+            .find('option')
+            .remove();
+
+        $('#property-features input:checked').each(function () {
+            var feature = $(this);
+            $('#FeatureFields').append('<input id="PropertyFeatures" name="PropertyFeatures" value="' +
+                feature.val() +
+                '" hidden="hidden" />');
+        });
+    };
+
+    function validateForm() {
+        // This function deals with validation of the form fields
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("tab");
+        y = x[currentTab].getElementsByTagName("input");
+        // A loop that checks every input field in the current tab:
+        for (i = 0; i < y.length; i++) {
+            // If a field is empty...
+            if (y[i].value === "") {
+                // add an "invalid" class to the field:
+                y[i].className += " invalid";
+                // and set the current valid status to false:
+                valid = false;
+            }
+        }
+        // If the valid status is true, mark the step as finished and valid:
+        if (valid) {
+            document.getElementsByClassName("step")[currentTab].className += " finish";
+        }
+        return valid; // return the valid status
+    };
+
+    //slider input
+</script>

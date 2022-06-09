@@ -1,0 +1,23 @@
+[
+    {
+        "fullName": "Mpho Brkovic",
+        "position": "Sales Rep",
+        "contact": "+267 77 338 100",
+        "email":"mphob@gosmartvalue.com",
+        "profilePic": "../../../../assets/images/team/placeholder.jpg"
+    },
+    {
+        "fullName": "Tumisang Loeto",
+        "position": "Property Analyst",
+        "contact": "+267 77 338 100",
+        "email":"tumisang@gosmartvalue.com",
+        "profilePic": "../../../../assets/images/team/tumisang.JPG"
+    },
+    {
+        "fullName": "Rapelang Balopi",
+        "position": "Operations",
+        "contact": "+267 77 338 100",
+        "email":"rapelang@gosmartvalue.com",
+        "profilePic": "../../../../assets/images/team/placeholder.jpg"
+    }
+]

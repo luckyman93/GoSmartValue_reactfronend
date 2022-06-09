@@ -1,0 +1,25 @@
+:host ::ng-deep .p-rowgroup-footer td {
+    font-weight: 700;
+  }
+  
+  :host ::ng-deep .p-rowgroup-header {
+    span {
+        font-weight: 700;
+    }
+  
+    .p-row-toggler {
+        vertical-align: middle;
+        margin-right: .25rem;
+    }
+  }
+
+  .section-title {
+    text-align: center;
+    font: normal normal 300 50px/65px Gilroy Regular;
+    color: #1A2E49;
+    opacity: 1;
+    text-decoration: underline #FF8800;
+    text-underline-offset: 1rem;
+    margin-top:2rem;
+    margin-bottom: 4rem;
+  }

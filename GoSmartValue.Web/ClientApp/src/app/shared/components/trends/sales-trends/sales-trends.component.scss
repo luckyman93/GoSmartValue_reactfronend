@@ -1,0 +1,22 @@
+.p-inputgroup p-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  .selectedLocationName {
+      font-family: "Gilroy Regular, serif";
+      font-weight: bolder;
+      font-size: larger;
+  }
+
+  .section-title {
+    text-align: center;
+    font: normal normal 150 30px/65px Gilroy Regular;
+    color: #1A2E49;
+    opacity: 1;
+    text-decoration: underline #FF8800;
+    text-underline-offset: 1rem;
+    margin-top:2rem;
+  }

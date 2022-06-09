@@ -1,0 +1,98 @@
+﻿@model List<GoSmartValue.Web.ViewModels.UserRoleViewModel>
+
+@{
+    var roleId = ViewBag.roleId;
+    Layout = "_Layout";
+}
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+            <h2>Add or Remove users from role</h2>
+        </div>
+        <div class="card-footer">
+            @*<input type="submit" value="Save" class="btn btn-primary" style="width:auto" />*@
+            <a class="btn btn-primary"
+               asp-action="EditRole" asp-controller="Administration" asp-route-id="@roleId">
+                Cancel
+            </a>
+        </div>
+        <div class="card-body">
+            @*<input type="text" id="searchInput" class="form-control" onkeyup="filterUsers()"
+                placeholder="Search for users..">*@
+            <div class="row col-md-12">
+                <table id="usersTable" class="appTable table table-striped table-bordered" width="100%">
+                    <tr class="header">
+                        <th>In UserRoles</th>
+                        <th>User Id</th>
+                        <th>Username</th>
+                        <th>Actions</th>
+                    </tr>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td scope="row">
+                                <input type="checkbox" asp-for="@Model[i].IsSelected" class="form-check-input" />
+                            </td>
+                            <td>
+                                <label asp-for="@Model[i].IsSelected">@Model[i].UserId</label>
+                                <input asp-for="@Model[i].UserId" type="hidden" />
+                            </td>
+                            <td>
+                                <label asp-for="@Model[i].IsSelected">@Model[i].UserName</label>
+                                <input type="hidden" asp-for="@Model[i].UserName" />
+                            </td>
+                            <td>
+                                @if (@Model[i].IsSelected)
+                                {
+                                    <a class="btn btn-primary"
+                                       asp-action="RemoveFromUserRoles" asp-controller="Administration" asp-route-roleId="@roleId" asp-route-userId="@Model[i].UserId">
+                                        Remove
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-primary"
+                                       asp-action="AddToUserRoles" asp-controller="Administration" asp-route-roleId="@roleId" asp-route-userId="@Model[i].UserId">
+                                        Add
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+
+    $(document).ready(function () {
+        //$('#usersTable').DataTable();
+    });
+
+    function filterUsers() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("usersTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                let label = td.getElementsByTagName("label")[0];
+                txtValue = label.textContent || label.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

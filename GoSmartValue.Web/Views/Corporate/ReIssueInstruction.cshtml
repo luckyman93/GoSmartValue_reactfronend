@@ -1,0 +1,140 @@
+﻿@using GoSmartValue.Web.Services
+@model AV.Contracts.Models.Valuation.InstructionModel
+@inject CachedStorageService CachedStorageService
+
+@{
+    ViewData["Title"] = "Re issue Instruction";
+
+    Layout = "Layouts/_CorporateLayout";
+
+    var valuers = new SelectList(
+        CachedStorageService.GetValuers().Result
+            .Select(c =>
+                new SelectListItem { Text = c.FullName, Value = c.Id.ToString() })
+        , "Value", "Text", "-");
+
+    //string FormatTime(DateTime? dateTime)
+    //{
+    //    if (!dateTime.HasValue)
+    //    {
+    //        return "";
+    //    }
+    //    return dateTime.Value.ToString("HH:mm");
+
+    //}
+}
+<link href="~/lib/jquery-ui/jquery.timepicker.min.css" />
+<div class="outer container-fluid image-container set-full-height" style="background-image:url(/valuerHome.jpg);">
+    <div class="middle container-fluid" style="padding-top:75px">
+        <div class=" inner container-fluid" style="margin:auto;max-height:100%;">
+
+            <div class="col-sm-12 container-fluid" style="height:100%;">
+                <form method="post" style="background-color:transparent!important">
+                    <div class="container-fluid" style="padding-top: 40px">
+                        <div class="row col-sm-12 form-group">
+                            <div class="row col-sm-3 " style="background-color: #fff; min-height: 100px; padding: 10px; box-shadow: 31px 14px 0px darkred;">
+                                <label class="col-sm-12">City/Town/Village</label>
+                                <div class="col-sm-12">
+                                    <input type="text" asp-for="Location.Name" readonly="readonly" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="row col-sm-3" style="background-color: #fff; min-height: 100px; padding: 10px; box-shadow: 31px 14px 0px darkred;">
+                                <div class="row col-sm-12">
+                                    <label class="col-sm-12">Plot Number</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" asp-for="PlotNumber"
+                                               readonly="readonly" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="row col-sm-3" style="background-color: #fff; min-height: 100px; padding: 10px; box-shadow: 31px 14px 0px darkred;">
+                                <div class="row col-sm-12">
+                                    <label class=" col-sm-12">Authorize Valuer</label>
+                                    <div class="col-sm-12">
+                                        <select asp-for="ValuerId" class="col-sm-12 form-control">
+                                            @foreach (var valuer in valuers)
+                                            {
+                                                if (string.Equals(valuer.Value, Model.ValuerId.ToString(), StringComparison.CurrentCultureIgnoreCase))
+                                                {
+                                                    <option value="@valuer.Value" selected="selected">@valuer.Text</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@valuer.Value">@valuer.Text</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row col-sm-12 form-group" style="padding-top: 20px">
+                            <div class="row col-sm-3" style="background-color: #fff; min-height: 100px; padding: 10px;">
+                                <label class="col-sm-12">Ward/Block</label>
+                                <div class="col-sm-12">
+                                    <input type="text" asp-for="Locality.Name" readonly="readonly" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="row col-sm-3" style="background-color: #fff; min-height: 100px; padding: 10px; ">
+                                <div class="col-sm-12">
+                                    <label class="col-sm-12">Preferred access date</label>
+                                    <div class="col-sm-12">
+
+                                        <input asp-for="PreferredAccessDate" type="date" typeof="datetime-local" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            @*<div class="row col-sm-3 shadow" style="background-color: #fff; height: 100px; padding: 10px;">
+                                    <div class="col-sm-12">
+                                        <label class="col-sm-12">Preferred access time</label>
+                                        <div class="col-sm-12">
+
+                                                <input name="PreferredAccessTime" value="@FormatTime(Model.PreferredAccessDate)" type="datetime-local" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>*@
+                        </div>
+
+                        <div class="row col-sm-12 form-group" style="padding-top: 20px">
+
+                            <div class="row col-sm-3" style="background-color: #fff; height: 150px; padding: 10px; ">
+                                <label class="col-sm-12">Access Information</label>
+                                <div class=" col-sm-12">
+                                    <input class="form-control form-group" asp-for="ClientName" readonly="readonly" />
+                                    <input class="form-control" asp-for="ClientMobileNumber" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="row col-sm-3" style="background-color: #fff; height: 150px; padding: 10px;">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" asp-for="SupportingDocuments" readonly="readonly" aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" asp-for="SupportingDocuments">Upload documents</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-3"></div>
+                        </div>
+
+                        <input type="text" hidden="hidden" asp-for="Status" />
+                        <input type="text" hidden="hidden" asp-for="AccountId" />
+                        <input type="text" hidden="hidden" asp-for="ParentInstructionId" />
+                        <input type="text" hidden="hidden" asp-for="LocationId" />
+                        <input type="text" hidden="hidden" asp-for="LocalityId" />
+                        <div style="float: right">
+                            <button type="submit" asp-controller="Corporate" asp-action="ReIssueInstruction" class="btn btn-blue">Re-Issue Instruction</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/js/valuations.min.js"></script>
+<script>
+</script>

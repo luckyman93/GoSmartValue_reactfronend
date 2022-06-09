@@ -1,0 +1,86 @@
+﻿@using AV.Common.Entities
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+
+@{
+	Layout = "_Layout";
+
+}
+
+<style>
+	#content {
+		margin: 0 auto 0 auto;
+	}
+</style>
+
+@*<%--Content--%>*@
+<div id="content" class="container-fluid image-container set-full-height" style="background-image: url(/coupleHome.jpg);">
+	<div class="row col-sm-12" style="margin-bottom:40%">
+
+		<div class="col" style="color:#fff">
+			<div  style="padding-top: 35%;font-weight:900">
+				
+					<div>
+						<p>Where am I?</p>
+						<p>gosmartvalue:The Automated Property Valuation Platform</p>
+					</div>
+					<div>
+						<p>What can i do here?</p>
+						<p>Get an indicative Quick Property Valuation <strong><i style="color:red">Free</i></strong> of charge</p>
+					</div>
+					<div>
+						<p>Do an Instant Automatically Calculated Valuation of your Property charged at P750</p>
+					</div>
+					<div>
+						<p>Instruct a valuer to provide you with a detailed and verified property valuation anywhere in botswana charged according to the fee scale</p>
+					</div>
+				</div>
+			
+		</div>
+		<div class="col" id="loginDiv" runat="server" style="text-align: center;">
+			@if (SignInManager.IsSignedIn(User))
+			{
+			<div class="container-fluid row " style="padding-top: 35%">
+				<div style="text-align: center; margin-right: auto; margin-left: auto; color: black">
+					<a asp-area="user" asp-controller="Valuations" asp-action="GetValuation" style="font-size: 14px; color: #ffffff; font-family: 'Segoe UI'; background-color: black; border-radius: 50px; text-decoration: none;" class="btn ">
+						<i class="fa fa-house-damage" style="color: #ffffff"></i>
+						Quick Property Valuation
+					</a>
+				</div>
+				<div style="text-align: center; margin-right: auto; margin-left: auto; color: black">
+					<a asp-area="user" asp-controller="Valuations" asp-action="IssueInstruction" style="font-size: 14px; color: #ffffff; font-family: 'Segoe UI'; background-color: #b71c1c; border-radius: 50px; text-decoration: none;" class="btn ">
+						<i class="fa fa-house-damage" style="color: #ffffff"></i>
+						Instruct Valuation
+					</a>
+				</div>
+			</div>
+			}
+			else
+			{
+				<div class="container-fluid row form-group text-center" style="padding-top: 40%">
+					<div class="col-sm-6 text-center" style="">
+						<a class="btn " style="color: #ffffff; border-radius: 50px; width: 200px; font-size: 14px; font-family: 'Segoe UI'; background-color: #1a237e" asp-action="Login" asp-controller="Account"><i class="fa fa-sign-in-alt"></i> Login</a>
+					</div>
+					<div class="col-sm-6 text-center">
+						<a class="btn" style="color: #ffffff; border-radius: 50px; width: 200px; font-size: 14px; font-family: 'Segoe UI'; background-color: #b71c1c" asp-action="Register" asp-controller="Account"><i class="fa fa-user-plus"></i> Register</a>
+					</div>
+				</div>
+				<div class="container-fluid row text-center" style="padding-top: 2%">
+					<div style="text-align: center; margin-right: auto; margin-left: auto; color: black">
+						<a asp-area="user" asp-controller="Valuations" asp-action="GetValuation" style="font-size: 14px; color: #ffffff; font-family: 'Segoe UI'; background-color: black; border-radius: 50px; text-decoration: none;" class="btn ">
+							<i class="fa fa-house-damage" style="color: #ffffff"></i>
+							Quick Property Valuation
+						</a>
+					</div>
+				</div>
+			}
+
+
+		</div>
+
+	</div>
+
+	
+</div>
+
+<script type="text/javascript" src="~/js/site.min.js"></script>

@@ -1,0 +1,120 @@
+  
+  .image-section {
+    overflow:hidden;
+  }
+  
+  .price {
+    font: normal normal 800 1.6rem Gilroy Regular;
+    color: #1A2E49;
+    opacity: 1;
+  }
+  
+  p, li {
+    font: normal normal 200 1.5rem Gilroy Regular;
+    color: #1A2E49;
+    opacity: 1;
+  }
+  
+  .header {
+    text-align: center;
+    font: normal normal 200 2rem Gilroy Heavy;
+    color: #1A2E49;
+    opacity: 1;
+  }
+  
+  .green{
+    color:#179877;
+    background-color: #D1EAE4;
+    border-radius: 0.5rem;
+  }
+  
+  .blue, .fasttrack{
+    color: #33A8E2;
+    background-color: #D3E1F3;
+    border-radius: 0.5rem;
+  }
+  
+  .black {
+    color: black;
+    background-color: #bebebe;
+    border-radius: 0.5rem;
+  }
+  
+  .white {
+    color: white;
+    background-color: #303030;
+    border-radius: 0.5rem;
+  }
+  
+  .business{
+    color: #FD4F64;
+    background-color: #FEDDE0;
+    border-radius: 0.5rem;
+  }
+  
+  .platinum{
+    color: #584f3f;
+    background-color: #e5e4e2;
+    border-radius: 0.5rem;
+  
+  }
+  
+  img {
+    width: 100%;
+    height:20rem;
+  }
+  
+  .pi-star{
+    color:darkgoldenrod;
+    transform:translateY(-30%);
+  }
+  
+  .features {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .feature-col {
+    display: grid;
+    grid-template-rows: repeat(6, min-content);
+    grid-auto-flow: column;
+  }
+  
+  .button-start {
+    width: 300px;
+    height: 78px;
+    font: normal normal 200 25px/65px Gilroy Heavy;
+    color: #ffffff;
+    background: #FD4F64 0% 0% no-repeat padding-box;
+    border: 1px solid #FEDDE0;
+    border-radius: 14px;
+    opacity: 1;
+    margin-bottom: 1rem;
+  }
+  
+  .p-tabPanel {
+    overflow:hidden;
+  }
+  
+  ul {
+    display: grid;
+    grid-template-rows: repeat(6, min-content);
+    grid-auto-flow: column;
+  }
+  
+  .more{
+    font-size: small;
+    border: none;
+    background: none;
+    float: right;
+   
+  }
+  
+  .detailedCard {
+    background: #FFFFFF 0 0 no-repeat padding-box;
+    box-shadow: 0 0 40px #00000029;
+    border: 1px solid #FFFFFF;
+    opacity: 1;
+    overflow: hidden;
+  }
+  
+  

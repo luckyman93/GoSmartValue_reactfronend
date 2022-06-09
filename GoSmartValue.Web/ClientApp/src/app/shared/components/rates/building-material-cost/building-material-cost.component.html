@@ -1,0 +1,62 @@
+<!-- <div class="card">
+    <h2 class="section-title">Building Material Costs</h2>
+    <p>Description of the data here.</p>
+    <p-table>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Type</th>
+                <th>Rate</th>
+                <th>Standard Size</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rate>
+            <tr>
+                <td>{{rate.propertyType}}</td>
+                <td>{{rate.rate | currency :' ':'symbol':'1.2-2'}}</td>
+                <td>{{rate.standardSize}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div> -->
+
+<div class="card">
+    <h2 class="section-title">Building Material Costs</h2>
+    <p>Description of the data here.</p>
+    <p-table #LocationTable [value]="buildingMaterials" sortField="material" sortMode="single" dataKey="material"
+    rowGroupMode="subheader" groupRowsBy="material" [rows]="100" [showCurrentPageReport]="true" 
+    [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"  styleClass="p-datatable-gridlines"
+    currentPageReportTemplate="{first} to {last} of {totalRecords}" [scrollable]="true" [globalFilterFields]="['item']"
+    scrollHeight="40rem" responsiveLayout="scroll">
+    <ng-template pTemplate="caption">
+        <div class="p-d-flex">
+            <span class="p-input-icon-left p-ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="LocationTable.filterGlobal($any($event.target).value, 'contains')" placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template>    
+    <ng-template pTemplate="header">
+            <tr>
+                <th>Item</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="groupheader" let-rate let-rowIndex="rowIndex" let-expanded="expanded">
+            <tr>
+                <td colspan="3">
+                    <button type="button" pButton pRipple [pRowToggler]="rate" class="p-button-text p-button-rounded p-button-plain p-mr-2 rowHeader" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                    <span class="p-text-bold p-ml-2">{{rate.material}}</span>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-rate>
+            <tr>
+                <td>{{rate.item}}</td>
+                <td>{{rate.description}}</td>
+                <td>{{rate.price}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+

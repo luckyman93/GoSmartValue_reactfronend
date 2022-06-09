@@ -1,0 +1,29 @@
+<p-card [style]="{'min-height': '15rem', 'border-radius':'2rem', 'border-style': 'solid','border-color':'#5CB8E8'}" class="details">
+  <div class="header">
+<!--    <div class="flex justify-content-start">-->
+<!--      <i class="topbar-icon pi pi-shopping-cart"></i>-->
+<!--    </div>-->
+    <div class="flex justify-content-center">
+      <span class="title">USER DETAILS</span>
+    </div>
+<!--    <div class="flex justify-content-end">-->
+<!--      <i class="topbar-icon pi pi-shopping-cart"></i>-->
+<!--    </div>-->
+  </div>
+  <div class="details">
+    <div>
+      <label>Name: </label>
+      <output>{{user.firstName}} {{user.lastName}}</output>
+    </div>
+    <div>
+      <label>Phone: </label>
+      <output>{{user.phoneNumber}}</output>
+    </div>
+    <div>
+      <label>Email: </label>
+      <output>{{user.email}}</output>
+    </div>
+  </div>
+
+
+</p-card>

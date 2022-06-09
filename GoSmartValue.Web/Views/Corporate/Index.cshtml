@@ -1,0 +1,33 @@
+﻿@{
+	ViewData["Title"] = "Home";
+	Layout = "Layouts/_CorporateLayout";
+}
+
+<div class="container-fluid image-container set-full-height" style="background-image:url(/valuerHome.jpg);">
+	<div class="middle container-fluid" style="padding-top:75px">
+		<div class=" inner container-fluid" >
+
+			<div class="col-sm-12 container-fluid" style="height:100%;">
+				<div class="text-center">
+
+					<div class="row container-fluid" style="">
+						<div class="col-sm-3" style="padding-top:18%;">
+							<a asp-controller="Corporate" asp-action="Valuations" class="btn index-menu"><span>Valuations</span></a>
+						</div>
+						<div class="col-sm-3" style="padding-top:18%;">
+							<a asp-controller="Corporate" asp-action="PropertyInformation" class="btn index-menu"><span>Property Information</span></a>
+						</div>
+						<div class="col-sm-3"text-center style="padding-top:18%;">
+							<a asp-controller="Corporate" asp-action="Reports" class="btn index-menu"><span>Reports</span></a>
+						</div>
+						<div class="col-sm-3 " style="padding-top:18%;">
+							<a asp-controller="Corporate" asp-action="Administration" class="btn index-menu"><span>Admin</span></a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	
+	</div>
+</div>

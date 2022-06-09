@@ -1,0 +1,99 @@
+﻿@using AV.Common
+@using AV.Contracts.Enums
+@using AV.Contracts.Models.Payment.Requests
+@using GoSmartValue.Web.Services
+@model IEnumerable<AV.Contracts.Models.Valuation.InstructionModel>
+@inject CachedStorageService CachedStorage
+@{
+	ViewData["Title"] = "Complete Instructions";
+
+	Layout = "_Layout";
+}
+
+<div class="outer container-fluid" style="background-image:url(/valuationsIndex.jpg);background-size:cover;height:100vh">
+        <div class="middle container-fluid" style="padding-top:85px">
+            <div class="inner container-fluid" style="">
+                <div class="shadow col-md-12 container-fluid">
+                    <div class="container-fluid " style="padding:10px">
+                        <div style="padding:0;width:100%">
+                            <table id="instructions" class="table  table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Valuer</th>
+                                        <th>City</th>
+                                        <th>Ward</th>
+                                        <th>Plot Number</th>
+                                        <th>Valuation Date</th>
+                                        @*<th>Service Fee(BWP)</th>*@
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var instruction in Model)
+                                    {
+                                        <tr>
+                                            <th scope="row">@instruction.Valuer.FirstName @instruction.Valuer.LastName</th>
+                                            <td>@instruction.Location?.Name</td>
+                                            <td>@instruction.Locality?.Name</td>
+                                            <td>@instruction.PlotNumber</td>
+                                            <td>
+                                                @if (instruction.Valuation.ValuationDate.HasValue)
+                                                {
+                                                    @instruction.Valuation.ValuationDate.Value.ToString("d")
+                                                }
+                                            </td>
+                                            @*<td>@instruction.Valuation.ServiceFee.ToString("0.00")</td>*@
+                                            <td>
+                                                @if (!instruction.Valuation.IsPaid)
+                                                {
+                                                    @Html.ActionLink("Pay Now", "Payment", "Payment", new SetProductAmountRequest { Reference = instruction.ValuationId.ToString(), Type = PaymentType.DetailedReport, InitiatedByUserId = ViewBag.CurrentUserId }, new { @class = "btn btn-blue" })
+                                                }
+                                                else
+                                                {
+                                                    @Html.ActionLink("View", "ValuationReport", "Document", new { id = instruction.ValuationId }, new { @class = "btn btn-blue" })
+                                                }
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+}
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+	$(document).ready(function () {
+		//$('#instructions').DataTable({
+		//	responsive: true
+		//});
+		//$('.dataTables_length').addClass('bs-select');
+
+		$('#payNow').click(function (e) {
+			e.preventDefault(); // <------------------ stop default behaviour of button
+			var element = this;
+			ShowProgress();
+			var request = {
+				amount: 750,
+				
+			};
+
+			var element = this;
+			$.get("/Payment/pay", request)
+				.done(function (data) {
+					HideProgress();
+				},
+					"json"
+				);
+
+		});
+
+	});
+</script>
+

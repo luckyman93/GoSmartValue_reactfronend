@@ -1,0 +1,166 @@
+﻿@using AutoMapper
+@using AV.Common.Entities
+@using AV.Contracts.Interface
+@using GoSmartValue.Web.Services
+@model AV.Contracts.Models.Users.UserModel
+@inject IUserReportService _userReportService
+@*@inject IInstructionService _instructionService
+@inject IMapper _mapper*@
+
+@{
+    ViewData["Title"] = $"User: {Model.FirstName} {Model.LastName}";
+    Layout = "Layouts/_Admin";
+
+    var instantReports = _userReportService.GetInstantReports(Model.Id);
+    //var detailedReports = _instructionService.GetUserInstructions(_mapper.Map<User>(Model)).ToList();
+}
+
+<div class="row">
+    <h2>@ViewData["Title"]</h2>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="" method="post">
+            <h4>User Details</h4>
+            <div class="row">
+                @if (!Model.EmailConfirmed)
+                {
+                    @Html.ActionLink("Activate Login", "AccountConfirmation", "Accounts", 
+                        new { UserId  = Model.Id, UserName = Model.UserName, EmailAddress = Model.Email})
+                }
+            </div>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="@Model.FirstName"></label>
+                <input asp-for="@Model.FirstName" class="form-control" />
+                <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.LastName"></label>
+                <input asp-for="@Model.LastName" class="form-control" />
+                <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Email"></label>
+                <input readonly="" asp-for="@Model.Email" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.PhoneNumber"></label>
+                <input asp-for="@Model.PhoneNumber" class="form-control" />
+                <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
+            </div>
+           
+            @*<button type="submit" class="btn btn-primary">Save User Details</button>*@
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <div class="row">
+            <div class="col-md-12">
+                <section>
+                    <h4>Account Subscription Information.</h4>
+                    <hr/>
+                    @{
+                        if (Model.Accounts.Any())
+                        {
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Subscription Name</th>
+                                    <th scope="col">Active</th>
+                                    <th scope="col">Created On</th>
+                                    <th scope="col">Expires On</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var account in Model.Accounts?.OrderByDescending(a => a.ExpiryDate))
+                                {
+                                    <tr>
+                                        <th scope="row">@account.AccountType.ToString()</th>
+                                        <td>@account.Active</td>
+                                        <td>@account.AddedOn.ToString("d")</td>
+                                        <td>@account.ExpiryDate.ToString("d")</td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        }
+                    }
+                </section>
+            </div>
+        </div>
+        @if (instantReports.Any())
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <section>
+                        <h4>Instant Reports</h4>
+                        <hr/>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Estimated On</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">Street Name</th>
+                                    <th scope="col">Plot Number</th>
+                                    <th scope="col">Payment Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var report in instantReports)
+                            {
+                                <tr>
+                                    <th scope="row">@report.AddedOn.ToString("dd/MM/yyy")</th>
+                                    <td>@report.Location.Name</td>
+                                    <td>@report.StreetName</td>
+                                    <td>@report.PlotNo</td>
+                                    <td>@report.paymentStatus.ToString()</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        }
+        
+        @*@if (detailedReports.Any())
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <section>
+                        <h4>Detailed Valuation Reports</h4>
+                        <hr/>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Estimated On</th>
+                                <th scope="col">Value</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Street Name</th>
+                                <th scope="col">Plot Number</th>
+                                <th scope="col">Payment Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var report in detailedReports)
+                            {
+                                <tr>
+                                    <th scope="row">@report.CreatedDate.ToString("dd/MM/yyy")</th>
+                                    <td>@report.Value?.ToString("C")</td>
+                                    <td>@report.Location.Name</td>
+                                    <td>@report.Locality?.Name</td>
+                                    <td>@report.PlotNumber</td>
+                                    <td>@report.paymentStatus.ToString()</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        }*@
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="join-us flex flex-row-reverse align-items-start xl:m-1 xl:m-1" >
+  <div class="options-container">
+    <p-tabView>
+      <p-tabPanel header="SIGN IN" [selected]="selected">
+        <app-login (closeLoginLogoutDialog) ="closeDialog($event)" [basketItem]="basketItem" [product]="product"></app-login>
+      </p-tabPanel>
+      <p-tabPanel header="SIGN UP" [selected]="!selected">
+        <app-register></app-register>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+
+  <div class="flex align-items-center justify-content-center border-round image-container">
+    <img [src]="'../../../../assets/images/House-01.png'" alt="Picture"/>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+[
+    {
+        "name": "Location",
+        "description": "Provides a breakdown of land use types in the location you’re looking at, the sales and lending activity within the location, a list of amenities in the location and a comprehensive overview of the actual boundaries of localities that make up a location - as well as a map of the area.",
+        "type": 2,
+        "category": 5,
+        "price": 150,
+        "serviceType": "string",
+        "sampleUrl": "location.pdf",
+        "features": []
+    },
+    {
+        "name": "Locality",
+        "description": "A map showing the boundary of the locality, list of recent transactions in the locality. A graphical representation of sales prices with a selected duration. Median Price, Average Price, Minimum and Maximum prices of properties in the locality for upto 5 years.",
+        "type": 2,
+        "category": 5,
+        "price": 250,
+        "serviceType": "string",
+        "sampleUrl": "locality.pdf",
+        "features": []
+    },
+    {
+        "name": "Estate Report",
+        "description": "A clear demarcation of the boundaries of the estate, the sales and lending activity within an estate. It also includes what properties have sold for recently. A comparison between the subject Estate and other comparables estates within the location.",
+        "type": 2,
+        "category": 5,
+        "price": 150,
+        "serviceType": "string",
+        "sampleUrl": "estate.pdf",
+        "features": []
+    },
+    {
+        "name": "Deeds Report",
+        "description": "Based on your query this report provides detailed and up to date records of property transfers and bond registrations for a locality/ location / an entity based on your search criteria. Designed to help conduct off-line analysis of property and bond transactions the report is available in a downloadable excel spread sheet.",
+        "type": 2,
+        "category": 5,
+        "price": 250,
+        "serviceType": "string",
+        "sampleUrl": "deeds.pdf",
+        "features": []
+    },
+    {
+        "name": "Risk Report",
+        "description": "A Matrix that details risks a property is exposed to. Information on the size, value, credit risk, locality demographics, provides relevant information on the property and its surrounds. The risk report further delves into the various crime, weather and land characteristics within the area. It provides insight into expected hail, lightning, flood risks as well as slope, soil type, seismic activity and proximity to mines and water.",
+        "type": 2,
+        "category": 5,
+        "price": 250,
+        "serviceType": "string",
+        "sampleUrl": "risk.pdf",
+        "features": []
+    },
+    {
+        "name": "Nodal Report",
+        "description": "A map showing the boundary of the commercial node, list of properties in the node, the property types and uses. A graphical representation of rental levels,occupancy levels and yields attained in that node. A graphical represention of near term upcoming developments is demostrated where applicable.",
+        "type": 2,
+        "category": 5,
+        "price": 250,
+        "serviceType": "string",
+        "sampleUrl": "nodal.pdf",
+        "features": []
+    }

@@ -1,0 +1,61 @@
+.p-field {
+    margin-top: 1.5rem;
+  }
+  
+  label{
+    //font-family: "Gilroy Regular", serif;
+    font: normal normal 200 1.6rem Gilroy Regular;
+    font-size: 1.2rem!important;
+    margin-top: -1rem!important;
+    color: #1A2E49;
+    opacity: 1;
+  }
+  
+  .p-float-label{
+    font-family: "Gilroy Regular", serif;
+    font-size: 1.2rem;
+  }
+  
+  input {
+    width: 100%;
+    padding:1rem 1.2rem;
+  }
+  
+  .p-dropdown {
+    width: 100%;
+    padding:1rem 1.2rem;
+  }
+  
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+  
+  h3{
+    font: normal normal 300 2.5rem Gilroy;
+    text-align: center;
+    color: #1A2E49;
+    opacity: 1;
+    text-decoration: underline #FF8800;
+    text-underline-offset: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    text-align: center;
+    font: normal normal 300 50px/65px Gilroy Regular;
+    color: #1A2E49;
+    opacity: 1;
+    text-decoration: underline #FF8800;
+    text-underline-offset: 1rem;
+    margin-top:2rem;
+    margin-bottom: 4rem;
+  }
+  
+  

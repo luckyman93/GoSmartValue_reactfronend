@@ -1,0 +1,98 @@
+﻿/*** Parameters ***/
+
+// Colors
+$color-primary: #666;
+$color-secondary: #888;
+$color-light: #e0e0e0;
+$color-lightest: #efefef;
+$color-brand: #239bf6;
+$background-color: #fff;
+// Brand color
+$color-facebook: #3b5998;
+$color-feedly: #2bb24c;
+$color-github: #333;
+$color-google: #dc4e41;
+$color-instagram: #3f729b;
+$color-linkedin: #0077b5;
+$color-medium: #00ab6b;
+$color-messenger: #0084ff;
+$color-rss: #f26522;
+$color-spotify: #2ebd59;
+$color-twitter: #55acee;
+
+// Borders
+$border-light: solid 1px rgba(0, 0, 0, .05);
+
+// Font Size
+$font-size-biggest: 2.8rem;
+$font-size-largest: 2.3rem;
+$font-size-large: 1.2rem;
+$font-size-base: 14;
+$font-size-small: .9rem;
+$font-size-smallest: .75rem;
+
+// Spacing
+$spacing-small: .75rem;
+$spacing-single: 1rem;
+$spacing-double: 2rem;
+$spacing-triple: 3rem;
+$spacing-big: 6rem;
+
+// Media queries
+$desktop: 800px;
+$tablet: 600px;
+$mobile: 480px;
+
+// Font Family
+$sans-serif: 'Roboto', sans-serif;
+$serif: 'Playfair Display', serif;
+
+// Animation
+$anime-in: .4s;
+$anime-out: .5s;
+
+
+
+//bootstrap wizard
+$gray-base: #000 !default;
+$gray: lighten($gray-base, 33.5%) !default; // #555
+$gray-light: #999999 !default; // #999999
+
+$black-color: #3C4858 !default;
+
+
+$body-bg: #fff !default;
+
+$line-height-base: 1.428571429 !default; // 20/14
+$font-size-base: 14px !default;
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+$font-family-sans-serif: 'Roboto', 'Helvetica', 'Arial', sans-serif !default;
+$font-family-serif: 'Roboto Slab', 'Times New Roman', serif !default;
+
+//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+$font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$font-family-base: $font-family-sans-serif !default;
+
+$font-size-base: 14px !default;
+$font-size-large: ceil(($font-size-base * 1.25)) !default; // ~18px
+$font-size-small: ceil(($font-size-base * 0.85)) !default; // ~12px
+
+$font-size-h1: 3.8em !default;
+$font-size-h2: 2.6em !default;
+$font-size-h3: 1.825em !default;
+$font-size-h4: 1.3em !default;
+$font-size-h5: 1.25em !default;
+$font-size-h6: 0.9em !default;
+$font-paragraph: 16px !default;
+$font-size-navbar: 16px !default;
+$font-size-small: 12px !default;
+
+$margin-base: 15px !default;
+
+
+$screen-sm: 768px !default;
+$screen-sm-min: $screen-sm !default;

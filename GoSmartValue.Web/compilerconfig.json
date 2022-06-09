@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "./Content/css/site.css",
+    "inputFile": "./assets/css/site.scss"
+  },
+  {
+    "outputFile": "assets/css/site.css",
+    "inputFile": "assets/css/site.scss"
+  },
+  {
+    "outputFile": "assets/css/components/tables/editor.dataTables.css",
+    "inputFile": "assets/css/components/tables/editor.dataTables.scss"
+  }
+]

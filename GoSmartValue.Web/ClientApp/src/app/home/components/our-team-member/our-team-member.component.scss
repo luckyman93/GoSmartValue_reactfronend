@@ -1,0 +1,42 @@
+.profile-image {
+  box-shadow: 0 1rem 2rem #00000029;
+  border: 2px solid #FF8800;
+  opacity: 1;
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+.fullName {
+  text-align: center;
+  font: normal normal 800 2rem Gilroy Regular;
+  color: #1A2E49;
+  opacity: 1;
+  margin-top: 1rem;
+}
+
+.position{
+  text-align: center;
+  font: normal normal normal 1.6rem Gilroy Regular;
+  color: #1A2E49;
+  opacity: 1;
+}
+
+.contact {
+  text-align: center;
+  font: normal normal normal 1.6rem Gilroy Regular;
+  color: #1A2E49;
+  opacity: 1;
+
+}

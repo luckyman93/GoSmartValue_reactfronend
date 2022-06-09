@@ -1,0 +1,42 @@
+<div class="card">
+    <h2 class="section-title">Sales Trends</h2>
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+                    <span class="p-float-label">
+                        <p-calendar  [(ngModel)]="dateFrom"
+                         inputId="fromDate" [showIcon]="true"></p-calendar>
+                        <label for="fromDate">From</label>
+                    </span>   
+            </div>
+        </div>
+        
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+                <span class="p-float-label">
+                    <p-calendar [(ngModel)]="dateTo" 
+                    inputId="toDate" [showIcon]="true"></p-calendar>
+                    <label for="toDate">To</label>
+                </span> 
+            </div>
+        </div>
+                
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+                <span class="p-float-label">
+                    <p-dropdown [options]="locations" [(ngModel)]="location" placeholder="Select a City" 
+                    optionLabel="name" [showClear]="true" [filter]="true" filterBy="name"></p-dropdown>
+                  </span>      
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-content-end">
+        <p-button label="Get Sales" (onClick)="getSalesData()" icon="pi pi-angle-right" iconPos="right"></p-button>
+    </div>
+</div>
+<div class="card chartCard">
+    <h5 *ngIf="salesData">Showing Sales Trends For: <span class="selectedLocationName">{{location.name}}</span></h5>
+    <p-chart type="line" [data]="salesData"></p-chart>
+</div>
+
+<p-toast position="top-center" key="tc"></p-toast>

@@ -1,0 +1,247 @@
+﻿@using GoSmartValue.Web.Services
+
+@model IEnumerable<AV.Contracts.Models.Market.ResponseModels.MarketInformation>
+@inject CachedStorageService CachedStorageService
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "Layouts/_BackOffice";
+
+	SelectList locations = new SelectList(
+		CachedStorageService.Cities
+			.Select(c =>
+				new SelectListItem { Text = c.Value, Value = c.Key.ToString(), Selected = c.Key == 33 })
+		, "Value", "Text", "-");
+
+	var localities = new List<SelectListItem>();
+
+	var streets = new List<SelectListItem>();
+
+    var districts = new SelectList(
+                    CachedStorageService.Country.Districts
+                        .Select(c =>
+                            new SelectListItem { Text = c.Name, Value = c.Id.ToString() })
+                    , "Value", "Text", "-");
+}
+
+
+<div class="outer container-fluid image-container set-full-height" style="background-image: url(/valuationsIndex.jpg);">
+	<div class="middle container-fluid" style="padding-top: 80px">
+		<div class=" inner container-fluid">
+
+			<div class="card card-nav-tabs card-plain">
+				<div class="card-header card-header-danger">
+					<!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+					<div class="nav-tabs-navigation">
+						<div class="nav-tabs-wrapper">
+							<ul class="nav nav-tabs" data-tabs="tabs">
+								<li class="nav-item">
+									<a class="nav-link active" href="#location-pane" data-toggle="tab">Locations</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#settings" data-toggle="tab">Settings</a>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="card-body ">
+					<div class="tab-content text-center">
+						<div class="tab-pane active" id="location-pane">
+							<table id="locations-grid" class="display p-2" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th>
+											<a data-toggle="modal" data-target="#addNewLocationModal">
+												<i class="material-icons" style="color: #1a237e">
+													add_box
+												</i>
+											</a>
+										</th>
+										<th>Country</th>
+										<th>District</th>
+										<th>Location</th>
+										<th>Locality</th>
+										<th>Measurement/Unit</th>
+										<th>Land Rate From</th>
+										<th>Land Rate To</th>
+										<th>Average Plot Size</th>
+										<th>Average Plot (Unit)</th>
+										<th>Zoning</th>
+										<th>Average Price</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									@if (Model != null)
+									{
+										@foreach (var marketInformation in Model)
+										{
+											<tr>
+												<td></td>
+												<td>@marketInformation.Country?.Name</td>
+												<td>@marketInformation.District?.Name</td>
+												<td>@marketInformation.Location?.Name</td>
+												<td>@marketInformation?.Locality</td>
+												<td>@marketInformation.Metric</td>
+												<td>@marketInformation.FromRate</td>
+												<td>@marketInformation.ToRate</td>
+												<td>@marketInformation.AveragePlotSize</td>
+												<td>@marketInformation.AveragePlotSizeMetric</td>
+												<td>@marketInformation.Zoning</td>
+												<td>@marketInformation.AveragePrice</td>
+											</tr>
+										}
+									}
+								</tbody>
+							</table>
+						</div>
+						<div class="tab-pane" id="settings">
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="addNewLocationModal" tabindex="-1" role="dialog" aria-labelledby="addNewLocationModal" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="exampleModalLabel">New Location</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<h3>
+					Enter new location and market information below
+				</h3>
+				<div class="row form-group">
+					<div class="col-sm-6">
+						<h4>Location details</h4>
+						<div class="label-floating form-group">
+							<label class="control-label">Country<small>(required)</small></label>
+							<input id="CountryName" name="CountryName" value="Botswana" readonly="readonly" type="text" class="form-control" tabindex="1">
+						</div>
+						<div class="label-floating form-group">
+							<label class="control-label">District Name(Province) <small>(required)</small></label>
+							<input id="DistrictName" name="DistrictName" type="text" class="form-control" tabindex="2">
+						</div>
+						<div class="autocomplete label-floating form-group">
+							<label class="control-label">Location (City/Town) <small>(required)</small></label>
+							<input id="LocationName" name="LocationName"  autocomplete="off" type="text" class="form-control" tabindex="3">
+						</div>
+						<div class="label-floating form-group">
+							<label class="control-label">Locality</label>
+							<input id="LocalityName" name="LocalityName" type="text" onfocus="SetLocalities()" class="form-control" tabindex="4">
+						</div>
+						<div class="label-floating form-group">
+							<label class="control-label">Street Name</label>
+							<input id="street" name="street" type="text" class="form-control" tabindex="5">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<h4>Market Information</h4>
+						<div class="label-floating form-group">
+							<label class="control-label">Zoning <small>(required)</small></label>
+							<input id="zoning" name="zoning" type="text" class="form-control" tabindex="6">
+						</div>
+						<div class="label-floating form-group">
+							<label class="control-label">Land Rate-From (min per m&sup2;) <small>(required)</small></label>
+							<input id="landRateFrom" name="landRateFrom" type="text" class="form-control" tabindex="7">
+						</div>
+						<div class="label-floating form-group">
+							<label class="control-label">Land Rate-To (max per m&sup2;) <small>(required)</small></label>
+							<input id="landRateTo" name="landRateTo" type="text" class="form-control" tabindex="8">
+						</div>
+
+						<div class="label-floating form-group">
+							<label class="control-label">Average Plot Size (m&sup2;)</label>
+							<input id="averagePlotSize" name="averagePlotSize" type="text" class="form-control" tabindex="9">
+						</div>
+						<div class="label-floating form-group">
+							<label class="control-label">Average Price(Pula) <small>(required)</small></label>
+							<input id="averagePrice" name="averagePrice" type="text" class="form-control" tabindex="10">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-black" data-dismiss="modal">Cancel</button>
+					<button id="addLocationDetails" type="button" class="btn btn-blue">Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="~/js/valuations.min.js"></script>
+
+<script>
+	var editor; // use a global for the submit and return data rendering in the examples
+
+	$(document).ready(function () {
+        $('#locations-grid').DataTable({
+			responsive: true
+		});
+		$('.dataTables_length').addClass('bs-select');
+
+		$('#addLocationDetails').on('click',
+			function (e) {
+				ShowProgress();
+				e.preventDefault(); // <------------------ stop default form submit
+
+				var locationData = {
+					CountryName: $('#CountryName').val(),
+					DistrictName: $('#DistrictName').val(),
+					LocationName: $('#LocationName').val(),
+					LocalityName: $('#LocalityName').val(),
+					FromRate: $('#landRateFrom').val(),
+					ToRate: $('#landRateTo').val(),
+					Zoning: $('#zoning').val(),
+					AveragePlotSize: $('#averagePlotSize').val(),
+					AveragePrice: $('#averagePrice').val()
+				};
+
+				$.post("/api/market",
+					// posts data from form
+					locationData,
+					// handle success
+					function (data) {
+						console.log(data);
+						HideProgress();
+						let marketLocation =
+							`<tr>
+								<td>${data.country.name}</td>
+								<td>${data.district.name}</td>
+								<td>${data.location.name}</td>
+								<td>${data.locality.name}</td>
+								<td>${data.metric}</td>
+								<td>${data.fromRate}</td>
+								<td>${data.toRate}</td>
+								<td>${data.averagePlotSize}</td>
+								<td>${data.averagePlotSizeMetric}</td>
+								<td>${data.zoning}</td>
+								<td>${data.averagePrice}</td>
+								<td value='${data.id}'></td>
+							 </tr>`;
+						$('#market-locations')
+							.append(marketLocation);
+
+
+						$('#addNewLocationModal').modal('hide');
+					},
+					"json"
+				);
+			});
+
+
+        autocomplete(document.getElementById("DistrictName"), districts.ToArray());
+	});
+
+
+</script>

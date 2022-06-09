@@ -1,0 +1,30 @@
+<p class="welcome">Welcome back</p>
+
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()" fxLayout="column">
+  <div class="p-field">
+      <span class="p-float-label">
+          <input type="email" formControlName="userName" id="username" pInputText>
+          <label for="username">Email</label>
+          <p class="p-error" *ngIf="f.userName.hasError('required') && f.userName.dirty"> Email required.</p>
+      </span>
+  </div>
+
+  <div class="p-field">
+      <span class="p-float-label">
+          <input type="password" formControlName="password" id="passWord" pInputText>
+          <label for="passWord">Password</label>
+          <p class="p-error" *ngIf="f.password.hasError('required') && f.password.dirty"> Password required.</p>
+      </span>
+  </div>
+
+  <div class="flex align-items-center">
+    <a (click)="openResetPassword()">Forgot password?</a>
+  </div>
+  <div class="flex align-items-center">
+    <button class="button-login"  [disabled]="!loginForm.valid || submitted">
+      <i class="topbar-icon pi pi-unlock"></i>
+      <span>Login</span>
+    </button>
+  </div>
+  <p-toast position="top-center" key="loginToast"></p-toast>
+</form>

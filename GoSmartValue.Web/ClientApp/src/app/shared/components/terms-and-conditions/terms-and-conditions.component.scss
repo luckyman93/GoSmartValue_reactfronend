@@ -1,0 +1,46 @@
+h1 {
+  font: normal normal 300 2.5rem Gilroy Heavy;
+  text-align: center;
+}
+
+h2 {
+  font: normal normal 200 1.8rem Gilroy Heavy;
+}
+
+h3 {
+  font: normal normal 200 1.6rem Gilroy Heavy;
+}
+
+h4 {
+  font: normal normal 200 1.4rem Gilroy Heavy;
+}
+
+a {
+  font: normal normal 200 1.4rem Gilroy Heavy;
+}
+
+p {
+  font: normal normal 200 1.4rem Gilroy Regular;
+}
+
+section {
+  padding: 2rem;
+}
+
+ol {
+  counter-reset: my-awesome-counter;
+  padding-left: 40px;
+}
+
+ol li {
+  margin: 0 0 0.5rem 0;
+  counter-increment: my-awesome-counter;
+  position: relative;
+  font: normal normal 200 1.4rem Gilroy Regular;
+}
+
+ul li {
+  margin: 0 0 0.5rem 0;
+  position: relative;
+  font: normal normal 200 1.4rem Gilroy Regular;
+}

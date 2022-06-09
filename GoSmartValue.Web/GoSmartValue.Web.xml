@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GoSmartValue.Web</name>
+    </assembly>
+    <members>
+        <member name="M:GoSmartValue.Web.AppStartConfigs.AuthConfigurations.GetJwtToken(AV.Common.Entities.User,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Generate JWT Bearer Token
+            </summary>
+            <param name="user"></param>
+            <param name="roles"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GoSmartValue.Web.Areas.api.Accounts.CompaniesController">
+            <summary>
+            Managing Company and firms with whom valuers and corporate users are associated
+            </summary>
+        </member>
+        <member name="M:GoSmartValue.Web.Areas.api.ApiTokenAuthAttribute.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
+            <summary>
+            Authentication by ApiKey
+            </summary>
+            <param name="context"></param>
+            <param name="next"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GoSmartValue.Web.Areas.api.Configuartion.Configuration">
+            <summary>
+            Valuations end points for standard users
+            </summary>
+        </member>
+        <member name="M:GoSmartValue.Web.Areas.api.Products.ProductsController.CreateProduct(AV.Contracts.Models.Product.Commands.CreateProductCommand)">
+            <summary>
+            Create a new Product
+            </summary>
+            <param name="createProductCommand"></param>
+            <returns>Created Product</returns>
+        </member>
+        <member name="M:GoSmartValue.Web.Areas.api.Products.ProductsController.GetAllProducts">
+            <summary>
+            Get all available products
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GoSmartValue.Web.Areas.api.Products.ProductsController.CreatePackage(AV.Contracts.Models.Accounts.Subscriptions.Command.CreatePackageCommand)">
+            <summary>
+            Create a new Package for account Subscriptions
+            </summary>
+            <param name="createPackageCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoSmartValue.Web.Areas.api.Products.ProductsController.CreatePackages(System.Collections.Generic.List{AV.Contracts.Models.Accounts.Subscriptions.Command.CreatePackageCommand})">
+            <summary>
+            Create a new Packages for account Subscriptions
+            </summary>
+            <param name="createPackageCommands"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoSmartValue.Web.Areas.api.Products.ProductsController.GetAll">
+            <summary>
+            Get all available subscription packages
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:GoSmartValue.Web.Areas.api.Valuations.StandardValuationsController">
+            <summary>
+            Valuations end points for standard users
+            </summary>
+        </member>
+        <member name="M:GoSmartValue.Web.Areas.api.Valuations.StandardValuationsController.#ctor(Microsoft.AspNetCore.Identity.UserManager{AV.Common.Entities.User},AutoMapper.IMapper,GoSmartValue.Web.Services.IInstructionService,GoSmartValue.Web.Services.IValuationsService,MediatR.IMediator,Microsoft.Extensions.Logging.ILogger{GoSmartValue.Web.Areas.api.Valuations.StandardValuationsController})">
+            <summary>
+            
+            </summary>
+            <param name="userManager"></param>
+            <param name="map"></param>
+            <param name="instructionService"></param>
+            <param name="valuationsService"></param>
+            <param name="mediator"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:GoSmartValue.Web.Areas.api.Valuations.StandardValuationsController.InstantReportRequest(AV.Contracts.Models.Reports.Requests.CreateInstantReportCommand)">
+            <summary>
+            Creates a Instant Report request for the currently logged in user
+            </summary>
+            <param name="comparable"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoSmartValue.Web.Areas.api.Valuations.StandardValuationsController.GetInstantReport(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoSmartValue.Web.Areas.api.Valuations.StandardValuationsController.GetDetailedReport(System.Guid)">
+            <summary>
+            Retrieves valuation by instruction id
+            </summary>
+            <param name="instructionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoSmartValue.Web.Areas.api.Valuations.StandardValuationsController.GetInstantReportPreView">
+            <summary>
+            Retrieves all the currently logged in users instant reports
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GoSmartValue.Web.Areas.api.Valuations.StandardValuationsController.GetInstructionList">
+            <summary>
+            Retrieves all instructions for the currently logged in user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GoSmartValue.Web.Controllers.ValuerController.BankDetails(AV.Contracts.Models.Accounts.Commands.AddBankDetailsCommand)">
+            <summary>
+            Used as an API end point for adding bank account details on currently logged inn valuers account
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoSmartValue.Web.Controllers.ValuerController.ManageProfile(AV.Contracts.Models.Accounts.Commands.AddProfileDetailsCommand)">
+            <summary>
+            Used as an API end point for adding account profile details on currently logged in valuers account
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoSmartValue.Web.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            host is responsible for application startup and lifetime management
+            Ensures application’s services and the server are available and properly configured
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

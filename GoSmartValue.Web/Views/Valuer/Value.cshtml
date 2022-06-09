@@ -1,0 +1,372 @@
+﻿@using AV.Common.Entities
+@using AV.Contracts.Enums
+@using AV.Contracts.Models.Valuation
+@using GoSmartValue.Web.Models
+@model ValuationModel
+@{
+    ViewData["Title"] = "Value";
+
+    Layout = "Layouts/_ValuerLayout";
+    InstructionModel instruction = ViewBag.Instruction
+                                       ?? Model.Instruction;
+}
+
+<div class="outer col-sm-12 image-container set-full-height" style="background-image:url(/valuationsIndex.jpg);">
+    <div class="inner col-sm-12">
+        <div class="col-md-8 offset-md-2">
+            <!--      Wizard container        -->
+            <div class="wizard-container">
+                <div class="card wizard-card" data-color="red" id="wizard">
+                    <form method="post" enctype="multipart/form-data">
+                        <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
+
+                        <div class="wizard-header">
+                            <h3 class="wizard-title">
+                                Plot Number: @instruction.PlotNumber
+                            </h3>
+                            <span>@instruction.Location?.Name </span><span>, @instruction.Locality?.Name</span>
+                        </div>
+                        <div class="wizard-navigation">
+                            <ul>
+                                <li><a href="#propertyDetails" data-toggle="tab">Property Details</a></li>
+                                <li><a href="#propertyFeatures" data-toggle="tab">Property Features</a></li>
+                                <li><a href="#constructionDetails" data-toggle="tab">Construction Details</a></li>
+                                <li><a href="#propertyRating" data-toggle="tab">Property Rating</a></li>
+                                <li><a href="#comments" data-toggle="tab">Market Commentary</a></li>
+                                <li><a href="#pictures" data-toggle="tab">Site Pictures</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="tab-content">
+                            <div class="tab-pane" id="propertyDetails">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Title Deed</label>
+                                            <input type="text" asp-for="TitleDeedNo" tabindex="1" class="form-control" />
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Neighbourhood</label>
+                                            <input type="text" asp-for="Neighbourhood" tabindex="4" class="form-control" />
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Property Description</label>
+                                            <textarea type="text" asp-for="Description" tabindex="7" maxlength="150" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Title Date</label>
+                                            <input asp-for="TitleDeedDate" type="date" tabindex="2" class="form-control" />
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Plot Size</label>
+                                            <input asp-for="PlotSize" type="number" tabindex="5" class="form-control" />
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Built-up area(m2)</label>
+                                            <input asp-for="BuiltUpArea" type="number" tabindex="9" class="form-control" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Zoning</label>
+                                            @Html.DropDownList("LandUse",
+                                                new SelectList(Enum.GetValues(typeof(Zoning))),
+                                                new { @class = "form-control dropdown", @tabindex = "3" })
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Land Use</label>
+                                            @Html.DropDownList("LandUse",
+                                                new SelectList(Enum.GetValues(typeof(LandUse))),
+                                                new { @class = "form-control dropdown", @tabindex = "6" })
+                                        </div>
+                                        @*<div class="form-group label-floating">
+                        <label class="control-label">Amenities</label>
+                        <textarea asp-for="Amenities" type="number" disabled="disabled" tabindex="8" maxlength="150" class="form-control"></textarea>
+                    </div>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="propertyFeatures">
+                                <h4 class="info-text">Select features available on the property </h4>
+                                <div class="row col-sm-12">
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="10" asp-for="SwimmingPool">
+                                                Swimming pool
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="13" asp-for="ElectricFence">
+                                                Electric Fence
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="16" asp-for="Paved">
+                                                Paved
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="11" asp-for="FirePlace">
+                                                Fire place
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="14" asp-for="MotorizedGate">
+                                                Motorized gate
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Other</label>
+                                                <input type="text" asp-for="OtherSpecialFeatures" tabindex="17" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="12" asp-for="BoundaryWall">
+                                                Boundary Wall
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="15" asp-for="OutdoorEntertainmentArea">
+                                                Outdoor Entertainment area
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="constructionDetails">
+                                <div class="row">
+
+                                    <div class="col-sm-4 col-sm-offset-1">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Doors</label>
+                                            <textarea type="text" asp-for="Doors" tabindex="18" maxlength="150" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Roofing</label>
+                                            <textarea type="text" asp-for="Roofing" tabindex="21" maxlength="150" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Walls</label>
+                                            <textarea type="text" asp-for="Walls" tabindex="24" maxlength="150" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Other</label>
+                                            <textarea type="text" asp-for="OtherDetails" tabindex="27" maxlength="150" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Fittings & Fixtures</label>
+                                            <textarea type="text" asp-for="FittingsAndFixtures" tabindex="19" maxlength="150" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Exterior finishes</label>
+                                            <textarea type="text" asp-for="ExteriorFinishes" tabindex="22" maxlength="150" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Ceiling</label>
+                                            <textarea type="text" asp-for="CeilingDetails" tabindex="25" maxlength="150" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Floors</label>
+                                            <textarea type="text" asp-for="FloorDetails" tabindex="20" maxlength="150" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Windows</label>
+                                            <textarea type="text" asp-for="Windows" tabindex="23" maxlength="150" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Bathroom and Toilet</label>
+                                            <textarea type="text" asp-for="ToiletAndBathroom" tabindex="26" maxlength="150" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="propertyRating">
+                                <h4 class="info-text"> Rate this property.</h4>
+                                <div class="row">
+                                    <div class="row form-group ">
+                                        <!-- Star Rating HTML -->
+                                        <div class="starRating" style="font-size: 24px;">
+                                            <span><i class="fa fa-star-o fa-2x" aria-hidden></i><i class="fa fa-star fa-2x"></i></span>
+                                            <span><i class="fa fa-star-o fa-2x"></i><i class="fa fa-star fa-2x"></i></span>
+                                            <span><i class="fa fa-star-o fa-2x"></i><i class="fa fa-star fa-2x"></i></span>
+                                            <span><i class="fa fa-star-o fa-2x"></i><i class="fa fa-star fa-2x"></i></span>
+                                            <span><i class="fa fa-star-o fa-2x"></i><i class="fa fa-star fa-2x"></i></span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="row col-sm-12 text center"><p class="col-sm-12" id="currentRating"></p></div>
+                            </div>
+                            <div class="tab-pane" id="comments">
+                                <div class="row">
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Market Commentary</label>
+                                            <textarea type="text" asp-for="MarketCommentary" tabindex="7" maxlength="150" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="pictures">
+
+
+                                <div class="row col-sm-12 container-fluid">
+                                    <div class="col-sm-6">
+                                        <div class="row form-group">
+                                            <div class="custom-file">
+                                                <input type="file" id="sitePicture1" name="Sitepictures" accept=".png, .jpg, .jpeg" tabindex="1">
+                                                <label class="custom-file-label">Upload picture</label>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="custom-file">
+                                                <input type="file" id="sitePicture2" name="Sitepictures" accept=".png, .jpg, .jpeg" tabindex="2">
+                                                <label class="custom-file-label">Upload picture</label>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="custom-file">
+                                                <input type="file" id="sitePicture3" name="Sitepictures" accept=".png, .jpg, .jpeg" tabindex="3">
+                                                <label class="custom-file-label">Upload picture</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row form-group">
+                                            <div class="custom-file">
+                                                <input type="file" id="sitePicture4" name="Sitepictures" accept=".png, .jpg, .jpeg" tabindex="3">
+                                                <label class="custom-file-label">Upload picture</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="custom-file">
+                                                <input type="file" id="sitePicture5" name="Sitepictures" accept=".png, .jpg, .jpeg" tabindex="3">
+                                                <label class="custom-file-label">Upload picture</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="custom-file">
+                                                <input type="file" id="sitePicture6" name="Sitepictures" accept=".png, .jpg, .jpeg" tabindex="3">
+                                                <label class="custom-file-label">Upload picture</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid row wizard-footer">
+
+                            <div class="pull-left text-center col-sm-6">
+                                <input type="button" class='btn btn-previous btn-fill btn-black btn-wd' name="previous" value="Previous" />
+                            </div>
+
+                            <div class="pull-right text-center col-sm-6" style="float:right">
+                                <input type="button" class='btn btn-next btn-fill btn-blue btn-wd' name="next" value="Next" />
+                                <input type="submit" class='btn btn-finish btn-fill btn-blue btn-wd' name="finish" value="Finish" />
+                            </div>
+                            <div class="clearfix"></div>
+                            <input hidden="hidden" asp-for="InstructionId" value="@instruction.Id" />
+                            <input hidden="hidden" id="rating" name="rating" asp-for="Rating" value="0" />
+                        </div>
+                    </form>
+                </div>
+            </div> <!-- wizard container -->
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+
+		$("#rate").rating({
+			count: 5,
+			size: 60,
+			primaryColor: "#F4F4F4",
+			selectedcolor: "#fdb300",
+			scale: 1,
+			readonly: "false",
+			rate: 0
+		});
+	});
+	$('.starRating span').click(function () {
+		$(this).siblings().removeClass('active');
+		$(this).addClass('active');
+		$(this).parent().addClass('starRated');
+
+		// Added for Demo
+		var rating = $(this).index() + 1;
+		if (rating === 1)
+    {
+			$('#currentRating').html("<small>Rating: Fair wear & tear </small>");
+			
+		}
+		else if (rating === 2)
+    {
+			$('#currentRating').html("<small>Rating:Slightly Fair </small>");
+		}
+		else if (rating === 3)
+		{
+			$('#currentRating').html("<small>Rating:Fair </small>");
+		}
+		else if (rating === 4)
+		{
+			$('#currentRating').html("<small>Rating:Slightly good </small>");
+		}
+		else if (rating === 5)
+		{
+			$('#currentRating').html("<small>Rating:Good </small>");
+		}
+		$('#rating').val(rating);
+	});
+
+</script>
+
+
+<script type="text/javascript" src="~/assets/js/jquery.rating.js"></script>

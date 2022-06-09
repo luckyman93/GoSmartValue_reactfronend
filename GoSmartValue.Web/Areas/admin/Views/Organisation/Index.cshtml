@@ -1,0 +1,65 @@
+﻿@model IEnumerable<GoSmartValue.Web.ViewModels.OrganisationViewModel>
+
+@{
+    ViewData["Title"] = "Organisations";
+    Layout = "_Layout";
+}
+
+<h1>Organisations</h1>
+
+<p>
+    @Html.ActionLink("Add","Create","Organisation",null,new {@class="btn btn-success"})
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.PhoneNumbers)
+            </th>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.PostalAddress)
+            </th>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.PrimaryUser)
+            </th>
+            <th cope="col">
+                @Html.DisplayNameFor(model => model.UserAccounts)
+            </th>
+            <th cope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <th scope="row">
+            @Html.DisplayFor(modelItem => item.Name)
+            </th>
+            <td>
+                @foreach (var phone in item.PhoneNumbers)
+                {
+                    <i class="text-info"><span>Type: @phone.Type | @phone.PhoneNumber</span></i>
+                }
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostalAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrimaryUser)
+            </td>
+            <td>
+                <i class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Organisation" asp-action="Accounts">View Users</a>
+                </i>
+            </td>
+            <td>
+                @Html.ActionLink("Edit","Edit","Comparables", new {Id = @item.Id},htmlAttributes:new {@class="btn btn-success"})|
+                @Html.ActionLink("Details","Details","Comparables", new {Id = @item.Id},htmlAttributes:new {@class="btn btn-primary"})|
+                @Html.ActionLink("Delete","Delete","Comparables", new {Id = @item.Id},htmlAttributes:new {@class="btn btn-primary"})|
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

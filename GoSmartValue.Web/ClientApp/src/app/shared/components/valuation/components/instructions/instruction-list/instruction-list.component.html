@@ -1,0 +1,29 @@
+<div class="card">
+    <p-table #instructionsTable [columns]="columns" [value]="instructions" [scrollable]="true" scrollHeight="400px" styleClass="p-datatable-gridlines"
+    [globalFilterFields]="['propertyType','standardSize','rate']">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="instructionsTable.filterGlobal($any($event.target).value, 'contains')" placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">{{col.name}}</th>
+                <th *ngIf="valuer">Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-instruction let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">{{instruction[col.value]}}</td>
+                <td *ngIf="valuer">
+                    <button pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-success mr-2"></button>
+                    <button pButton pRipple icon="pi pi-upload" class="p-button-rounded p-button-info" (click) = "uploadValuation(instruction)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+

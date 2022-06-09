@@ -1,0 +1,49 @@
+﻿@{
+	Layout = "Layouts/_GraphLayout";
+}
+
+<div class="outer container-fluid">
+	<div class="middle container-fluid" style="padding-top:20px">
+		<div class=" inner container-fluid">
+			<div class="col-md-12 container-fluid">
+				<div id="instructionsSummary" style="width: 500px; height: 400px;"></div>
+			</div>
+		</div>
+	</div>
+</div>
+			<script type="text/javascript">
+	google.charts.load("current", { packages: ["corechart"] });
+	google.setOnLoadCallback(drawVisualization);
+
+	function drawVisualization() {
+		$.ajax({
+		url: "/valuer/PerformanceReport",
+		type: 'POST',
+		success: function (response) {
+			var instructions = @Json.Serialize(ViewBag.Data);
+			var tdata = new google.visualization.DataTable();
+			tdata.addColumn('string', 'Description');
+			tdata.addColumn('number', 'Count');
+			var data = JSON.parse(instructions);
+
+			for (var i = 0; i < data.length; i++) {
+				tdata.addRow([data[i].Description, data[i].Count]);
+			};
+			var options = {
+				title: 'Total Instructions Summary',
+				is3D: false,
+			};
+			// Create and draw the visualization.
+			var chart = new google.visualization.PieChart(document.getElementById('instructionsSummary'));
+			chart.draw(tdata, options);
+		},
+		error: function (error) {
+			alert("error");
+		},
+		cache: false,
+		contentType: false,
+		processData: false
+	});
+
+	};
+			</script>

@@ -1,0 +1,72 @@
+﻿@using GoSmartValue.Web.Services
+@using AV.Contracts.Enums
+@model AV.Contracts.Models.Market.ResponseModels.ImportBuildingMaterialCostsResponse
+
+
+@{
+	ViewData["Title"] = "Building Materials";
+	Layout = "~/Views/Shared/Layouts/_BackOffice.cshtml";
+}
+
+<div class="container-fluid image-container set-full-height" style="background-image: url(/valuationsIndex.jpg);">
+	<div class="container-fluid" style="padding-top: 80px">
+		<div class=" inner container-fluid">
+
+			<div class="card" style="margin-bottom:30px">
+				<h3 class="p-2">Building Material Costs <small style="font-style:italic;font-size:1.2rem"> - generated through www.gosmartvalue.com</small></h3>
+				
+				<div class="card-body">
+					<div class="tab-content text-center">
+						<div class="tab-pane active" id="location-pane">
+							<table id="locations-grid" class="table  table-hover">
+								<thead>
+									<tr>
+										<th>Material</th>
+										<th>Item</th>
+										<th>Description</th>
+										<th>Price</th>
+									</tr>
+								</thead>
+								<tbody id="locations-grid-rows">
+									@if (Model != null)
+									{
+										@foreach (var material in Model.Data.Select((value, i) => new { i, value }))
+										{
+											<tr>
+												<td>@material.value.Material.ToString()</td>
+												<td>@material.value.Item</td>
+												<td>@material.value.Description</td>
+												<td>BWP @material.value.Price.ToString("0.00")</td>
+
+											</tr>
+										}
+									}
+								</tbody>
+							</table>
+						</div>
+						<div class="tab-pane" id="settings">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	$(document).ready(function () {
+
+		$('#locations-grid').DataTable({
+			responsive: false
+		});
+
+		$('.dataTables_length').addClass('bs-select');
+
+
+	});
+</script>
+
+

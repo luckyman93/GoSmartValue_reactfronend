@@ -1,0 +1,83 @@
+section{
+  max-width:3000rem;
+}
+
+.section-title {
+  text-align: center;
+  font: normal normal 300 3.3rem Gilroy Regular;
+  color: #1A2E49;
+  opacity: 1;
+  text-decoration: underline #FF8800;
+  text-underline-offset: 10px;
+  margin-top:2rem;
+}
+
+.section-description {
+  width: 65rem;
+  text-align: center;
+  font: normal normal 200 1.84rem Gilroy Regular;
+  color: #1A2E49;
+  opacity: 1;
+  margin:20px
+}
+
+p {
+  font: normal normal 200 1.4rem Gilroy Regular;
+  color: #1A2E49;
+  opacity: 1;
+}
+.description{
+  text-align:left !important;
+}
+
+.header {
+  text-align: center;
+  font: normal normal 200 2rem Gilroy Heavy;
+  color: #1A2E49;
+  opacity: 1;
+}
+
+.price {
+  font: normal normal 800 1.6rem Gilroy Regular;
+  color: #1A2E49;
+  opacity: 1;
+}
+
+.card {
+  background: #FFFFFF 0 0 no-repeat padding-box;
+  box-shadow: 0 0 20px #00000029;
+  border: 1px solid #FFFFFF;
+  border-radius: 30px;
+  opacity: 1;
+  overflow: hidden;
+}
+.image-section {
+  overflow:hidden;
+}
+
+img {
+  width:100%;
+  height:100%;
+}
+
+.pi-star{
+  color:darkgoldenrod;
+}
+
+.standard{
+  color:#179877;
+  background-color: #D1EAE4;
+  border-radius: 0.2rem;
+}
+
+.premium{
+  color: #33A8E2;
+  background-color: #D3E1F3;
+  border-radius: 0.2rem;
+}
+
+.enterprise{
+  color: #FD4F64;
+  background-color: #FEDDE0;
+  border-radius: 0.2rem;
+}

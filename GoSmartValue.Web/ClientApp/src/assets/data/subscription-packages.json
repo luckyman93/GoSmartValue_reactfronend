@@ -1,0 +1,362 @@
+[
+  {
+    "name": "Standard User",
+    "description": "Blue",
+    "paymentFrequency": 1,
+    "price": 175,
+    "maximumSubAccounts": 0,
+    "instantReportLimit": 0,
+    "detailedReportLimit": 0,
+    "discountPerReferral": 0,
+    "features": [
+      {
+        "title": "Sales Trends",
+        "description": "string",
+        "position": 1
+      },
+      {
+        "title": "Rental Trends",
+        "description": "string",
+        "position": 2
+      },
+      {
+        "title": "Land Rates",
+        "description": "string",
+        "position": 3
+      },
+      {
+        "title": "Building Cost Rates",
+        "description": "string",
+        "position": 4
+      },
+      {
+        "title": "1 Property Market Report of Your Choice per Month",
+        "description": "string",
+        "position": 5
+      }
+    ]
+  },{
+  "name": "Standard User",
+  "description": "Black",
+  "paymentFrequency": 1,
+  "price": 250,
+  "maximumSubAccounts": 0,
+  "instantReportLimit": 0,
+  "detailedReportLimit": 0,
+  "discountPerReferral": 0,
+  "features": [
+    {
+      "title": "Sales Trends",
+      "description": "string",
+      "position": 1
+    },
+    {
+      "title": "Rental Trends",
+      "description": "string",
+      "position": 2
+    },
+    {
+      "title": "Land Rates",
+      "description": "string",
+      "position": 3
+    },
+    {
+      "title": "Building Cost Rates",
+      "description": "string",
+      "position": 4
+    },
+    {
+      "title": "2 Property Market Report of Your Choice per Month",
+      "description": "string",
+      "position": 5
+    }
+  ]
+  },{
+  "name": "Standard User",
+  "description": "White",
+  "paymentFrequency": 1,
+  "price": 375,
+  "maximumSubAccounts": 0,
+  "instantReportLimit": 0,
+  "detailedReportLimit": 0,
+  "discountPerReferral": 0,
+  "features": [
+    {
+      "title": "Sales Trends",
+      "description": "string",
+      "position": 1
+    },
+    {
+      "title": "Rental Trends",
+      "description": "string",
+      "position": 2
+    },
+    {
+      "title": "Land Rates",
+      "description": "string",
+      "position": 3
+    },
+    {
+      "title": "Building Cost Rates",
+      "description": "string",
+      "position": 4
+    },
+    {
+      "title": "5 Property Market Report of Your Choice per Month",
+      "description": "string",
+      "position": 5
+    }
+    ]
+  },
+  {
+  "name": "Valuer",
+  "description": "FastTrack",
+  "paymentFrequency": 1,
+  "price": 375,
+  "maximumSubAccounts": 0,
+  "instantReportLimit": 0,
+  "detailedReportLimit": 0,
+  "discountPerReferral": 0,
+  "features": [
+  {
+  "title": "1 User Account",
+  "description": "string",
+  "position": 1
+  },
+  {
+  "title": "Sales Trends",
+  "description": "string",
+  "position": 2
+  },
+  {
+  "title": "Rental Trends",
+  "description": "string",
+  "position": 3
+  },
+  {
+  "title": "Land Rates",
+  "description": "string",
+  "position": 4
+  },
+  {
+  "title": "Building Cost Rates",
+  "description": "string",
+  "position": 5
+  },
+  {
+  "title": "Remote instruction",
+  "description": "string",
+  "position": 6
+  },
+  {
+  "title": "Onboarding Training",
+  "description": "string",
+  "position": 7
+  },
+  {
+  "title": "Unlimited Market Comparables",
+  "description": "string",
+  "position": 8
+  },
+  {
+  "title": "Brand Your Valuation Report",
+  "description": "string",
+  "position": 9
+  },
+  {
+  "title": "Automatically Generate Report",
+  "description": "string",
+  "position": 10
+  },
+  {
+  "title": "10 Market Reports of Choice per Month",
+  "description": "string",
+  "position": 11
+  },
+  {
+  "title": "Technology Support",
+  "description": "string",
+  "position": 12
+  }
+  ]
+  },
+  {
+  "name": "Valuer",
+  "description": "Business",
+  "paymentFrequency": 1,
+  "price": 2500,
+  "maximumSubAccounts": 2,
+  "instantReportLimit": 0,
+  "detailedReportLimit": 0,
+  "discountPerReferral": 0,
+  "features": [
+  {
+  "title": "2 User Account",
+  "description": "string",
+  "position": 1
+  },
+  {
+  "title": "Sales Trends",
+  "description": "string",
+  "position": 2
+  },
+  {
+  "title": "Rental Trends",
+  "description": "string",
+  "position": 3
+  },
+  {
+  "title": "Land Rates",
+  "description": "string",
+  "position": 4
+  },
+  {
+  "title": "Building Cost Rates",
+  "description": "string",
+  "position": 5
+  },
+  {
+  "title": "Remote instruction",
+  "description": "string",
+  "position": 6
+  },
+  {
+  "title": "Onboarding Training",
+  "description": "string",
+  "position": 7
+  },
+  {
+  "title": "unlimited Market Comparables",
+  "description": "string",
+  "position": 8
+  },
+  {
+  "title": "Brand Your Valuation Report",
+  "description": "string",
+  "position": 9
+  },
+  {
+  "title": "Automatically Generate Report",
+  "description": "string",
+  "position": 10
+  },
+  {
+  "title": "20 Market Reports of Choice per Month",
+  "description": "string",
+  "position": 11
+  },
+  {
+  "title": "Technology Support",
+  "description": "string",
+  "position": 12
+  }
+  ]
+  },
+  {
+  "name": "Corporate",
+  "description": "Green",
+  "paymentFrequency": 1,
+  "price": 1500,
+  "maximumSubAccounts": 0,
+  "instantReportLimit": 0,
+  "detailedReportLimit": 0,
+  "discountPerReferral": 0,
+  "features": [
+  {
+
+  "title": "Sales Trends",
+  "description": "string",
+  "position": 1
+  },
+  {
+  "title": "Rental Trends",
+  "description": "string",
+  "position": 2
+  },
+  {
+  "title": "Land Rates",
+  "description": "string",
+  "position": 3
+  },
+  {
+  "title": "Building Cost Rates",
+  "description": "string",
+  "position": 4
+  },
+  {
+  "title": "Valuation Management Support",
+  "description": "string",
+  "position": 5
+  },
+  {
+  "title": "Bulk Instant valuation",
+  "description": "string",
+  "position": 6
+  },
+  {
+  "title": "Unlimited users",
+  "description": "string",
+  "position": 7
+  },
+  {
+  "title": "10 market reports per month",
+  "description": "string",
+  "position": 8
+  }
+  ]
+  },
+  {
+  "name": "Corporate",
+  "description": "Platinum",
+  "paymentFrequency": 1,
+  "price": 2500,
+  "maximumSubAccounts": 0,
+  "instantReportLimit": 0,
+  "detailedReportLimit": 0,
+  "discountPerReferral": 0,
+  "features": [
+  {
+
+  "title": "Sales Trends",
+  "description": "string",
+  "position": 1
+  },
+  {
+  "title": "Rental Trends",
+  "description": "string",
+  "position": 2
+  },
+  {
+  "title": "Land Rates",
+  "description": "string",
+  "position": 3
+  },
+  {
+  "title": "Building Cost Rates",
+  "description": "string",
+  "position": 4
+  },
+  {
+  "title": "Valuation Management Support",
+  "description": "string",
+  "position": 5
+  },
+  {
+  "title": "Bulk Instant valuation",
+  "description": "string",
+  "position": 6
+  },
+  {
+  "title": "Unlimited users",
+  "description": "string",
+  "position": 7
+  },
+  {
+  "title": "20 market reports per month",
+  "description": "string",
+  "position": 8
+  }
+  ]
+  }
+]
+

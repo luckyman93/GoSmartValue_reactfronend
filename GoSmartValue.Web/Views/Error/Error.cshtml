@@ -1,0 +1,33 @@
+﻿@page
+@model Models.ErrorViewModel
+@{
+    //ViewData["Title"] = "Error";
+}
+
+<div class="outer col-sm-12 image-container set-full-height" style="background-image:url(/accessDenied.jpg);">
+	<div class="middle container-fluid" style="padding-top:100px">
+		<div class=" inner container-fluid">
+			<div class="col-md-8 offset-md-2">
+				<div class="card">
+					<div class="text-center">
+						<h2>
+							<span class="input-group-addon">
+								<i class="material-icons">report_problem</i>
+							</span>Error!!
+						</h2>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							Oops!! An error has occured and has been logged with us.
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<span>Return to dashboard </span><a asp-controller="Home" asp-action="Index" class="btn btn-blue">Home</a>
+						</div>
+					</div>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>

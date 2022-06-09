@@ -1,0 +1,40 @@
+﻿
+@{
+	ViewData["Title"] = "BuildingMaterialCostsImport";
+	Layout = "~/Views/Shared/Layouts/_BackOffice.cshtml";
+}
+
+<div class="container-fluid image-container set-full-height" style="background-image: url(/valuationsIndex.jpg);">
+	<div class="container-fluid" style="padding-top: 80px">
+		<div class=" inner container-fluid">
+
+			<div class="card">
+				<header class="rgba-teal-light">
+					<div class="card-title">
+						Import Building Material Costs from CSV file
+					</div>
+				</header>
+				<div class="card-body">
+					<form method="post" id="form" name="form" enctype="multipart/form-data">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Upload</span>
+							</div>
+							<div class="custom-file">
+								<input type="file" class="custom-file-input"
+									   id="CsvFormFile" name="CsvFormFile"
+									   aria-describedby="importFile">
+								<label class="custom-file-label" for="importFile">Choose file</label>
+							</div>
+						</div>
+						<div>
+							<button type="submit" asp-controller="Market" asp-action="ImportBuildingCosts" class="btn btn-blue">Import</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div>
+		</div>
+	</div>
+</div>

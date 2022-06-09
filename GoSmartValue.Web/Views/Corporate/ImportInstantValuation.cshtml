@@ -1,0 +1,104 @@
+﻿@model AV.Contracts.Models.Valuation.ResponseModels.ImportForInstantValuationResponse
+
+@{
+    ViewData["Title"] = "Instant Valuation";
+    Layout = "Layouts/_CorporateLayout";
+
+    
+}
+
+@functions {
+    private IEnumerable<string> GetValidationErrors(int lineNumber)
+    {
+        return Model.ImportErrors.TryGetValue(lineNumber, out var errorMessage) ? errorMessage : null;
+    }
+
+}
+
+
+<div class="container-fluid image-container set-full-height" style="background-image: url(/valuationsIndex.jpg);">
+    <div class="container-fluid" style="padding-top: 80px">
+        <div class=" inner container-fluid">
+
+            <div class="card">
+                <header class="rgba-teal-light">
+                    <div class="card-title">
+                        Import from CSV file
+                    </div>
+                </header>
+                <div class="card-body">
+                    <form method="post" id="form" name="form" enctype="multipart/form-data">
+                      
+                        <div class="card">
+                            <h1>Building Costs</h1>
+                            <div>
+                                @Html.ActionLink("Import Building Costs", "BuildingCostsImport", "Market", null, new { @class = "btn btn-blue" })
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">Number of records: @Model.FailedData.Count()</div>
+                                    <div class="col-6">
+                                        @if (Model.ImportErrors?.Count() > 0)
+                                        {
+                                            <span class="warning-color">Validation Error Count: @Model.ImportErrors.Count() - file not imported</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="success-color">File imported successfully.</span>
+                                        }
+                                    </div>
+                                </div>
+                                <table class="table  table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Location</th>
+                                            <th>Locality</th>
+                                            <th>Plot Number</th>
+                                            <th>Plot Size</th>
+                                            <th>Property Type</th>
+                                            <th>Development</th>
+                                            <th>Validation Failures</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            @foreach (var comparable in Model.FailedData.Select((value, i) => new {i, value}))
+                                            {
+                                        <tr>
+                                            <td>@comparable.value.LocationName</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                @{
+                                                    var errors = GetValidationErrors(comparable.i);
+                                                    if (errors != null)
+                                                    {
+                                                        <ul class="warning-color">
+                                                            @foreach (var validationError in errors)
+                                                            {
+                                                                <li>@validationError</li>
+                                                            }
+                                                        </ul>
+                                                    }
+                                                }
+                                            </td>
+                                        </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>

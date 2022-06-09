@@ -1,0 +1,80 @@
+﻿@using GoSmartValue.Web.Services
+@model IEnumerable<AV.Contracts.Models.Valuation.InstructionModel>
+@inject CachedStorageService CachedStorage
+@{
+    ViewData["Title"] = "Rejected Instruction";
+
+    Layout = "Layouts/_CorporateLayout";
+}
+
+<div class="outer container-fluid image-container set-full-height" style="background-image:url(/valuationsIndex.jpg);">
+	<div class="middle container-fluid" style="padding-top:75px">
+		<div class=" inner container-fluid">
+
+			<div class="shadow col-md-12 container-fluid">
+				<div class="container-fluid " style="padding:10px">
+					<div style="padding:0;width:100%">
+						<table id="instructions" class="table  table-hover">
+							<thead>
+								<tr>
+									<th scope="col">City</th>
+									<th scope="col">Client Name</th>
+									<th scope="col">Client Number</th>
+									<th scope="col">Plot Number</th>
+									<th scope="col">Ward</th>
+									<th scope="col">Valuer</th>
+									<th scope="col">Preferred Access Date</th>
+									<th scope="col">Comments</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var instruction in Model)
+								{
+								    {
+								        var localityId = instruction.LocalityId.HasValue ? CachedStorageService.Localities[instruction.LocalityId.Value] : null;
+
+								        <tr>
+                                            <th scope="row">@CachedStorageService.Cities[instruction.LocationId]</th>
+                                            <td>@instruction.ClientName</td>
+                                            <td>@instruction.ClientMobileNumber</td>
+                                            <td>@instruction.PlotNumber</td>
+                                            <td>@localityId</td>
+                                            <td>@instruction.Valuer?.FullName</td>
+                                            <td>
+                                                @if (instruction.PreferredAccessDate.HasValue)
+                                                {
+                                                    @instruction.PreferredAccessDate.Value.ToString("dd/MM/yyyy")
+                                                }
+                                            </td>
+                                            <td>@instruction.Comment</td>
+                                            <td>
+                                                @if (instruction.CanBeReIssued)
+                                                {
+                                                    <a class="" asp-controller="Corporate" asp-action="ReIssueInstruction" asp-route-id="@instruction.Id" style="text-decoration: none">Re-Assign <i title="Re-Assign" class="fa fa-share"></i></a>
+                                                }
+                                            </td>
+                                        </tr>
+								    }
+								}
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+    $(document).ready(function () {
+         $('#instructions').DataTable({
+			 responsive: true,
+			 searching: true,
+    ordering:  true
+		});
+        $('.dataTables_length').addClass('bs-select');
+
+    });
+</script>

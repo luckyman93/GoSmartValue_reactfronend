@@ -1,0 +1,107 @@
+<h1>
+ {{title}}
+</h1>
+      <div class="p-fluid grid flex flex-row">
+
+        <p-card  class="xl:col-12 lg:col-12 md:col-12 sm:col-12" [style]="{width: '100%'}">
+            <div class="grid row">
+
+              <div *ngIf="(title != 'Estate Report') && (title != 'Nodal Report') && (title != 'Deeds Report')" class="field xl:col-6 lg:col-6 md:col-12 sm:col-12">
+                <label for="time">Date/Time</label>
+                <p-calendar  [(ngModel)]="productOrderDetails.date" [showTime]="true" [showSeconds]="true" inputId="time"></p-calendar>
+              </div>
+
+                <div class="p-field col-6">
+                    <span class="p-float-label">
+                      <p-dropdown id="city" [style]="{'height':'3.5rem'}" panelStyleClass="minWidthOverride" #city="ngModel" [options]="locations"
+                      [(ngModel)]="productOrderDetails.location"
+                                  optionLabel="name" [filter]="true" filterBy="name" (onChange)="getLocalities()"
+                                  [ngClass]="{'ng-dirty': (city.invalid && submitted) || (city.dirty && city.invalid)}" placeholder="Select a City/Town">
+                        <ng-template pTemplate="selectedItem">
+                          <div class="location-item location-item-value" *ngIf="productOrderDetails.location">
+                            <div>{{productOrderDetails.location.name}}</div>
+                          </div>
+                        </ng-template>
+                        <ng-template let-city pTemplate="item">
+                          <div class="location-item">
+                            <div>{{city.name}}</div>
+                          </div>
+                        </ng-template>
+                      </p-dropdown>
+                      <label>City/Town</label>
+                  </span>
+                    <small *ngIf="(city.invalid && submitted) || (city.dirty && city.invalid)" class="p-error">City is required.</small>
+
+                  </div>
+
+                  <div class="p-field col-12" *ngIf="localities.length > 0 || productOrderDetails.locality">
+                    <span class="p-float-label">
+                      <p-dropdown #ward="ngModel" [options]="localities" [(ngModel)]="productOrderDetails.locality"
+                            [style]="{'height':'3.5rem'}" optionLabel="name" [filter]="true" filterBy="name"
+                                  [ngClass]="{'ng-dirty': (localities.length > 0) && ((ward.invalid && submitted) || (ward.dirty && ward.invalid))}" placeholder="Select a Ward">
+                        <ng-template pTemplate="selectedItem">
+                          <div class="location-item location-item-value" *ngIf="productOrderDetails.locality">
+                            <div>{{productOrderDetails.locality.name}}</div>
+                          </div>
+                        </ng-template>
+                        <ng-template let-ward pTemplate="item">
+                          <div class="locality-item">
+                            <div>{{ward.name}}</div>
+                          </div>
+                        </ng-template>
+                      </p-dropdown>
+                      <label>Ward</label>
+                    </span>
+                    <small *ngIf="(localities.length > 0) && ((ward.invalid && submitted) || (ward.dirty && ward.invalid))" class="p-error">Ward is required.</small>
+                  </div>
+
+                  <div  *ngIf="title === 'Estate Report'" class="p-field xl:col-12 sm:col-12">
+                    <span class="p-float-label">
+                        <p-multiSelect [options]="estates" [(ngModel)]="selectedEstates" optionLabel="name"></p-multiSelect>
+                      <label>Estates</label>
+                    </span>
+                  </div>
+
+                  <div  *ngIf="title === 'Nodal Report'" class="p-field xl:col-12 sm:col-12">
+                    <span class="p-float-label">
+                        <p-multiSelect [options]="estates" [(ngModel)]="selectedEstates" optionLabel="name"></p-multiSelect>
+                      <label>Nodes</label>
+                    </span>
+                  </div>
+
+                  <div *ngIf="title === 'Risk Report'" class="p-field xl:col-12 sm:col-12">
+                    <span class="p-float-label">
+                      <input #plotNo="ngModel" id="plotNo" type="text" required pInputText [(ngModel)]="basketItem.inputData.plotNo"
+                           [ngClass]="{'ng-dirty': (plotNo.invalid && submitted) || (plotNo.dirty && plotNo.invalid)}">
+                      <label for="plotNo">Plot No</label>
+                    </span>
+                    <small class="p-error" *ngIf="(plotNo.invalid && submitted )|| (plotNo.dirty && plotNo.invalid)">Plot Number is required.</small>
+                  </div>
+
+                  <div *ngIf="title === 'Risk Report'" class="p-field xl:col-12 sm:col-12">
+                    <span class="p-float-label">
+                      <input #plotSize="ngModel" id="plotSize" type="number"  required pInputText [(ngModel)]="basketItem.inputData.plotSize"
+                                     [ngClass]="{'ng-dirty': (plotSize.invalid && submitted) || (plotSize.dirty && plotSize.invalid)}">
+                      <label for="plotSize">Plot Size (Square meters)</label>
+                    </span>
+                    <small class="p-error" *ngIf="(plotSize.invalid && submitted  ) || (plotSize.dirty && plotSize.invalid)">Plot Size number is required.</small>
+                  </div>
+
+                  <div *ngIf="title === 'Risk Report'"  class="p-field xl:col-12 sm:col-12">
+                    <span class="p-float-label">
+                      <input #value="ngModel" id="value" type="number"  required pInputText [(ngModel)]="detailedValuationReportRequest.plotSize"
+                                     [ngClass]="{'ng-dirty': (value.invalid && submitted) || (value.dirty && value.invalid)}">
+                      <label for="value">Value</label>
+                    </span>
+                    <small class="p-error" *ngIf="(value.invalid && submitted  ) || (value.dirty && value.invalid)">Property Value is required.</small>
+                  </div>
+            </div>
+        </p-card>
+
+
+      </div>
+      <div class="flex align-items-center justify-content-center center">
+        <button class="submitButton" (click)="placeOrder()"><span>Generate Report </span><i class="pi pi-angle-right"></i></button>
+      </div>
+
+  <p-toast position="top-center" key="tc"></p-toast>

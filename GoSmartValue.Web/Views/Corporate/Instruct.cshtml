@@ -1,0 +1,203 @@
+﻿@using AV.Contracts.Enums
+@using GoSmartValue.Web.Services
+@model AV.Contracts.Models.Valuation.InstructionModel
+
+
+@inject CachedStorageService CachedStorageService
+
+@{ var defaultLocation = 33;
+                var locations = new SelectList(
+                    CachedStorageService.Cities
+                        .Select(c =>
+                            new SelectListItem { Text = c.Value, Value = c.Key.ToString(), Selected = c.Key == defaultLocation })
+                    , "Value", "Text", defaultLocation);
+
+                var locies = CachedStorageService.GetLocalities(defaultLocation);
+
+                var valuers = new SelectList(
+                    CachedStorageService.GetValuers().Result
+                        .Select(c =>
+                            new SelectListItem { Text = c.FullName, Value = c.Id.ToString() })
+                    , "Value", "Text", "-");
+
+}
+
+@{ 
+    ViewData["Title"] = "Instruct";
+
+                Layout = "Layouts/_CorporateLayout"; }
+
+<link href="~/lib/jquery-ui/jquery.timepicker.min.css" />
+<div class="outer container-fluid image-container set-full-height" style="background-image:url(/valuerHome.jpg);">
+    <div class="middle" style="padding-top: 40px">
+        <div class="inner">
+            <form method="post" enctype="multipart/form-data" style="background-color:transparent!important">
+                <div class="container-fluid">
+                    <div class="row form-group">
+                        <div class="col-sm-4 shadow " style="background-color: #fff; min-height: 100px; padding: 10px;">
+                            <div class="autocomplete label-floating form-group">
+                                <label class="control-label">Location:city/town</label>
+                                <input type="text" asp-for="LocationName" tabindex="1"
+                                       required="required" class="form-control" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-3 shadow" style="background-color: #fff; height: 100px; padding: 10px;">
+                            <div class="form-group label-floating autocomplete">
+                                <label class="control-label">Ward</label>
+                                <input type="text" asp-for="LocalityName" tabindex="2" autocomplete="off"
+                                       onfocus="SetLocalities()"
+                                       class="form-control" />
+                                <span asp-validation-for="LocalityName" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-3 shadow" style="background-color: #fff; height: 100px; padding: 10px;">
+                            <div class="form-group label-floating col-sm-12">
+                                <label class="control-label">Plot Number</label>
+                                <input type="text" asp-for="PlotNumber" tabindex="3" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row form-group">
+                        <div class="col-sm-4 shadow" style="background-color: #fff; min-height: 100px; padding: 10px;">
+                            <label>Select Valuer/Company</label>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="ValuerTypeOption">
+                                <label class="custom-control-label" for="ValuerTypeOption">Select company</label>
+                            </div>
+                            <div id="ValuerOption">
+                                <label class=" col-sm-12">Authorize Individual Valuer</label>
+                                <div class="col-sm-12">
+                                    <select asp-for="ValuerId" tabindex="4" class="col-sm-12 form-control autocomplete">
+                                        @foreach (var valuer in valuers)
+                                        {
+                                            <option value="@valuer.Value">@valuer.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            <div id="OrganisationOption">
+                                <label class=" col-sm-12">Organisations</label>
+                                <div class="col-sm-12">
+                                    <select asp-for="ValuerAccountId" tabindex="4" class="col-sm-12 form-control autocomplete">
+                                        @foreach (var valuer in CachedStorageService.GetAccounts(AccountType.Valuer))
+                                        {
+                                            <option value="@valuer.Id">@valuer.CompanyName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="row col-sm-7 shadow p-2" style="background-color: #fff; min-height: 150px; ">
+                            <label class="row col-sm-12">Supporting documents: <span style="color:red">File size limit is 2MB on each upload.Accepted file types:.pdf.jpeg.png</span></label>
+                            <div class="col-sm-6">
+                                <div class="row form-group">
+                                    <div class="custom-file">
+                                        <input type="file" id="UploadDocument" name="UploadDocument">
+                                        <label class="custom-file-label">Upload document 1</label>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="custom-file">
+                                        <input type="file" id="UploadDocument3" name="UploadDocument">
+                                        <label class="custom-file-label">Upload document 3</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row form-group">
+                                    <div class="custom-file">
+                                        <input type="file" id="UploadDocument2" name="UploadDocument">
+                                        <label class="custom-file-label">Upload document 2</label>
+                                    </div>
+
+                                </div>
+                                <div class="row form-group">
+                                    <div class="custom-file">
+                                        <input type="file" id="UploadDocument4" name="UploadDocument">
+                                        <label class="custom-file-label">Upload document 4</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row  form-group">
+                        <div class="col-sm-4 shadow p-2" style="background-color: #fff; min-height: 150px; padding: 10px; ">
+                            <div class="col-sm-12">
+                                <label class="col-sm-12">Access Information</label>
+                                <div class="label-floating ">
+                                    <label class="control-label">Client Name</label>
+                                    <input type="text" asp-for="ClientName" tabindex="6" required="required" class="form-control" />
+                                </div>
+                                <div class=" label-floating autocomplete">
+                                    <label class="control-label">Cell Number</label>
+                                    <input type="text" asp-for="ClientMobileNumber" tabindex="7" required="required" class="form-control" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class=" col-sm-3 shadow" style="background-color: #fff; height: 150px; padding: 10px;">
+                            <div class="col-sm-12">
+                                <label class="col-sm-12">Preferred access date</label>
+                                <div class="col-sm-12">
+
+                                    <input type="datetime-local" class="form-control" tabindex="8" asp-for="PreferredAccessDate" required="required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        @*<div class="col-sm-3 shadow" style="background-color: #fff; height: 150px; padding: 10px;">
+                                <div class="col-sm-12">
+                                    <label class="col-sm-12">Preferred access time</label>
+                                    <div class="col-sm-12">
+
+                                            <input name="PreferredAccessTime" tabindex="9" type="datetime" class="form-control " />
+
+                                    </div>
+                                </div>
+                            </div>*@
+
+                    </div>
+
+                    <div style="float: right">
+                        <button asp-controller="Corporate" asp-action="IssueInstruction"
+                                type="submit" class="btn btn-blue">
+                            Issue Instruction
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="~/js/valuations.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#OrganisationOption').hide();
+
+        $('#ValuerTypeOption').change(function ()
+        {
+            if(this.checked !== true)
+            {
+                $('#OrganisationOption').hide();
+                $('#ValuerOption').show();
+            }
+            else {
+
+                $('#OrganisationOption').show();
+                $('#ValuerOption').hide();
+            }
+        });
+    });
+</script>

@@ -1,0 +1,530 @@
+﻿@model GoSmartValue.Web.ViewModels.RegisterValuerViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "User Registration";
+}
+
+<script src="~/js/bootstrap-select.js"></script>
+<div class="container-fluid image-container set-full-height" style="background-image:url(/team.jpg);">
+    <!-- MultiStep Form -->
+    <div class="container-fluid" id="multistep-form">
+        <div class="row container-fluid justify-content-center mt-0">
+            <div class="col-11 col-sm-12 text-center p-0 mt-3 mb-2">
+                <div class=" px-0 pt-4 pb-0 mt-3 mb-3">
+                    <h4 style="color:#fff"><strong>Register Account</strong></h4>
+                    <div class="row">
+                        <div class="container-fluid col-sm-12 mx-0">
+                            <form class="col-sm-12 container-fluid" id="msform" method="post" asp-controller="Account" asp-action="RegisterValuer" style="background:none!important">
+                                <div class="row col-sm-12 container-fluid">
+                                    <!-- progressbar -->
+                                    <ul id="progressbar" class="col-sm-12">
+                                        <li class="active col-sm-2" id="personal"><strong>Personal</strong></li>
+                                        <li id="account" class="col-sm-2"><strong>Account</strong></li>
+                                        <li id="experience" class="col-sm-2"><strong>Industry Experience</strong></li>
+                                        <li id="payment" class="col-sm-2"><strong>Payment</strong></li>
+                                    </ul>
+                                </div>
+                                <!-- fieldsets -->
+
+                                <fieldset style="background:none!important">
+                                    <div class="container-fluid form-card">
+										<div class="text-danger">@Html.ValidationMessage("Error")</div>
+                                        <input type="text" asp-for="FirstName" placeholder="First Name" required />
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                                        <input type="text" asp-for="LastName" placeholder="Last Name" required />
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+
+                                        <input type="text" asp-for="PhoneNumber" placeholder="Cell Number" required />
+                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+                                        <input type="email" asp-for="UserName" placeholder="Email" autocomplete="off" required />
+                                        <span asp-validation-for="UserName" class="text-danger"></span>
+
+                                        <input type="password" asp-for="Password" placeholder="Password" autocomplete="off" required />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+
+                                        <input type="password" asp-for="PasswordConfirm" placeholder="Confirm Password" autocomplete="off" required />
+                                        <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="button" name="next" class="next action-button " value="Next Step" />
+                                    </div>
+                                </fieldset>
+                                <fieldset style="background:none!important">
+                                    <div class="form-card">
+                                        <h2 class="fs-title">Account Type</h2>
+
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input"  required   type="checkbox" checked asp-for="RegisteredProfessional">
+                                                Are you a registered property professional?
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                                <span asp-validation-for="RegisteredProfessional" class="text-danger"></span>
+                                            </label>
+                                        </div>
+                                        <h8>Select required account types</h8>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" checked required  type="checkbox" asp-for="Valuer">
+                                                Valuer
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                                <span asp-validation-for="Valuer" class="text-danger"></span>
+                                            </label>
+                                        </div>	                                    
+	                                    <input id="REACNumber" asp-for="ReacNumber" type="text" placeholder="REAC number" class="custom-control mt-2" required />
+                                        <span asp-validation-for="ReacNumber" class="text-danger"></span>
+                                        <input id="REIBNumber" asp-for="ReibNumber" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="4" asp-format="" placeholder="REIB number" class="custom-control" required />
+                                        <span asp-validation-for="ReibNumber" class="text-danger"></span>
+                                        <input id="IDNumber" asp-for="IDNumber" type="text" placeholder="Enter your ID Number" class="custom-control" required />
+                                        <span asp-validation-for="IDNumber" class="text-danger"></span>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" asp-for="IDDocument" aria-describedby="inputGroupFileAddon01">
+                                                <label class="custom-file-label" asp-for="IDDocument">Upload a copy of your ID</label>
+                                                <span asp-validation-for="IDDocument" class="text-danger"></span>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                        <input type="button" name="next" class="next action-button account" value="Next Step" />
+                                    </div>
+                                </fieldset>
+                                <fieldset style="background:none!important">
+                                    <div class="form-card">
+                                        <h2 class="fs-title">Industry Experience</h2>
+                                        <div class="row col-sm-12">
+                                            <label class="col-sm-3">Experience</label>
+                                            <div class="col-sm-7">
+                                                <textarea asp-for="IndustryExperience" class="form-control " required></textarea>
+                                                <div class="invalid-feedback">
+                                                    Please provide a summery of your work experience.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row col-sm-12">
+                                            <label class="col-sm-3">LinkedIn</label>
+                                            <input type="text" asp-for="LinkedInUrl" placeholder="Enter your linkedIn profile Url.." />
+                                            <span asp-validation-for="LinkedInUrl" class="fa-linkedin text-danger"></span>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                        <input type="button" name="next" class="next action-button" value="Next Step" />
+                                    </div>
+                                </fieldset>
+                                <fieldset style="background:none!important">
+                                    <div class="form-card">
+                                        <h2 class="fs-title">Account Options</h2>
+                                        <div class="col-md-12">
+                                            <table class="table-bordered" style="table-layout: fixed; width: 100%;border:1px solid;color:#000">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th colspan="3">Packages</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>ACCOUNT TYPE</td>
+                                                        <td></td>
+                                                        <td class="text-center">SINGLE USE</td>
+                                                        <td class="text-center">BUSINESS</td>
+                                                        <td class="text-center">FAST TRACK</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>FEATURES</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Originate and Process your own valuation</td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Automatic email of valuation to client</td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Access to comparables</td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Recommended valuation</td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Adjust Recommendation</td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Market Trends</td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Sales Trends</td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Land Rates</td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Building rates</td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Market Analysis</td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Access to legislative documentation</td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Auto invoice collection</td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">professional chat room</td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>BENEFITS</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Individual leads</td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Appear on banks dashboard</td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Business performance analytics</td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>INCENTIVES</td>
+                                                        <td></td>
+                                                        <td class="text-center">Nil</td>
+                                                        <td class="text-center">10% discount</td>
+                                                        <td class="text-center">Free 3 Months</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>FEES</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Set up</td>
+                                                        <td class="text-center">200</td>
+                                                        <td class="text-center">200</td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Transaction fee</td>
+                                                        <td class="text-center" style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">500 per transaction</td>
+                                                        <td class="text-center" style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Unlimited transactions</td>
+                                                        <td class="text-center" style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Unlimited transactions</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Monthly Cost</td>
+                                                        <td class="text-center"><i class="fa fa-times" style="color:red" aria-hidden="true"></i></td>
+                                                        <td class="text-center">375</td>
+                                                        <td class="text-center">250</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">Payments</td>
+                                                        <td class="text-center">per transaction</td>
+                                                        <td class="text-center">monthly per user</td>
+                                                        <td class="text-center">annually per user</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">CHOOSE PACKAGE</td>
+                                                        <td></td>
+                                                        <td class="text-center">
+                                                            <div class="form-check form-check-inline">
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input Package" type="checkbox" asp-for="ValuerSingleUse">
+                                                                    Single Use
+                                                                    <span class="form-check-sign">
+                                                                        <span class="check"></span>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="form-check form-check-inline">
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input Package" type="checkbox" asp-for="ValuerBusiness">
+                                                                    Business
+                                                                    <span class="form-check-sign">
+                                                                        <span class="check"></span>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="form-check form-check-inline">
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input Package" type="checkbox" asp-for="ValuerFastTrack">
+                                                                    Fast Track
+                                                                    <span class="form-check-sign">
+                                                                        <span class="check"></span>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                </table>
+                                            </div>    
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                            <button class="btn  action-button" type="submit">Submit form</button>
+                                        </div>
+</fieldset>
+                                <input hidden="hidden" asp-for="ReturnUrl" value="@Context.Request.QueryString.Value" />
+                                <input hidden="hidden" asp-for="Active" value="true" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        //Call file upload endpoint
+        var UploadFile = function (event) {
+            var files = event.target.files;
+
+            var formData = new FormData();
+            files.forEach(f => formData.append('files', f));
+
+            console.log(event);
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '/UploadFiles',
+                    data: formData, // The form with the file inputs.
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        console.log(data);
+                        alert(data);
+                    }
+                }).done(function () {
+                    console.log("Success: Files sent!");
+                }).fail(function () {
+                    console.log("An error occurred, the files couldn't be sent!");
+                });
+        };
+
+        //Form validation
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+                console.log(validation);
+            }, false);
+
+
+        })();
+
+
+        $(document).ready(function () {
+
+            //MultiPage
+
+            var current_fs, next_fs, previous_fs; //fieldsets
+            var opacity;
+
+            $(".next").click(function () {
+
+                current_fs = $(this).parent().parent();
+                next_fs = $(this).parent().parent().next();
+
+                //Add Class Active
+                $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+                //show the next fieldset
+                next_fs.show();
+                //hide the current fieldset with style
+                current_fs.animate({ opacity: 0 }, {
+                    step: function (now) {
+                        // for making fielset appear animation
+                        opacity = 1 - now;
+
+                        current_fs.css({
+                            'display': 'none',
+                            'position': 'relative'
+                        });
+                        next_fs.css({ 'opacity': opacity });
+                    },
+                    duration: 600
+                });
+            });         
+
+            $(".previous").click(function () {
+
+                current_fs = $(this).parent().parent();
+                previous_fs = $(this).parent().parent().prev();
+
+                //Remove class active
+                $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+                //show the previous fieldset
+                previous_fs.show();
+
+                //hide the current fieldset with style
+                current_fs.animate({ opacity: 0 }, {
+                    step: function (now) {
+                        // for making fielset appear animation
+                        opacity = 1 - now;
+
+                        current_fs.css({
+                            'display': 'none',
+                            'position': 'relative'
+                        });
+                        previous_fs.css({ 'opacity': opacity });
+                    },
+                    duration: 600
+                });
+            });
+
+            $('.radio-group .radio').click(function () {
+                $(this).parent().find('.radio').removeClass('selected');
+                $(this).addClass('selected');
+            });
+
+            $(".submit").click(function () {
+                return false;
+            });
+            $('input.Package').on('change', function () {
+                $('input.Package').not(this).prop('checked', false);
+            });
+
+            $('input.Profession').on('change', function () {
+                $('input.Profession').not(this).prop('checked', false);
+            });
+        });
+    </script>

@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html class="document-background">
+<head>
+    <title>Detailed Valuation Report</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style type="text/css">
+        .container {
+            position: relative;
+            margin: 20px auto;
+            max-width: 790px;
+            padding: 15px;
+        }
+
+        body {
+            background-color: transparent;
+        }
+
+        .background-color {
+            background-color: white;
+        }
+
+        .document-background {
+            background-color: #868383;
+        }
+
+        @media print {
+            @page {
+                size: A4; /* DIN A4 standard, Europe */
+                margin: 25mm 25mm 25mm 25mm;
+            }
+
+            html, body {
+                width: 210mm;
+                /* height: 297mm; */
+                height: 282mm;
+                font-size: 14px;
+                background: #FFF;
+                overflow: visible;
+            }
+
+            body {
+                padding-top: 15mm;
+                background-color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-color container">
+        <div style="page-break-after:always">
+
+            <div class="col-sm-12 text-center" style="text-align:center">
+                <h1>VALUATION</h1>
+            </div>
+            <div class="col-sm-12 text-center" style="text-align:center">
+                <h1>REPORT</h1>
+            </div>
+            <div class="col-sm-12 text-center" style="text-align:center">
+                <p>processed through www.gosmartvalue.com</p>
+            </div>
+
+            <table style="width:100%">
+                <tr>
+                    <th>VALUATION COMPANY</th>
+                    <th>REGISTERED VALUER</th>
+                    <th>DATE OF VALUATION</th>
+                </tr>
+                <tr>
+                    <td><valuer organisation></td>
+                    <td><valuerName></td>
+                    <td><valuationDate></td>
+                </tr>
+
+            </table>
+
+
+        </div>
+
+        <div style="page-break-after:always">
+
+            <div class="row col-sm-12" style="padding-top:15%">
+                <div class="col-sm-7" style="background-color: white;">
+                    <div class="row">
+                        <h1>Property Information</h1>
+                    </div>
+                    <div class="row">
+                        <h3>OWNERSHIP DETAILS</h3>
+                    </div>
+                    <div class="row">
+                        Title deed:<titledeed>
+
+                    </div>
+                    <div class="row">
+                        Title date:<titleDeedDate>
+
+                    </div>
+                    <div class="row">
+                        <h3>PURPOSE OF VALUATION</h3>
+                    </div>
+                    <div class="row">
+                        <p>Finance/Sale</p>
+                    </div>
+                    <div class="row">
+                        <h3>PROPERTY DESCRIPTION</h3>
+                    </div>
+                    <div class="row">
+
+                        <zoning>
+                    </div>
+                    <div class="row">
+
+                        <propertyDescription>
+                    </div>
+                    <div class="row">
+
+                        <builtUpArea>
+
+                    </div>
+                    <div class="row">
+                        <h3>PROPERTY LOCATION INFORMATION</h3>
+                    </div>
+                    <div class="row">
+                        Plot <insert plot number> located in <insert locality>, <insert location>
+                    </div>
+
+
+                </div>
+                <div class="col-sm-5" style="background-color: dimgray;">
+                    <div class="row">
+                        <h3>MARKET INFORMATION</h3>
+                    </div>
+                    <div class="row">
+                        <h5>Market Value</h5>
+                    </div>
+                    <div class="row">
+                        <h2>
+                            <value>
+                        </h2>
+                    </div>
+                    <div class="row">
+                        <p>Average Sales Price in locality</p>
+                    </div>
+                    <div class="row">
+                        <h2>
+                            <averagePropertyValue>
+                        </h2>
+                    </div>
+                    <div class="row">
+                        <p>Average Sale Price in location</p>
+                    </div>
+                    <div class="row">
+                        <h2>Value</h2>
+                    </div>
+                    <div class="row">
+                        <p>Average land rate in locality</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div style="page-break-after:always" style="padding-top:15%;">
+            <div class="row col-sm-12" style="padding-bottom: 20px;">
+                <h1>Sales Comparables</h1>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>
+                        Top 3 most recent property sales, similar to your property conducted in the last 6-12 months.
+                        Within close proximity to your property
+                    </p>
+                </div>
+            </div>
+            <div class="row col-sm-12">
+                <table class="table table-border">
+                    <thead>
+                        <tr>
+                            <th scope="col">Plot</th>
+                            <th scope="col">Value</th>
+                            <th scope="col">Date of Sale</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div style="page-break-after:always">
+            <!-- //Site Pictures -->
+
+            <div class="col-sm-12">
+                <div class="row">
+                    <h2>ZONING/PLANNING</h2>
+                </div>
+                <div class="row">
+                    <p>
+                        Planning: <zoning>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                    <h2>DISCLAIMERS</h2>
+                </div>
+                <div class="row">
+                    <p>Environmental matters:</p>
+                </div>
+                <div class="row">
+                    <p>Flooding: Unknown</p>
+                </div>
+                <div class="row">
+                    <p>Radon gas: Unknown</p>
+                </div>
+                <div class="row">
+                    <p>Sustainability: Unknown</p>
+                </div>
+                <div class="row">
+                    <p>Source of information: provided by <requester>, deeds registry</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

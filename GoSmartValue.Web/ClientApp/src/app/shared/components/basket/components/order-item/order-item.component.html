@@ -1,0 +1,22 @@
+<div class="grid order-item">
+  <div class="image-section col-2">
+    <img [src]="'assets/images/promo/promo-1'" alt="Picture"/>
+  </div>
+
+  <div class="details-section col-8">
+    <p class="itemType">{{productName}} Report</p>
+    <p class="paymentFrequency">One Off Payment</p>
+<!--    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>-->
+  </div>
+
+  <div class="price col-2">
+    <div class="flex justify-content-end" *ngIf="basketStatus.id == 1">
+      <i class="edit pi pi-pencil"><span></span></i>
+      <i class="delete pi pi-trash" (click)="deleteItems(productId, productName)"><span></span></i>
+    </div>
+
+    <div class="flex justify-content-end">
+      <p class="price ">BWP {{price}}</p>
+    </div>
+  </div>
+</div>

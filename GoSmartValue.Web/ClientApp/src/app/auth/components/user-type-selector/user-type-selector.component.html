@@ -1,0 +1,25 @@
+<p-dialog [(visible)]="displayModal" [style]="{width: '50rem',  height: '30rem'}">
+  <div class="center-content modal-header">
+    <h3 class="">
+      Select User Type
+    </h3>
+  </div>
+  <div class="grid center-content">
+    <a href="#" (click)="selectUser('standard')" class="col-4">
+      <i class="pi pi-user standard"></i>
+      <h3 class="standard-txt">Standard User</h3>
+    </a>
+
+
+    <a href="#" (click)="selectUser('valuer')" class="col-4">
+      <i class="pi pi-home valuer"></i>
+      <h3 class="valuer-txt">Valuer</h3>
+    </a>
+
+
+    <a href="#" (click)="selectUser('corporate')" class="col-4">
+      <i class="pi pi-briefcase corporate"></i>
+      <h3 class="corporate-txt">Corporate</h3>
+    </a>
+  </div>
+</p-dialog>

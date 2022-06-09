@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Cloud.Storage.V1" Version="3.6.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AV.Common\AV.Common.csproj" />
+    <ProjectReference Include="..\AV.Contracts\AV.Contracts.csproj" />
+    <ProjectReference Include="..\AV.Handlers\AV.Handlers.csproj" />
+  </ItemGroup>
+
+</Project>

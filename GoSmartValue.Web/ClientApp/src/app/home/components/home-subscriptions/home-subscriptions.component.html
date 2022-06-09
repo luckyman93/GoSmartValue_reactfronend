@@ -1,0 +1,15 @@
+<h2 class="section-title">Subscriptions</h2>
+<div fxLayoutAlign="center">
+  <p class="section-description">Our range of competitive prices tailor made for our customers</p>
+</div>
+
+<p-carousel [value]="packageTypes" [numVisible]="1">
+  <ng-template let-subscriptionPackage pTemplate="item" class="align-content-between align-items-center justify-content-center flex-wrap">
+      <span class="packages-title">{{subscriptionPackage.title}}</span>
+    <div class="grid row sublist">
+      <div *ngFor="let subscriptionPackage of subscriptionPackage.packages">
+        <app-subscription [description]="subscriptionPackage.description" [price]="subscriptionPackage.price" [features]="subscriptionPackage.features"></app-subscription>
+      </div>
+    </div>
+  </ng-template>
+</p-carousel>

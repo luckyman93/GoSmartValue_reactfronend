@@ -1,0 +1,100 @@
+<p-card class="xl:col-12 lg:col-6 md:col-6 sm:col-12 align-content-between align-items-center justify-content-center flex-wrap" >
+
+<div class="grid row">
+  <p-card header="Instant Valuation" class="xl:col-6 lg:col-6 md:col-12 sm:col-12" [style]="{width: '100%'}" styleClass="p-card-shadow">
+    <p class="price">BWP 750</p>
+    <p>Get an instant report for your property estimate</p>
+    <ng-template pTemplate="footer">
+      <p-button label="Proceed" (click)="nextPage('instant')" icon="pi pi-check"></p-button>
+    </ng-template>
+  </p-card>
+
+  <p-card header="Detailed Valuation" class="xl:col-6 lg:col-6 md:col-12 sm:col-12" [style]="{width: '100%'}" styleClass="p-card-shadow">
+    <p class="price">BWP 1000</p>
+    <p>Issue an instruction to a valuer perform valuation on property</p>
+    <ng-template pTemplate="footer">
+      <p-button label="Proceed" (click)="nextPage('detailed')" icon="pi pi-check"></p-button>
+    </ng-template>
+  </p-card>
+</div>
+
+<!-- <p-card header="Valuation Type" class="xl:col-6 lg:col-6 md:col-12 sm:col-12" [style]="{width: '100%'}" styleClass="p-card-shadow">
+  <div class="p-grid grid flex flex-column">
+    <div class="grid row">
+      <div class="xl:col-12 lg:col-12 md:col-12 sm:col-12 xs:col-12">
+        <div class="field-radiobutton">
+          <p-radioButton name="instant" value="instant" [(ngModel)]="reportType" (onClick)="isDetailedReport(false)" inputId="istantVal"></p-radioButton>
+          <label for="instant">Instant Valuation</label>
+      </div>
+      <div class="field-radiobutton">
+          <p-radioButton name="detailed" value="detailed" [(ngModel)]="reportType" (onClick)="isDetailedReport(true)" inputId="detailedVal" ></p-radioButton>
+          <label for="detailed">Detailed Valuation</label>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</p-card>
+
+
+<div *ngIf="isDetailed" class="grid row">
+  <p-card header="Valuer/Company" class="xl:col-6 lg:col-6 md:col-12 sm:col-12" [style]="{width: '100%'}" styleClass="p-card-shadow">
+    <div class="p-field col-12">
+      <span class="p-float-label">
+        <p-dropdown id="city" [style]="{'height':'3.5rem'}" panelStyleClass="minWidthOverride" #company="ngModel" [options]="companies" 
+        [(ngModel)]="instantValuationReportRequest.location"
+                    optionLabel="name" [filter]="true" filterBy="name"
+                    [ngClass]="{'ng-dirty': (company.invalid && submitted) || (company.dirty && company.invalid)}" placeholder="Select a Valuer/Company">
+          <ng-template pTemplate="selectedItem">
+            <div class="location-item location-item-value" *ngIf="instantValuationReportRequest.location">
+              <div>{{instantValuationReportRequest.location.name}}</div>
+            </div>
+          </ng-template>
+          <ng-template let-city pTemplate="item">
+            <div class="location-item">
+              <div>{{city.name}}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+        
+    </span>
+      <small *ngIf="(company.invalid && submitted) || (company.dirty && company.invalid)" class="p-error">Valuer is required.</small>
+    </div>
+  </p-card>
+
+    <p-card header="Preferred Access Date/Time" class="xl:col-6 lg:col-6 md:col-12 sm:col-12" [style]="{width: '100%'}">
+      <div class="grid row">
+
+      <div class="p-field col-6">
+        <span class="p-float-label">
+          <label for="timeonly">Time / 12h</label>
+          <p-calendar [(ngModel)]="instantValuationReportRequest.AccessDate" [showIcon]="true" [showTime]="true" inputId="timeonly"></p-calendar>
+        </span>
+      </div>
+    </div>
+    </p-card>
+
+    <p-card header="Access Information" class="xl:col-6 lg:col-6 md:col-12 sm:col-12" [style]="{width: '100%'}" styleClass="p-card-shadow">
+      <div class="grid row">
+      <div class="p-field col-6">
+        <span class="p-float-label">
+          <input #street="ngModel" id="street" type="text" pInputText [(ngModel)]="instantValuationReportRequest.streetName">
+          <label for="street">Client Name</label>
+        </span>
+      </div>
+
+      <div class="p-field col-6">
+        <span class="p-float-label">
+          <input #street="ngModel" id="street" type="text" pInputText [(ngModel)]="instantValuationReportRequest.streetName">
+          <label for="street">Client Contact</label>
+        </span>
+      </div>
+    </div>
+
+    </p-card> -->
+<!-- 
+</div> -->
+
+</p-card>
+
+

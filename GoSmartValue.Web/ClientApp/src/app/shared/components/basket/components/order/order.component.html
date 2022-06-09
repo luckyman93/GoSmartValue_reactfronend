@@ -1,0 +1,13 @@
+<p-card [style]="{'min-height': '32.1rem', 'border-radius':'2rem', 'border-style': 'solid','border-color':'#5CB8E8'}" class="order">
+  <div class="header">
+    <div class="flex justify-content-start">
+      <span class="title">Your Order {{basket.id}}</span>
+    </div>
+  </div>
+  <div class="oder-items">
+    <div *ngFor="let item of basket.items">
+      <app-order-item [productName]="item.productName" [price]="item.price" [productId]="item.id" [basketStatus]="basket.status"></app-order-item>
+    </div>
+    <app-total [discountTotal]="basket.discountTotal" [netTotal]="basket.netTotal"></app-total>
+  </div>
+</p-card>

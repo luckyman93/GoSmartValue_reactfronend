@@ -1,0 +1,128 @@
+<p-card class="xl:col-6 lg:col-6 md:col-6 sm:col-12" >
+    <ng-template pTemplate="title">
+        <h3>Detailed Valuation</h3>
+      </ng-template>
+    <ng-template pTemplate="content">
+      <div class="p-fluid grid flex flex-row">
+
+        <p-card header="Location Details" class="xl:col-12 lg:col-12 md:col-12 sm:col-12" [style]="{width: '100%'}">
+            <div class="grid row">
+                <div class="p-field col-6">
+                    <span class="p-float-label">
+                      <p-dropdown id="city" [style]="{'height':'3.5rem'}" panelStyleClass="minWidthOverride" #city="ngModel" [options]="locations"
+                      [(ngModel)]="instructionRequest.location"
+                                  optionLabel="name" [filter]="true" filterBy="name" (onChange)="getLocalities()"
+                                  [ngClass]="{'ng-dirty': (city.invalid && submitted) || (city.dirty && city.invalid)}" placeholder="Select a City/Town">
+                        <ng-template pTemplate="selectedItem">
+                          <div class="location-item location-item-value" *ngIf="instructionRequest.location">
+                            <div>{{instructionRequest.location.name}}</div>
+                          </div>
+                        </ng-template>
+                        <ng-template let-city pTemplate="item">
+                          <div class="location-item">
+                            <div>{{city.name}}</div>
+                          </div>
+                        </ng-template>
+                      </p-dropdown>
+                      <label>City/Town</label>
+                  </span>
+                    <small *ngIf="(city.invalid && submitted) || (city.dirty && city.invalid)" class="p-error">City is required.</small>
+                  </div>
+
+                  <div class="p-field col-6" *ngIf="localities.length > 0 || instructionRequest.localityId">
+                    <span class="p-float-label">
+                      <p-dropdown #ward="ngModel" [options]="localities" [(ngModel)]="instructionRequest.locality"
+                            [style]="{'height':'3.5rem'}" optionLabel="name" [filter]="true" filterBy="name"
+                                  [ngClass]="{'ng-dirty': (localities.length > 0) && ((ward.invalid && submitted) || (ward.dirty && ward.invalid))}" placeholder="Select a Ward">
+                        <ng-template pTemplate="selectedItem">
+                          <div class="location-item location-item-value" *ngIf="instructionRequest.locality">
+                            <div>{{instructionRequest.locality.name}}</div>
+                          </div>
+                        </ng-template>
+                        <ng-template let-ward pTemplate="item">
+                          <div class="locality-item">
+                            <div>{{ward.name}}</div>
+                          </div>
+                        </ng-template>
+                      </p-dropdown>
+                      <label>Ward</label>
+                    </span>
+                    <small *ngIf="(localities.length > 0) && ((ward.invalid && submitted) || (ward.dirty && ward.invalid))" class="p-error">Ward is required.</small>
+                  </div>
+
+                  <div class="p-field xl:col-6 sm:col-12">
+                    <span class="p-float-label">
+                      <input #plotNumber="ngModel" id="plotNumber" type="text" required pInputText [(ngModel)]="instructionRequest.plotNumber"
+                           [ngClass]="{'ng-dirty': (plotNumber.invalid && submitted) || (plotNumber.dirty && plotNumber.invalid)}">
+                      <label for="plotNumber">Plot No</label>
+                    </span>
+                    <small class="p-error" *ngIf="(plotNumber.invalid && submitted )|| (plotNumber.dirty && plotNumber.invalid)">Plot Number is required.</small>
+                  </div>
+
+            </div>
+        </p-card>
+
+
+          <p-card header="Access Information" class="xl:col-6 lg:col-6 md:col-12 sm:col-12" [style]="{width: '100%'}" styleClass="p-card-shadow">
+            <div class="grid row">
+            <div class="p-field col-6">
+              <span class="p-float-label">
+                <input #street="ngModel" id="street" type="text" pInputText [(ngModel)]="instructionRequest.accessContactName">
+                <label for="street">Client Name</label>
+              </span>
+            </div>
+
+            <div class="p-field col-6">
+              <span class="p-float-label">
+                <input #street="ngModel" id="accessContactMobileNumber" type="text" pInputText [(ngModel)]="instructionRequest.accessContactMobileNumber">
+                <label for="accessContactMobileNumber">Client Contact</label>
+              </span>
+            </div>
+          </div>
+
+          </p-card>
+
+          <p-card header=" Valuer & Preferred Access Date/Time" class="xl:col-6 lg:col-6 md:col-12 sm:col-12" [style]="{width: '100%'}">
+            <div class="grid row">
+<!--                <div class="p-field col-6">-->
+<!--                    <span class="p-float-label">-->
+<!--&lt;!&ndash;                      <p-dropdown id="valuer" [style]="{'height':'3.5rem'}" panelStyleClass="minWidthOverride" #valuer="ngModel" [options]="companies"&ndash;&gt;-->
+<!--&lt;!&ndash;                      [(ngModel)]="instructionRequest.comp"&ndash;&gt;-->
+<!--&lt;!&ndash;                                  optionLabel="name" [filter]="true" filterBy="name"&ndash;&gt;-->
+<!--&lt;!&ndash;                                  [ngClass]="{'ng-dirty': (valuer.invalid && submitted) || (valuer.dirty && valuer.invalid)}" placeholder="Select a Valuer/Company">&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                        <ng-template pTemplate="selectedItem">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                          <div class="location-item location-item-value" *ngIf="instructionRequest.location">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <div>{{instructionRequest.location.name}}</div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                          </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                        </ng-template>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                        <ng-template let-company pTemplate="item">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <div class="location-item">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div>{{company.name}}</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </ng-template>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </p-dropdown>&ndash;&gt;-->
+<!--                      <label>Valuer/Company</label>-->
+<!--                  </span>-->
+<!--                    <small *ngIf="(valuer.invalid && submitted) || (valuer.dirty && valuer.invalid)" class="p-error">Valuer is required.</small>-->
+<!--                  </div>-->
+
+            <div class="p-field col-6">
+              <span class="p-float-label">
+                <label>Date & Time</label>
+                <p-calendar [(ngModel)]="instructionRequest.preferredAccessDate" [showIcon]="true" [showTime]="true" inputId="timeonly"></p-calendar>
+              </span>
+            </div>
+          </div>
+          </p-card>
+
+
+      </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div class="flex justify-content-end">
+        <p-button label="Issue Instruction" (onClick)="submit()" icon="pi pi-angle-right" iconPos="right"></p-button>
+      </div>
+    </ng-template>
+  </p-card>
+  <p-toast position="top-center" key="tc"></p-toast>
+

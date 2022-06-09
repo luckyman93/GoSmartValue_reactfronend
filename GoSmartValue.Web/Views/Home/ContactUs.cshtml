@@ -1,0 +1,54 @@
+﻿
+@{
+	ViewData["Title"] = "Complete Payment";
+
+	Layout = "_Layout";
+}
+
+<div class="outer container-fluid image-container set-full-height" style="background-image:url(/team.jpg);">
+	<div class="middle container-fluid" style="padding-top:80px">
+		<div class=" inner container-fluid">
+			<div class="card shadow col-md-6 offset-md-6 container-fluid" style="background-color: #ffffff;">
+				<div style="padding:0;width:100%;padding:10px">
+					<form method="post" enctype="multipart/form-data" asp-controller="Payment" asp-action="MakePayment">
+						<div class=" col-sm-12 text-center">
+							<h3>Contact Us</h3>
+						</div>
+						<div class="col-sm-12 row" style="color:#000">
+							<div class="col-sm-6 text-center" style="font-family:'Segoe UI'">
+								<p>Plot 74769,Unit 7</p>
+								<p>CBD Mowana Mews</p>
+								<p>Gaborone</p>
+
+							</div>
+							<div class="col-sm-6 text-center">
+
+								<div class="row">
+									<a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/infovantage?lang=en" target="_blank" data-original-title="Follow us on Twitter" rel="nofollow">
+										<i class="fab fa-twitter" style="color: #000;height:20px"></i> Twitter
+									</a>
+								</div>
+								<div class="row">
+									<a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/vantagepropertiesbw/" target="_blank" data-original-title="Add us on Facebook" rel="nofollow">
+										<i class="fab fa-facebook-square" style="color: #000;height:20px"></i> Facebook
+									</a>
+								</div>
+								<div class="row"><p><i class="fab fa-whatsapp" aria-hidden="true"></i> +267 730 567 33</p></div>
+								<div class="row">
+									<p><i class="fa fa-phone" aria-hidden="true"></i> BeMobile: +267 730 567 33</p>
+								</div>
+								<div class="row">
+									<p><i class="fa fa-phone-square" aria-hidden="true"></i> Orange: +267 773 381 00</p>
+								</div>
+								<div class="row">
+									<p><i class="fa fa-envelope" aria-hidden="true"></i> info@vantagepropertiesbw.com</p>
+								</div>
+							</div>
+							
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

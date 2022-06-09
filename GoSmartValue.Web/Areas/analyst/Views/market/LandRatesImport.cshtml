@@ -1,0 +1,44 @@
+﻿@using GoSmartValue.Web.Services
+@inject CachedStorageService CachedStorageService
+@model AV.Contracts.Models.Market.ResponseModels.ImportLandRatesResponse
+@{
+    ViewData["Title"] = "LandRates";
+    Layout = "~/Views/Shared/Layouts/_BackOffice.cshtml";
+
+    var country = CachedStorageService.Country;
+}
+
+<div class="container-fluid image-container set-full-height" style="background-image: url(/valuationsIndex.jpg);">
+    <div class="container-fluid" style="padding-top: 80px">
+        <div class=" inner container-fluid">
+            <h1>LandRates</h1>
+                <div class="card">
+                    <header class="rgba-teal-light">
+                        <div class="card-title">
+                            Import Land Rates from CSV file
+                        </div>
+                    </header>
+                    <div class="card-body">
+                        <form method="post" id="form" name="form" asp-controller="Market" asp-action="UploadLandRates" enctype="multipart/form-data">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input"
+                                           id="CsvFormFile" name="CsvFormFile"
+                                           aria-describedby="importFile">
+                                    <label class="custom-file-label" for="importFile">Choose file</label>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" asp-controller="Market" asp-action="LandRatesImport" class="btn btn-blue">Import</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<h2 class="section-title">Standard Subscriptions</h2>
+<div class="grid row container">
+    <div *ngFor="let subscriptionPackage of standardPackages" class="xl:col-4 lg:col-6 md:col-12 sm:col-12 xs:col-12">
+      <app-subscription [description]="subscriptionPackage.description" [price]="subscriptionPackage.price"
+                        [features]="subscriptionPackage.features" [package]="subscriptionPackage"></app-subscription>
+    </div>
+</div>
+

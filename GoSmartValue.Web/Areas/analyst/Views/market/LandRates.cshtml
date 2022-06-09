@@ -1,0 +1,147 @@
+﻿@using GoSmartValue.Web.Services
+@inject CachedStorageService CachedStorageService
+@model AV.Contracts.Models.Market.ResponseModels.ImportLandRatesResponse
+
+@functions {
+    private IEnumerable<string> GetValidationErrors(int lineNumber)
+    {
+        return Model.ImportErrors.TryGetValue(lineNumber, out var errorMessage) ? errorMessage : null;
+    }
+
+}
+@{
+    ViewData["Title"] = "LandRates";
+    Layout = "~/Views/Shared/Layouts/_BackOffice.cshtml";
+
+    var country = CachedStorageService.Country;
+}
+
+<div class="container-fluid image-container set-full-height" style="background-image: url(/valuationsIndex.jpg);">
+    <div class="container-fluid" style="padding-top: 80px">
+        <div class=" inner container-fluid">
+            <h1>LandRates</h1>
+            <div class="card">
+                <div class="card-header">Data Type: @Model.Header?.Type.ToString()</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            Active from: @Model.Header?.ActiveFrom.ToString("dd-MM-yyyy")
+                        </div>
+                        <div class="col-6">
+                            Active Until: @Model.Header?.ActiveTo?.ToString("dd-MM-yyyy")
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">Number of records: @Model.Data.Count()</div>
+                        <div class="col-6">
+                            @if (Model.ImportErrors?.Count() > 0)
+                            {
+                                <span class="warning-color">Validation Error Count: @Model.ImportErrors.Count() - file not imported</span>
+                            }
+                            else
+                            {
+                                <span class="success-color">File imported successfully.</span>
+                            }
+                        </div>
+                    </div>
+                    <div>
+                        @Html.ActionLink("Import Land Rates", "LandRatesImport", "Market", null, new {@class="btn btn-blue"})
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content text-center">
+                        <div class="tab-pane active" id="location-pane">
+                            <table id="locations-grid" class="table  table-hover">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Country</th>
+                                    <th>District</th>
+                                    <th>Location</th>
+                                    <th>Locality</th>
+                                    <th>Measurement/Unit</th>
+                                    <th>Land Rate</th>
+                                    <th>Low Income</th>
+                                    <th>Middle Income</th>
+                                    <th>High Income</th>
+                                    <th>Zoning</th>
+                                    <th>Average Price</th>
+                                    <th>Validation Failures</th>
+                                </tr>
+                                </thead>
+                                <tbody id="locations-grid-rows">
+                                @if (Model != null)
+                                {
+                                    @foreach (var landRate in Model.Data.Select((value, i) => new {i, value}))
+                                    {
+                                        <tr>
+                                            <td></td>
+                                            <td>@country?.Name</td>
+                                            <td>@landRate.value.DistrictId</td>
+                                            <td>@landRate.value.LocationId</td>
+                                            <td>@landRate.value.LocalityId</td>
+                                            <td>@landRate.value.Metric</td>
+                                            <td>@landRate.value.Rate</td>
+                                            <td>@landRate.value.LowIncome</td>
+                                            <td>@landRate.value.MiddleIncome</td>
+                                            <td>@landRate.value.HighIncome</td>
+                                            <td>@landRate.value.Zoning</td>
+                                            <td>@landRate.value.AveragePrice</td>
+                                            <td>
+                                                @{
+                                                    var errors = GetValidationErrors(landRate.i);
+                                                    if (errors != null)
+                                                    {
+                                                        <ul class="warning-color">
+                                                            @foreach (var validationError in errors)
+                                                            {
+                                                                <li>@validationError</li>
+                                                            }
+                                                        </ul>
+                                                    }
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="settings">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        $('#locations-grid').DataTable({
+                responsive: true
+            });
+
+            $('.dataTables_length').addClass('bs-select');
+
+            $('#importLandRates').click(function (e) {
+            e.preventDefault(); // <------------------ stop default behaviour of button
+            //variables
+            e.stopImmediatePropagation();
+
+            var formData = new FormData(form);
+            $.ajax({
+                url: "/analyst/landrates/import",
+                type: 'POST',
+                data: formData,
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>

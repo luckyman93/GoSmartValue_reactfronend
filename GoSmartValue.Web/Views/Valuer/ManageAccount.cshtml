@@ -1,0 +1,299 @@
+﻿@using AV.Common.Entities
+@using Microsoft.AspNetCore.Identity
+
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> userManager
+
+
+@model AV.Contracts.Models.ViewModels.ManageAccountViewModel
+@{
+
+	ViewData["Title"] = "Manage Account";
+
+	Layout = "Layouts/_ValuerLayout";
+
+    bool hasCompanyName = !string.IsNullOrEmpty(Model.Account.CompanyName);
+}
+
+<div class="container-fluid image-container set-full-height" style="background-image: url(/backgroundImages/profiles.jpg);">
+	<form method="post" id="form" name="form" class="inner" enctype="multipart/form-data" style="padding-top:50px;background-color:transparent!important">
+		<div class="container-fluid card col-sm-10 offset-1" style="margin-bottom:20px">
+			<div class="row p-2">
+				<div class="col-sm-6 text-left "><h4 class="info-text"> Manage Profile</h4></div>
+				<div class="col-sm-6 text-right">@*@ViewBag.UserModel.FirstName @ViewBag.UserModel.LastName*@</div>
+			</div>
+			<div class="col-sm-12 text center">
+				
+				<div class="row">
+					@if (Model.Account.CompanyLogos.Count > 0)
+					{
+						@foreach (var item in Model.Account.CompanyLogos)
+						{
+							<img src="@Url.Action("Download", "Document", new { documentId = item.Id })" width="150" height="150" alt="Company Logo" />
+						}
+					}
+					else
+					{
+						<div class="avatar-upload">
+				
+						<div class="avatar-edit">
+							<input type='file' id="LogoDocument" name="LogoDocument" multiple class="custom-file-input" accept=".png, .jpg, .jpeg" />
+							<label title="Upload Logo" for="LogoDocument"></label>
+						</div>
+						<div class="avatar-preview">
+							<div id="imagePreview" style="background-image: url(/backgroundImages/default-avatar.png);">
+							</div>
+						</div>
+						<label>Upload Company Logo</label>
+						</div>
+					}
+				</div>
+			</div>
+			<div class="row p-2">
+				<div class="col-sm-6">
+					@if (!hasCompanyName)
+					{
+						<div class="label-floating form-group">
+							<label class="control-label">Company/Organisation name <small>(required)</small></label>
+							<input id="companyName" asp-for="Account.CompanyName" type="text" class="form-control">
+						</div>
+					}
+					else
+					{
+						<div class="label-floating form-group">
+							<label class="control-label">Company/Organisation name <small>(required)</small></label>
+							<input id="companyName" disabled="disabled" asp-for="Account.CompanyName" type="text" class="form-control">
+						</div>
+					}
+				</div>
+			</div>
+			@if (!hasCompanyName && Model.Account.CompanyLogos.Count==0)
+			{
+				<div class="text-right p-2">
+					<button id="manageProfile" type="button" class="btn btn-blue">Save</button>
+				</div>
+			}
+			</div>
+		<div class="container-fluid card col-sm-10 offset-1">
+			<div class="row p-2">
+				<div class="col-sm-6">
+					<h4>Banking Details</h4>
+				</div>
+				<div class="col-sm-6 ">
+					@if (Model.BankAccounts == null || !Model.BankAccounts.Any())
+					{
+					    <a data-toggle="modal" data-target="#bankingDetailsModal">
+                            <i class="material-icons" style="color: #1a237e">
+                                add_box
+                            </i>
+                        </a>
+					}
+                </div>
+			</div>
+
+			<div class="row col-sm-12">
+				<div style="padding:0;width:100%;padding:10px">
+					<table id="" class="table table-hover table-responsive " style="width:100%">
+						<thead>
+							<tr>
+								<th scope="col">Bank</th>
+								<th scope="col">Account Name</th>
+								<th scope="col">Account Number</th>
+								<th scope="col">Branch</th>
+								<th scope="col">Branch Code</th>
+								<th scope="col">Swift Code</th>
+							</tr>
+						</thead>
+                        <tbody>
+						@if (Model.BankAccounts != null)
+						{
+						    @foreach (var account in Model.BankAccounts)
+						    {
+						        <tr>
+                                    <th scope="row">@account.BankName</th>
+                                    <td>@account.AccountName</td>
+                                    <td>@account.AccountNumber</td>
+                                    <td>@account.BranchName</td>
+                                    <td>@account.BranchCode</td>
+                                    <td>@account.SwiftCode</td>
+                                </tr>
+						    }
+						}
+                        </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="bankingDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="exampleModalLabel">BANKING DETAILS</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>
+					Kindly provide your <strong>Banking</strong> details below:
+				</p>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="label-floating form-group">
+							<label class="control-label">Bank name <small>(required)</small></label>
+							<input id="bankName"  type="text" class="form-control" tabindex="1">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="label-floating form-group">
+							<label class="control-label">Branch Name <small>(required)</small></label>
+							<input id="branchName"  type="text" class="form-control" tabindex="2">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="label-floating form-group">
+							<label class="control-label">Account name(Holder) <small>(required)</small></label>
+							<input id="accountName"  type="text" class="form-control" tabindex="3">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="label-floating form-group">
+							<label class="control-label">Account Number <small>(required)</small></label>
+							<input id="accountNumber"  type="text" class="form-control" tabindex="4">
+						</div>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="label-floating form-group">
+							<label class="control-label">Branch Code <small>(required)</small></label>
+							<input id="branchCode"  type="text" class="form-control" tabindex="5">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="label-floating form-group">
+							<label class="control-label">Swift Code</label>
+							<input id="swiftCode"  type="text" class="form-control" tabindex="6">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-black" data-dismiss="modal">Cancel</button>
+				<button id="addBankDetails" type="button" class="btn btn-blue">Submit</button>
+				<input type="hidden" id="accountId" value="@Model.Account.Id" />
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function () {
+		$("#LogoDocument").change(function() {
+			readURL(this);
+		});
+
+		$('#bankingDetails').DataTable({
+			responsive: true
+		});
+		$('.dataTables_length').addClass('bs-select');
+
+		$('#manageProfile').click(function (e) {
+			e.preventDefault(); // <------------------ stop default behaviour of button
+			//variables
+            ShowProgress();
+			e.stopImmediatePropagation();
+
+			var accountId = $('#accountId').val();
+			var companyName = $('#companyName').val();
+			//var files = $('#UploadDocument')[0].files;
+
+			var formData = new FormData(form);
+			formData.append('accountId', accountId);
+			formData.append('companyName', companyName);
+			//formData.append('uploadDocument', files);
+
+
+      $.ajax({
+           url: "/valuer/manageprofiles",
+           type: 'POST',
+           data: formData,
+           success: function (response) {
+               
+                   HideProgress();
+               location.reload();
+           },
+           error: function (error) {
+			   console.log(error)
+			   HideProgress();
+               location.reload();
+           },
+           cache: false,
+           contentType: false,
+           processData: false
+      });
+	
+		});
+
+		$('#addBankDetails').click(function (e) {
+			e.preventDefault(); // <------------------ stop default behaviour of button
+			//variables
+
+			ShowProgress();
+			var bankDetailsData = {
+				AccountId: $('#accountId').val(),
+				BankAccount:
+				{
+					BankName: $('#bankName').val(),
+					AccountName: $('#accountName').val(),
+					AccountNumber: $('#accountNumber').val(),
+					BranchName: $('#branchName').val(),
+					BranchCode: $('#branchCode').val(),
+					SwiftCode: $('#swiftCode').val()
+				}
+			};
+
+			var element = this;
+			$.post("/Valuer/bankdetails", bankDetailsData)
+				.done(function (data) {
+					HideProgress();
+					ClearModal();
+					$('#bankingDetailsModal').modal('hide');
+					location.reload();
+				},
+					"json"
+				);
+
+		});
+
+	});
+
+	function ClearModal() {
+		$('#accountId').val("");
+		$('#bankName').val("");
+		$('#accountName').val("");
+		$('#accountNumber').val("");
+		$('#branchName').val("");
+		$('#branchCode').val("");
+		$('#swiftCode').val("");
+	};
+
+	function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+            $('#imagePreview').hide();
+            $('#imagePreview').fadeIn(650);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+	};
+</script>

@@ -1,0 +1,42 @@
+﻿@using AV.Common.Entities
+@using AV.Contracts.Enums
+@if (Context.User.IsInRole("analyst") || Context.User.IsInRole("admin"))
+{
+    @*<ul class="collapse list-unstyled" id="analystsMenuItems">
+        <li>*@
+    <a class="dropdown-item" asp-area="analyst" asp-controller="Valuations" asp-action="PropertyDetailCreate" class="btn btn-success">
+        Add New Sales
+    </a>
+    @*</li>
+        <li>*@
+    <a class="dropdown-item" asp-area="analyst" asp-controller="Valuations" asp-action="Index">
+        All Sales
+    </a>
+    @*</li>
+        <li>*@
+    <a class="dropdown-item" asp-area="analyst" asp-controller="Valuations" asp-action="Index" asp-route-filterBy=@DataState.Pending>
+        Pending/Drafts
+    </a>
+    @*</li>
+        <li>*@
+    <a class="dropdown-item" asp-area="analyst" asp-controller="Valuations" asp-action="Index" asp-route-filterBy=@DataState.Verified>
+        Verified Sales
+    </a>
+    @*</li>
+        <li>*@
+    <a class="dropdown-item" asp-area="analyst" asp-controller="Valuations" asp-action="Index" asp-route-filterBy=@DataState.Raw>
+        Raw Sales- Website
+    </a>
+    @*</li>
+        <li>*@
+    <a class="dropdown-item" asp-area="analyst" asp-controller="Valuations" asp-action="Index" asp-route-filterBy=@DataState.Discarded>
+        Discarded Sales
+    </a>
+    @*</li>
+        <li>*@
+    <a class="dropdown-item" asp-area="analyst" asp-controller="Users" asp-action="Index">
+        All Registrations
+    </a>
+    @*</li>
+        </ul>*@
+}

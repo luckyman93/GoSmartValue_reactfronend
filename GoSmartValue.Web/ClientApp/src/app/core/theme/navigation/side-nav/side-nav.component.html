@@ -1,0 +1,84 @@
+<div class="layout-sidebar" [ngStyle]="{'overflow':appM.sidebarActive ? 'hidden' : 'visible'}"
+      (click)="appM.onSidebarClick()">
+  <div class="layout-tabmenu">
+    <ul class="layout-tabmenu-nav">
+      <li [ngClass]="{'active-item':appM.activeTabIndex === 0}">
+        <a href="#" pRipple class="tabmenuitem-link" (click)="appM.onTabClick($event, 0)"><i class="pi pi-fw pi-home"></i></a>
+        <div class="layout-tabmenu-tooltip">
+          <div class="layout-tabmenu-tooltip-arrow"></div>
+          <div class="layout-tabmenu-tooltip-text">Valuations</div>
+        </div>
+      </li>
+      <li [ngClass]="{'active-item':appM.activeTabIndex === 1}">
+        <a href="#" pRipple class="tabmenuitem-link" (click)="appM.onTabClick($event, 1)"><i class="pi pi-fw pi-chart-line"></i></a>
+        <div class="layout-tabmenu-tooltip">
+          <div class="layout-tabmenu-tooltip-arrow"></div>
+          <div class="layout-tabmenu-tooltip-text">Trends</div>
+        </div>
+      </li>
+      <li [ngClass]="{'active-item':appM.activeTabIndex === 2}">
+        <a href="#" pRipple class="tabmenuitem-link" (click)="appM.onTabClick($event, 2)"><i class="pi pi-fw pi-file"></i></a>
+        <div class="layout-tabmenu-tooltip">
+          <div class="layout-tabmenu-tooltip-arrow"></div>
+          <div class="layout-tabmenu-tooltip-text">Reports</div>
+        </div>
+      </li>
+
+      <!-- <li [ngClass]="{'active-item':appM.activeTabIndex === 2}">
+        <a href="#" pRipple class="tabmenuitem-link" (click)="appM.onTabClick($event, 3)"><i class="pi pi-fw pi-file"></i></a>
+        <div class="layout-tabmenu-tooltip">
+          <div class="layout-tabmenu-tooltip-arrow"></div>
+          <div class="layout-tabmenu-tooltip-text">Valuations</div>
+        </div>
+      </li> -->
+
+    </ul>
+    <div class="layout-tabmenu-contents">
+      <div class="layout-tabmenu-content" [ngClass]="{'layout-tabmenu-content-active': appM.activeTabIndex === 0}">
+        <div class="layout-submenu-title clearfix">
+          <span>Valuations</span>
+          <a href="#" class="menu-button pi pi-bars" (click)="appM.closeSidebar($event)"></a>
+        </div>
+        <app-side-nav-tab-content>
+          <app-menu></app-menu>
+        </app-side-nav-tab-content>
+      </div>
+      <div class="layout-tabmenu-content" [ngClass]="{'layout-tabmenu-content-active': appM.activeTabIndex === 1}">
+        <div class="layout-submenu-title clearfix">
+          <span>Trends</span>
+          <a href="#" class="menu-button pi pi-bars" (click)="appM.closeSidebar($event)"></a>
+        </div>
+          <app-side-nav-tab-content>
+            <app-trends-menu></app-trends-menu>
+          </app-side-nav-tab-content>
+      </div>
+      <!-- <div class="layout-tabmenu-content" [ngClass]="{'layout-tabmenu-content-active': appM.activeTabIndex === 3}">
+        <div class="layout-submenu-title clearfix">
+          <span>Valuations</span>
+          <a href="#" class="menu-button pi pi-bars" (click)="appM.closeSidebar($event)"></a>
+        </div>
+          <app-side-nav-tab-content>
+            <app-valuations-menu></app-valuations-menu>
+          </app-side-nav-tab-content>
+      </div> -->
+      <div class="layout-tabmenu-content" [ngClass]="{'layout-tabmenu-content-active': appM.activeTabIndex === 2}">
+        <div class="layout-submenu-title clearfix">
+          <span>Reports</span>
+          <a href="#" class="menu-button pi pi-bars" (click)="appM.closeSidebar($event)"></a>
+        </div>
+        <app-side-nav-tab-content>
+          <div class="">
+            <ul class="reportList">
+              <li class="clearfix">
+                <a href="#" (click)="appM.closeSidebar($event)">
+                  <i class="pi pi-file"></i>
+                  <span class="calendar-event-title">Reports</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </app-side-nav-tab-content>
+      </div>
+    </div>
+  </div>
+</div>

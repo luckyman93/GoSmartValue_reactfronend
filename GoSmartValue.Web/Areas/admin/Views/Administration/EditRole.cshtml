@@ -1,0 +1,58 @@
+﻿@using AV.Contracts.Models.Users
+@using GoSmartValue.Web.Models
+@model GoSmartValue.Web.ViewModels.EditRoleViewModel
+
+@{
+    ViewBag.Title = "Edit UserRole";
+    Layout = "_Layout";
+}
+
+    <h1>Edit User UserRoles</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id"></label>
+                <input asp-for="Id" disabled class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoleName"></label>
+                <input asp-for="RoleName" class="form-control" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success"
+                        asp-controller="administration" asp-action="EditRole">
+                    Save
+                </button>
+                <a type="submit" class="btn btn-primary"
+                   asp-controller="Administration" asp-action="ListRoles">
+                    Cancel
+                </a>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3>Users in UserRoles</h3>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary" style="width: auto"
+                       asp-action="EditUsersInRole" asp-controller="Administration" asp-route-roleId="@Model.Id">
+                        Add Or Remove Users
+                    </a>
+                </div>
+                <div class="card-body">
+                    @if (Model.Users != null && Model.Users.Any())
+                    {
+                        foreach (var user in Model.Users)
+                        {
+                            <h5 class="card-title">Username: @(((UserLoginViewModel) user).UserName)</h5>
+                        }
+                    }
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

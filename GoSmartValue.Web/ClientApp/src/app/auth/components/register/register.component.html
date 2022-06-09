@@ -1,0 +1,96 @@
+<p class="welcome">Welcome to GoSmartValue</p>
+<p class="new-account">New {{userType | titlecase}} User Account</p>
+<p class="acc-exists">Already have an account? <a class="login" href="" (click)="login()">Login</a></p>
+
+<form [formGroup]="registerForm" (ngSubmit)="onRegister()" fxLayout="column">
+    <input type="text" pInputText formControlName="userType" [(ngModel)]="userType" hidden> 
+  <div class="p-field">
+      <span class="p-float-label">
+          <input type="text" id="firstName" formControlName="firstName" required pInputText>
+          <label for="firstName">*First Name</label>
+          <p class="p-error" *ngIf="f.firstName.hasError('required') && f.firstName.dirty"> FirstName required.</p>
+      </span>
+  </div>
+
+  <div class="p-field">
+      <span class="p-float-label">
+          <input type="text" id="lastName" formControlName="lastName" required pInputText>
+          <label for="lastName">*Last Name</label>
+          <p class="p-error" *ngIf="f.lastName.hasError('required') && f.lastName.dirty"> LastName required.</p>
+      </span>
+  </div>
+
+  <div class="p-field">
+      <span class="p-float-label">
+          <input type="text" id="phoneNumber" formControlName="phoneNumber" required pInputText>
+          <label for="phoneNumber">*Phone</label>
+          <p class="p-error" *ngIf="f.phoneNumber.hasError('required') && f.phoneNumber.dirty"> Phone number required.</p>
+      </span>
+  </div>
+
+  <div *ngIf="userType == 'valuer'" class="p-field">
+    <span class="p-float-label">
+        <input type="text" id="reacNumber" formControlName="reacNumber" pInputText>
+        <label for="reacNumber">*REAC Number</label>
+        <!-- <p class="p-error" *ngIf="f.reacNumber.hasError('required') && f.reacNumber.dirty"> Reac number required.</p> -->
+    </span>
+</div>
+
+<div *ngIf="userType == 'valuer'"  class="p-field">
+    <span class="p-float-label">
+        <input type="text" id="reibNumber" formControlName="reibNumber" pInputText>
+        <label for="reibNumber">*REIB Number</label>
+        <!-- <p class="p-error" *ngIf="f.reibNumber.hasError('required') && f.reibNumber.dirty"> Phone number required.</p> -->
+    </span>
+</div>
+
+  <div class="p-field">
+      <span class="p-float-label">
+          <input type="email" id="email" (blur)="isRegistered()" aria-describedby="email-help" formControlName="email" required pInputText>
+          <label for="email">*Email</label>
+          <span id="username2-help" class="p-error" *ngIf="userExist"> Email already in use.</span>
+          <p class="p-error" *ngIf="f.email.hasError('required') && f.email.dirty"> Email required.</p>
+          <p class="p-error" *ngIf="f.email.hasError('email')">Invalid  Email format.</p>
+      </span>
+  </div>
+ 
+  <div class="p-field">
+      <span class="p-float-label">
+          <input type="password" id="password" formControlName="password" autocomplete="new-password" required pInputText>
+          <label for="password">*Password</label>
+          <p class="p-error" *ngIf="f.password.hasError('required') && f.password.dirty"> Password required.</p>
+      </span>
+  </div>
+
+  <div class="p-field">
+      <span class="p-float-label">
+          <input type="password" id="confirmPassword" formControlName="confirmPassword" autocomplete="new-password" required pInputText>
+          <label for="confirmPassword">*Confirm Password</label>
+          <p class="p-error" *ngIf="f.confirmPassword.hasError('required') && f.confirmPassword.dirty"> Confirm password required.</p>
+          <p class="p-error" *ngIf="f.confirmPassword.hasError('NoPasswordMatch') && f.confirmPassword.dirty">Passwords do not match.</p>
+      </span>
+  </div>
+
+  <div *ngIf="userType == 'valuer'" class="p-col-12 p-md-4">
+    <div class="p-field-checkbox">
+      <p-checkbox name="group2" value="accept" formControlName="professionalConfirmation" id="prof"></p-checkbox>
+      <label> Are you a registered property professional?</label>
+      <!-- <p class="p-error" *ngIf="f.termsAndConditions.hasError('required') && f.termsAndConditions.dirty"> Please read and confirm the privacy policy.</p> -->
+    </div>
+  </div>
+
+  <div class="p-col-12 p-md-4">
+    <div class="p-field-checkbox">
+      <p-checkbox name="group1" value="accept" formControlName="termsAndConditions" id="terms"></p-checkbox>
+      <label> By submiting I accept the <a (click)="openTerms()">terms and conditions {{registerForm.value.termsAndConditions}}</a></label>
+      <p class="p-error" *ngIf="f.termsAndConditions.hasError('required') && f.termsAndConditions.dirty"> Please read and confirm the privacy policy.</p>
+    </div>
+  </div>
+
+  <div class="flex align-items-center">
+    <button class="button-register" [disabled] = "!registerForm.valid"><span>Create Account</span></button>
+  </div>
+
+</form>
+
+<app-user-type-selector (selectedUserType) ="selectUser($event)"  [displayModal]="true"></app-user-type-selector>

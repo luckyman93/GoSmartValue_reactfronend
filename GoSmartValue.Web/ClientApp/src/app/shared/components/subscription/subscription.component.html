@@ -1,0 +1,31 @@
+
+<div class="card subscription">
+  <div class="grid">
+    <div class="image-section col-5">
+      <img [src]="'assets/images/promo/promo-1.jpg'" alt="Picture"/>
+    </div>
+
+    <div class="details-section col-7">
+      <p class="header" [ngClass]="classToUse">
+        <i [ngClass]="{'pi pi-star pi pi-star': classToUse == 'blue'}"></i>
+        <i [ngClass]="{'pi pi-star pi pi-star': classToUse == 'black' || classToUse == 'fasttrack' || classToUse == 'green'}"></i>
+        <i [ngClass]="{'pi pi-star pi pi-star': classToUse == 'black' || classToUse == 'fasttrack' || classToUse == 'green'}"></i>
+
+        <i [ngClass]="{'pi pi-star pi pi-star': classToUse == 'white' || classToUse == 'business' || classToUse == 'platinum'}"></i>
+        <i [ngClass]="{'pi pi-star pi pi-star': classToUse == 'white' || classToUse == 'business' || classToUse == 'platinum'}"></i>
+        <i [ngClass]="{'pi pi-star pi pi-star': classToUse == 'white' || classToUse == 'business' || classToUse == 'platinum'}"></i> {{description}}</p>
+      <p class="price">BWP {{price}} p/m</p>
+      <ul class="features">
+        <li  *ngFor="let feature of features | slice:0:5"><i class="pi pi-check-circle"></i> {{feature.title}}</li>
+        <p-button type="button" label="See All features" styleClass="p-button-link"  class="more" *ngIf="features.length > 5" (onClick)="viewAll(description,features,price)"></p-button>
+      </ul>
+    </div>
+  </div>
+
+  <div class="flex align-items-center justify-content-center center" *ngIf="isConfirm == false">
+    <button class="button-start" (click)="openConfirmationDialog()"><span>Subscribe</span></button>
+  </div>
+  <div class="flex align-items-center justify-content-center center" *ngIf="isConfirm == true">
+    <button class="button-start" (click)="getPaymentToken()"><span>Continue to checkout</span></button>
+  </div>
+</div>

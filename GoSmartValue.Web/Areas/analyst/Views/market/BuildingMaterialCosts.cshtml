@@ -1,0 +1,119 @@
+﻿@using GoSmartValue.Web.Services
+@using AV.Contracts.Enums
+@model AV.Contracts.Models.Market.ResponseModels.ImportBuildingMaterialCostsResponse
+
+@functions {
+	private IEnumerable<string> GetValidationErrors(int lineNumber)
+	{
+		return Model.ImportErrors.TryGetValue(lineNumber, out var errorMessage) ? errorMessage : null;
+	}
+
+}
+@{
+	ViewData["Title"] = "LandRates";
+	Layout = "~/Views/Shared/Layouts/_BackOffice.cshtml";
+}
+
+<div class="container-fluid image-container set-full-height" style="background-image: url(/valuationsIndex.jpg);">
+	<div class="container-fluid" style="padding-top: 80px">
+		<div class=" inner container-fluid">
+			
+			<div class="card">
+				<h3 class="p-2">Building Material Costs</h3>
+				<div class="card-header">Data Type: @Model.Header?.Type.ToString()</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-6">
+							Active from: @Model.Header?.ActiveFrom.ToString("dd-MM-yyyy")
+						</div>
+						<div class="col-6">
+							Active Until: @Model.Header?.ActiveTo?.ToString("dd-MM-yyyy")
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-6">Number of records: @Model.Data.Count()</div>
+						<div class="col-6">
+							@if (Model.ImportErrors?.Count() > 0)
+							{
+								<span class="warning-color">Validation Error Count: @Model.ImportErrors.Count() - file not imported</span>
+							}
+							else
+							{
+								<span class="success-color">File imported successfully.</span>
+							}
+						</div>
+					</div>
+
+				</div>
+				<div class="card-body">
+					<div class="tab-content text-center">
+						<div class="tab-pane active" id="location-pane">
+							<table id="locations-grid" class="table  table-hover">
+								<thead>
+									<tr>
+										<th></th>
+										<th>Material</th>
+										<th>Item</th>
+										<th>Description</th>
+										<th>Price</th>
+										<th>Validation Failures</th>
+									</tr>
+								</thead>
+								<tbody id="locations-grid-rows">
+									@if (Model != null)
+									{
+										@foreach (var material in Model.Data.Select((value, i) => new { i, value }))
+										{
+											<tr>
+												<td></td>
+												<td>@material.value.Material.ToString()</td>
+												<td>@material.value.Item</td>
+												<td>@material.value.Description</td>
+												<td>@material.value.Price.ToString("0.00")</td>
+												<td>
+													@{if (Model.ImportErrors != null)
+														{
+															var errors = GetValidationErrors(material.i);
+															if (errors != null)
+															{
+																<ul class="warning-color">
+																	@foreach (var validationError in errors)
+																	{
+																		<li>@validationError</li>
+																	}
+																</ul>
+															}
+														}
+													}
+												</td>
+											</tr>
+										}
+									}
+								</tbody>
+							</table>
+						</div>
+						<div class="tab-pane" id="settings">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	$(document).ready(function () {
+
+		$('#locations-grid').DataTable({
+			responsive: true
+		});
+
+		$('.dataTables_length').addClass('bs-select');
+
+		
+	});
+</script>
+

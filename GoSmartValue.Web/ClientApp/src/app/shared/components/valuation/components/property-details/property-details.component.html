@@ -1,0 +1,70 @@
+<p-card class="col-12">
+  <ng-template pTemplate="title">
+    <h3>Property Details</h3>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <div class="p-fluid grid flex flex-column">
+     
+        <div class="p-field col-12">
+          <span class="p-float-label">
+            <input #bedRooms="ngModel" id="bedRooms" type="number"  required pInputText  [(ngModel)]="instantValuationReportRequest.bedRooms"
+                           [ngClass]="{'ng-dirty': (bedRooms.invalid && submitted) || (bedRooms.dirty && bedRooms.invalid)}">
+            <label for="bedRooms">Number of Bedrooms</label>
+          </span>
+          <small class="p-error" *ngIf="(bedRooms.invalid && submitted) || (bedRooms.dirty && bedRooms.invalid)">Number of Bedrooms required.</small>
+        </div>
+  
+        <div class="p-field col-12">
+          <span class="p-float-label">
+            <input #Kitchens="ngModel" id="Kitchens" type="number"  required pInputText  [(ngModel)]="instantValuationReportRequest.Kitchens"
+                           [ngClass]="{'ng-dirty': (Kitchens.invalid && submitted) || (Kitchens.dirty && Kitchens.invalid)}">
+            <label for="kitchens">Number of Kitchens</label>
+          </span>
+          <small class="p-error" *ngIf="(Kitchens.invalid && submitted) || (Kitchens.dirty && Kitchens.invalid)">Number of Kitchens required.</small>
+        </div>
+
+        <div class="p-field col-12">
+          <span class="p-float-label">
+            <input #SittingRooms="ngModel" id="SittingRooms" type="number"  required pInputText  [(ngModel)]="instantValuationReportRequest.SittingRooms"
+                           [ngClass]="{'ng-dirty': (SittingRooms.invalid && submitted) || (SittingRooms.dirty && SittingRooms.invalid)}">
+            <label for="SittingRooms">Number of SittingRooms</label>
+          </span>
+          <small class="p-error" *ngIf="(SittingRooms.invalid && submitted) || (SittingRooms.dirty && SittingRooms.invalid)">Number of SittingRooms required.</small>
+        </div>
+    
+        <div class="p-field col-12">
+          <span class="p-float-label">
+            <input #bathRooms="ngModel" id="bathRooms" type="number"  required pInputText  [(ngModel)]="instantValuationReportRequest.bathRooms"
+                           [ngClass]="{'ng-dirty': (bathRooms.invalid && submitted) || (bathRooms.dirty && bathRooms.invalid)}">
+            <label for="bathRooms">Number of Bathrooms</label>
+          </span>
+          <small class="p-error" *ngIf="(bathRooms.invalid && submitted) || (bathRooms.dirty && bathRooms.invalid)">Number of Bathrooms required.</small>
+        </div>
+  
+        <div class="p-field col-12">
+          <span class="p-float-label">
+  
+            <input #toilets="ngModel" id="toilets" type="number"  required pInputText  [(ngModel)]="instantValuationReportRequest.toilets"
+                           [ngClass]="{'ng-dirty': (toilets.invalid && submitted) || (toilets.dirty && toilets.invalid)}">
+            <label for="toilets">Number of toilets</label>
+          </span>
+          <small class="p-error" *ngIf="(toilets.invalid && submitted) || (toilets.dirty && toilets.invalid)">Number of toilets required.</small>
+        </div>
+  
+        <div class="p-field col-12">
+          <span class="p-float-label">
+            <input #garages="ngModel" id="garages" type="number"  required pInputText  [(ngModel)]="instantValuationReportRequest.garages"
+                           [ngClass]="{'ng-dirty': (garages.invalid && submitted) || (garages.dirty && garages.invalid)}">
+            <label for="garages">Number of garages</label>
+          </span>
+          <small class="p-error" *ngIf="(garages.invalid && submitted) || (garages.dirty && garages.invalid)">Number of garages required.</small>
+        </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer" class="grid flex-row">
+    <div class="flex justify-content-end">
+      <button pButton type="button" (click)="previousPage()" label="Previous" icon="pi pi-angle-left" iconPos="left"></button>
+      <button pButton type="button" (click)="nextPage()" label="Next"  icon="pi pi-angle-right" iconPos="right"></button>
+    </div>
+  </ng-template>
+</p-card>

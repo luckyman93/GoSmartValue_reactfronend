@@ -1,0 +1,31 @@
+﻿@{
+	ViewData["Title"] = "Valuations";
+
+	Layout = "Layouts/_CorporateLayout";
+}
+
+<div class="col-sm-12" style="		background-image: url(/reports.jpg);background-size: cover;height: 100vh">
+	<div class="row col-sm-12" style="padding-top:88px;padding-left:100px">
+		<div class="col-sm-6">
+			<div class="row col-sm-12">
+				<a asp-controller="Corporate" asp-action="Instruct" style="font-size: 20px;color: #1a237e;font-family:'Segoe UI';text-decoration:none"><i class="fa fa-chevron-right" style="text-decoration:none"></i><span> Issue Instruction</span></a>
+			</div>
+			<div class="row col-sm-12">
+				<a asp-controller="Corporate" asp-action="CompleteInstructions" style="font-size: 20px;color:#1a237e;font-family:'Segoe UI';text-decoration:none"><i class="fa fa-chevron-right" style="font-size: 25px;text-decoration: none"></i><span> Completed Instruction</span></a>
+			</div>
+			<div class="row col-sm-12">
+				<a asp-controller="Corporate" asp-action="PendingInstruction" style="font-size: 20px;color:#1a237e;font-family:'Segoe UI';text-decoration:none"><i class="fa fa-chevron-right" style="font-size: 25px; text-decoration: none"></i><span> Pending Instruction</span></a>
+			</div>
+			<div class="row col-sm-12">
+				<a asp-controller="Corporate" asp-action="RejectedInstructions" style="font-size: 20px;color:#1a237e;font-family:'Segoe UI';text-decoration:none"><i class="fa fa-chevron-right" style="font-size: 25px; text-decoration: none"></i><span> Rejected Instruction</span></a>
+			</div>
+			<div class="row col-sm-12">
+				<a asp-controller="Corporate" asp-action="InstantValuation" style="font-size: 20px;color:#1a237e;font-family:'Segoe UI';text-decoration:none"><i class="fa fa-chevron-right" style="font-size: 25px; text-decoration: none"></i><span> Instant Valuation</span></a>
+			</div>
+		</div>
+		<div class="col-sm-6">
+
+		</div>
+	</div>
+</div>
+

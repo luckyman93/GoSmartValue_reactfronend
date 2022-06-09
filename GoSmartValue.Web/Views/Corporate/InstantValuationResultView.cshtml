@@ -1,0 +1,153 @@
+﻿@using GoSmartValue.Web.Controllers
+@using GoSmartValue.Web.Services
+
+@model List<AV.Contracts.Models.Valuation.ComparableResultViewModel>
+@inject CachedStorageService CachedStorageService
+
+@{
+    ViewData["Title"] = "";
+
+    Layout = "Layouts/_CorporateLayout";
+
+    var model = Model;
+
+    SelectList locations = new SelectList(
+        CachedStorageService.Cities
+            .Select(c =>
+                new SelectListItem {Text = c.Value, Value = c.Key.ToString(), Selected = c.Key == 33})
+        , "Value", "Text", "-");
+
+    var localities = new List<SelectListItem>();
+
+    var streets = new List<SelectListItem>();
+
+}
+
+<script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.0/dist/latest/bootstrap-autocomplete.min.js"></script>
+
+<div class="outer container-fluid image-container set-full-height" style="background-image: url(/valuationsIndex.jpg);">
+    <div class="middle container-fluid" style="padding-top: 75px">
+        <div class=" inner container-fluid" style="min-height: 500px; margin: auto; max-height: 100%;">
+            <form method="post" asp-controller="Document" asp-action="ExportToExcel">
+                <div class="card shadow col-md-12 container-fluid" style="background-color: #ffffff; height: 100%;">
+                    <div class="p-2">
+                        <a asp-action="InstantValuation" asp-controller="Corporate">Back</a>
+                    </div>
+					<div style="float:right">
+						@*<input type="submit" name="btnExport" class="btn btn-blue" id="btnExport" value="Export" />*@
+						<button type="submit" name="btnExport" class="btn btn-blue" id="btnExport" value="Export"><span class="material-icons">save_alt</span> Download File</button>
+					</div>
+                    <div class="col-sm-12 text-center">
+                        <h2>Comparable results</h2>
+                    </div>
+
+                    <div class="p-2">
+                        @foreach (var comparableResult in Model)
+                        {
+                            <div class="border border-danger" style="margin-bottom: 20px; padding: 15px">
+                                @if (@comparableResult.EstimatedValue <= 0.00)
+                                {
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label style="color: #000">Plot No: @comparableResult.ComparableRequest?.PlotNo</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label style="color: #000">Size: @comparableResult.ComparableRequest?.Size</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label style="color: #000">Location: @comparableResult.ComparableRequest?.LocationName</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label style="color: #000">Locality: @comparableResult.ComparableRequest?.LocalityName</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p>
+                                            The system could not find enough comparables to generate an estimate,please instruct a
+                                            valuer to get a detailed valuation.
+                                        </p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <h5 style="color: #000">Estimate(BWP): @comparableResult.EstimatedValue.ToString("0.00")</h5>
+                                        </div>
+                                        <div class="col-sm-6"></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label style="color: #000">Plot No: @comparableResult.ComparableRequest?.PlotNo</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label style="color: #000">Size: @comparableResult.ComparableRequest?.Size</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label style="color: #000">Location: @comparableResult.ComparableRequest?.LocationName</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label style="color: #000">Locality: @comparableResult.ComparableRequest?.LocalityName</label>
+                                        </div>
+                                    </div>
+                                    <div class="row col-sm-12">
+                                        <h6>3 Comparables used:</h6>
+                                        <table class="table table-hover table-sm">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Plot</th>
+                                                <th scope="col">Value</th>
+                                                <th scope="col">Date of Sale</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach (var comparable in comparableResult.Comparables)
+                                            {
+                                                <tr>
+                                                    <td>@comparable.PlotNo</td>
+                                                    <td>@comparable.SalePrice.ToString("0.00")</td>
+                                                    <td>@comparable.DateOfSale?.ToString("dd/MM/yyyy")</td>
+                                                </tr>}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        @{ int count = 0; }
+
+                        @foreach (var result in DocumentController.ConvertToExcelRows(Model))
+                        {
+                            <input type="hidden" name="[@count].Development" value="@result.Development" />
+                            <input type="hidden" name="[@count].PlotSize" value="@result.PlotSize" />
+                            <input type="hidden" name="[@count].PlotNo" value="@result.PlotNo" />
+                            <input type="hidden" name="[@count].Location" value="@result.Location" />
+                            <input type="hidden" name="[@count].Locality" value="@result.Locality" />
+                            <input type="hidden" name="[@count].Estimate" value="@result.Estimate" />
+                            <input type="hidden" name="[@count].Comp1" value="@result.Comp1" />
+                            <input type="hidden" name="[@count].Comp2" value="@result.Comp2" />
+                            <input type="hidden" name="[@count].Comp3" value="@result.Comp3" />
+
+                            count++;
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+   // $(document).ready(function() {
+   //     $('#btnExport').click(function(e) {
+   //         console.log('export clicked');
+   //         var data = JSON.stringify($('results').toArray());
+			//console.log(data);
+   //     });
+
+   // });
+</script>

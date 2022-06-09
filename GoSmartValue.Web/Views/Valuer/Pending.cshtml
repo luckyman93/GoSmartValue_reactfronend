@@ -1,0 +1,84 @@
+﻿@using GoSmartValue.Web.Services
+@model IEnumerable<AV.Contracts.Models.Valuation.InstructionModel>
+@inject CachedStorageService CachedStorage
+@{
+    ViewData["Title"] = "Pending Instruction";
+
+    Layout = "Layouts/_ValuerLayout";
+}
+
+<div class="outer container-fluid image-container set-full-height" style="background-image:url(/valuationsIndex.jpg);">
+    <div class="middle container-fluid" style="padding-top:80px">
+        <div class=" inner container-fluid" >
+            <div class="shadow col-md-12 container-fluid">
+                    <div style="padding:0;width:100%;padding:10px">
+                        <table id="instructions" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">From</th>
+                                    <th scope="col">Client Name</th>
+                                    <th scope="col">Client Number</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Ward/Locality</th>
+                                    <th scope="col">Plot Number</th>
+                                    <th scope="col">Access Name</th>
+                                    <th scope="col">Access Number</th>
+                                    <th scope="col">Preferred Access Date</th>
+                                    <th scope="col">Preferred Access time</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var instruction in Model.OrderByDescending(i => i.CreatedDate))
+                                {
+                                    {
+                                        var localityName = instruction.LocalityId.HasValue ? CachedStorage.GetLocalityName(instruction.LocalityId.Value) : null;
+                                <tr>
+                                    <th scope="row">@instruction.Issuer.FirstName @instruction.Issuer.LastName</th>
+                                    <td>@instruction.ClientName</td>
+                                    <td>@instruction.ClientMobileNumber</td>
+                                    <td>@await CachedStorage.GetLocationName(instruction.LocationId)</td>
+                                    <td>@localityName?.Result</td>
+                                    <td>@instruction.PlotNumber</td>
+                                    <td>@instruction.AccessContactName</td>
+                                    <td>@instruction.AccessContactMobileNumber</td>
+                                    <td>@instruction.PreferredAccessDate?.ToString("d")</td>
+                                    <td>@instruction.PreferredAccessDate?.ToString("t")</td>
+                                    <td>
+                                        <div>
+                                            @if (!instruction.ValuationId.HasValue)
+                                            {
+                                                <a asp-controller="Valuer" asp-action="Value" asp-route-id="@instruction.Id" class="col-sm-2" style="color: #000"><i title="Process" class="fa fa-share"></i></a>
+                                            }
+
+                                            @if (instruction.SupportingDocuments.Any())
+                                            {
+                                                @foreach (var item in instruction.SupportingDocuments)
+                                                {
+                                                    <a asp-controller="Document" asp-action="DownloadByInstruction" asp-route-instructionId="@instruction.Id"
+                                                       target="_blank" class="col-sm-2" style="color: #000">
+                                                        <i title="download" class="fa fa-file-download"></i>
+                                                    </a>
+												}
+											}
+                                            </div>
+                                    </td>
+                                </tr>
+									}
+								}
+                            </tbody>
+                        </table>
+                    </div>
+              
+                </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#instructions').DataTable({
+            responsive: true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

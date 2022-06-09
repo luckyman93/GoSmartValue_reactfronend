@@ -1,0 +1,52 @@
+﻿ <!-- Logged In Menu Bar -->
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            @*<li class="nav-item dropdown mr-auto active">
+                <a href="#organisationsMenuItems" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle">
+                    <i class="fa fa-building"></i>
+                    My Organisation
+                </a>
+                @await Component.InvokeAsync("OrganisationMenu")
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="myOrganisations" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-school"></i>
+                        My Valuations
+                    </a>
+                    @await Component.InvokeAsync("UserValuationsMenu")
+                </div>
+            </li>*@
+            @if (Context.User.IsInRole("analyst") || Context.User.IsInRole("admin"))
+            {
+                <li class="nav-item">
+                    <a href="#analystsMenuItems" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle">
+                        <i class="fas fa-school"></i>
+                        Analyst
+                    </a>
+
+                    @await Component.InvokeAsync("AnalystMenu")
+                </li>
+            }
+            @if (Context.User.IsInRole("admin"))
+            {
+                <li class="nav-item">
+                    <a href="#systemAdminMenuItems" data-toggle="collapse" aria-expanded="false" class=" nav-linkdropdown-toggle">
+                        <i class="fas fa-school"></i>
+                        System Admin
+                    </a>
+                    @await Component.InvokeAsync("SystemAdminMenu")
+                </li>
+            }
+        </ul>
+    </div>
+
+ <script>
+    $(document).ready(function() {
+
+        $('#sidebarCollapse').on('click',
+            function() {
+                $('#sidebar').toggleClass('active');
+            });
+
+    });
+</script>

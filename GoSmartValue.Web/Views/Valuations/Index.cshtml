@@ -1,0 +1,77 @@
+﻿@model System.Collections.Generic.ICollection<AV.Contracts.Models.Valuation.PropertySaleViewModel>
+
+@{
+    Layout = "_Layout";
+}
+
+<h3>Valuations</h3>
+<form>
+    <table id="valuations" class="table table-striped table-hover dataTable no-footer" style="width:100%">
+        <thead>
+        <tr>
+            <th>Action</th>
+            <th>Requested On</th>
+            <th>DataState</th>
+            <th>Sold On</th>
+            <th>Price Sold (Pula)</th>
+            <th>City</th>
+            <th>Ward</th>
+            <th>Street</th>
+            <th>PlotNo</th>
+            <th>PlotSize</th>
+            <th>LandUse</th>
+            <th>PropertyType</th>
+            <th>BandClass</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @if (Model.Any())
+        {
+            @foreach (var valuation in Model)
+            {
+                <tr>
+                    <th>
+                        <a class="btn btn-primary" style="width: auto"
+                           asp-area="analyst" asp-controller="Valuations" asp-action="PropertyDetailEdit" asp-route-id="@valuation.Id">View</a>
+                    </th>
+                    <th>@valuation.AddedOn.ToString("dd/mm/yyyy")</th>
+                    <th>@valuation.DataState</th>
+                    <th>@valuation.DateOfSale.ToString("dd/mm/yyyy")</th>
+                    <th>@string.Format("{0}", valuation.SalePrice)</th>
+                    <th>@valuation.LocationId</th>
+                    <th>@valuation.LocalityId</th>
+                    <th>@valuation.StreetName</th>
+                    <th>@valuation.PlotNo</th>
+                    <th>@valuation.PlotSize</th>
+                    <th>@valuation.LandUse</th>
+                    <th>@valuation.PropertyType</th>
+                    <th>@valuation?.BandClass?.BandName</th>
+                </tr>
+            }  
+        }
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>Action</th>
+            <th>Requested On</th>
+            <th>DataState</th>
+            <th>Sold On</th>
+            <th>Price Sold (Pula)</th>
+            <th>City</th>
+            <th>Ward</th>
+            <th>Street</th>
+            <th>PlotNo</th>
+            <th>PlotSize</th>
+            <th>LandUse</th>
+            <th>PropertyType</th>
+            <th>BandClass</th>
+        </tr>
+        </tfoot>
+    </table>
+</form>
+<script>
+    $(document).ready( function () {
+        $('#valuations').DataTable();
+    } );
+</script>

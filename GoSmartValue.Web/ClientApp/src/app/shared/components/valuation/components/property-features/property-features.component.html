@@ -1,0 +1,25 @@
+<p-card class="col-12">
+  <ng-template pTemplate="title">
+    <h3>Property Features</h3>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    <div class="p-grid grid flex flex-column">
+      <div class="grid row">
+        <div class="xl:col-4 lg:col-6 md:col-12 sm:col-12 xs:col-12" *ngFor="let feature of instantValuationReportRequest.features">
+          <div class="p-field-checkbox">
+            <input name="group1" type="checkbox" value="true" [(ngModel)]="feature.isSelected" id="feature">
+            <label for="feature"> {{feature.name}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-end">
+      <button pButton type="button" (click)="previousPage()" label="Previous" icon="pi pi-angle-left" iconPos="left"></button>
+      <button pButton type="button" (click)="nextPage()" label="Next"  icon="pi pi-angle-right" iconPos="right"></button>
+    </div>
+  </ng-template>
+</p-card>

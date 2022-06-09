@@ -1,0 +1,72 @@
+﻿@model AV.Contracts.Models.Market.ResponseModels.ImportBuildingCostsResponse
+
+@{
+	ViewData["Title"] = "Building Costs";
+	Layout = "~/Views/Shared/Layouts/_BackOffice.cshtml";
+}
+
+<div class="container-fluid image-container set-full-height" style="background-image: url(/valuationsIndex.jpg);">
+	<div class="container-fluid" style="padding-top: 80px">
+		<div class=" inner container-fluid">
+			@*<form asp-controller="Market" asp-action="ImportBuildingCosts">*@
+			<div class="card">
+				<h1>Building Costs</h1>
+				<div>
+					@Html.ActionLink("Import Building Costs", "BuildingCostsImport", "Market", null, new { @class = "btn btn-blue" })
+				</div>
+				<div class="card-body">
+					<table class="table  table-hover">
+						<thead>
+							<tr>
+								<th>Property Type</th>
+								<th>Rate</th>
+								<th>Standard Size</th>
+								<th>Metric</th>
+							</tr>
+						</thead>
+						<tbody>
+							@if (Model != null)
+							{
+								@foreach (var buildingRate in Model.Data)
+								{
+									<tr>
+										<td>@buildingRate.PropertyType</td>
+										<td>@buildingRate.Rate?.ToString("0.00")</td>
+									
+										<td>@buildingRate.StandardSize?.ToString("0.00")</td>
+										<td>
+											@buildingRate.Metric
+										</td>
+									</tr>
+							}
+							}
+							</tbody>
+					</table>
+				</div>
+
+			</div>
+			@*</form>*@
+		</div>
+		<div>
+		</div>
+	</div>
+</div>
+
+<div>
+
+</div>
+
+
+<script>
+	$(document).ready(function () {
+
+		$('#locations-grid').DataTable({
+			responsive: true
+		});
+
+		$('.dataTables_length').addClass('bs-select');
+
+
+	});
+
+</script>

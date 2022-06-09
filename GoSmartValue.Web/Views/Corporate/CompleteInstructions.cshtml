@@ -1,0 +1,75 @@
+﻿@using GoSmartValue.Web.Services
+@model IEnumerable<AV.Contracts.Models.Valuation.InstructionModel>
+@inject CachedStorageService CachedStorage
+@{
+    ViewData["Title"] = "Complete Instructions";
+
+    Layout = "Layouts/_CorporateLayout";
+}
+
+<div class="outer container-fluid image-container set-full-height" style="background-image:url(/valuationsIndex.jpg);">
+    <div class="middle container-fluid" style="padding-top:75px">
+        <div class=" inner container-fluid" >
+
+            <div class="shadow col-md-12 container-fluid">
+                <div class="container-fluid" style="padding:10px">
+                    <div style="padding:0;width:100%">
+                        <table id="instructions" class="table  table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Valuer</th>
+                                    <th>Client Name</th>
+                                    <th>City</th>
+                                    <th>Ward</th>
+                                    <th>Plot Number</th>
+                                    <th>Valuation Date</th>
+                                    <th>Value(BWP)</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var instruction in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@instruction.Valuer.FirstName @instruction.Valuer.LastName</th>
+                                    <td>@instruction.ClientName</td>
+                                    <td>@instruction.Location?.Name</td>
+                                    <td>@instruction.Locality?.Name</td>
+                                    <td>@instruction.PlotNumber</td>
+                                    <td>
+                                        @if (instruction.Valuation.ValuationDate.HasValue)
+                                        {
+                                            @instruction.Valuation.ValuationDate.Value.ToString("d")
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (instruction.Valuation.Value.HasValue)
+                                        {
+                                            @instruction.Valuation.Value.Value.ToString("0.00")
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-controller="Document"
+                                           asp-action="ValuationReport"
+                                           asp-route-id="@instruction.ValuationId" target="_blank">View Report</a>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+         $('#instructions').DataTable({
+            responsive: true
+		});
+        $('.dataTables_length').addClass('bs-select');
+
+    });
+</script>

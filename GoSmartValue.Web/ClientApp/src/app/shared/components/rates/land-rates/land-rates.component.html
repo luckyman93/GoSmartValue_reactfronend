@@ -1,0 +1,59 @@
+<div class="card">
+    <h2 class="section-title">Land Rates</h2>
+    <p>Description of the data here.</p>
+    <p-table #LocationTable [value]="landRates" sortField="location.name" sortMode="single" dataKey="location.name"
+        rowGroupMode="subheader" groupRowsBy="location.name" [rows]="100" [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"  styleClass="p-datatable-gridlines"
+        currentPageReportTemplate="{first} to {last} of {totalRecords}"
+        [globalFilterFields]="['location.name','locality.name']" scrollHeight="40rem"
+        [virtualScroll]="true" [virtualRowHeight]="40" [scrollable]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="LocationTable.filterGlobal($any($event.target).value, 'contains')" placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Location</th>
+                <th>Locality</th>
+                <th>Low Income</th>
+                <th>Medium Income</th>
+                <th>High Income</th>
+                <th>Average Price</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="groupheader" let-locality let-rowIndex="rowIndex" let-expanded="expanded">
+            <tr>
+                <td colspan="6">
+                    <button type="button" pButton pRipple [pRowToggler]="locality" class="p-button-text p-button-rounded p-button-plain p-mr-2 rowHeader" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                    <span class="p-text-bold p-ml-2">{{locality.location? locality.location.name : "Other"}}</span>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-landRate>
+            <tr>
+                <td>
+                    {{ landRate.location? landRate.location.name : "N/A" }}
+                </td>
+                <td>
+                    {{ landRate.locality ? landRate.locality.name : "N/A" }}
+                </td>
+                <td>
+                    {{ landRate.lowIncome | currency :'P':'symbol':'1.2-2' }}
+                </td>
+                <td>
+                    {{ landRate.middleIncome | currency :'P':'symbol':'1.2-2' }}
+                </td>
+                <td>
+                    {{ landRate.highIncome | currency :'P':'symbol':'1.2-2' }}
+                </td>
+                <td>
+                    {{ landRate.averagePrice  | currency :'P':'symbol':'1.2-2'}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

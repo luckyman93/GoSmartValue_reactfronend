@@ -1,0 +1,70 @@
+﻿@model AV.Contracts.Models.Market.ResponseModels.ImportBuildingCostsResponse
+
+@{
+    ViewData["Title"] = "Building Costs";
+    Layout = "Layouts/_CorporateLayout";
+}
+
+<div class="container-fluid image-container set-full-height" style="background-image: url(/valuationsIndex.jpg);">
+    <div class="container-fluid" style="padding-top: 80px">
+        <div class=" inner container-fluid">
+
+            <div class="card">
+
+                <div class="card-body">
+                    <h1>Building Costs</h1>
+
+                    <table id="buildingCosts" class="table  table-hover">
+                        <thead>
+                            <tr>
+                                <th>Property Type</th>
+                                <th>Rate</th>
+                                <th>Standard Size</th>
+                                <th>Metric</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                @foreach (var buildingRate in Model.Data)
+                                {
+                                    <tr>
+                                        <td>@buildingRate.PropertyType</td>
+                                        <td>@buildingRate.Rate?.ToString("0.00")</td>
+
+                                        <td>@buildingRate.StandardSize?.ToString("0.00")</td>
+                                        <td>
+                                            @buildingRate.Metric
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+					<p style="font-style:italic">generated through www.gosmartvalue.com</p>
+                </div>
+
+            </div>
+
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+
+<div>
+
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+		$('#buildingCosts').DataTable({
+			responsive: true
+		});
+		$('.dataTables_length').addClass('bs-select');
+	});
+
+</script>

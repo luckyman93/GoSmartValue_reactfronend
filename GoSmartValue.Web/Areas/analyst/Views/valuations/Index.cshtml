@@ -1,0 +1,101 @@
+﻿@using GoSmartValue.Web.Services
+@model System.Collections.Generic.ICollection<AV.Contracts.Models.Valuation.ComparableViewModel>
+@inject CachedStorageService CachedStorageService
+
+@{
+    Layout = "_Layout";
+}
+<div class="container h-100">
+    <div class="row my-auto" style="height: 100%">
+        <form class="form">
+            <table id="valuations" class="table-responsive table-striped bg-light table-hover dataTable no-footer">
+                <thead>
+                    <tr>
+                        <th scope="col">Action</th>
+                        <th scope="col">Requested On</th>
+                        <th scope="col">DataState</th>
+                        <th scope="col">Sold On</th>
+                        <th scope="col">Price Sold (Pula)</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Ward</th>
+                        <th scope="col">Street</th>
+                        <th scope="col">PlotNo</th>
+                        <th scope="col">PlotSize</th>
+                        <th scope="col">LandUse</th>
+                        <th scope="col">PropertyType</th>
+                        <th scope="col">BandClass</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @if (Model.Any())
+                    {
+                        @foreach (var valuation in Model)
+                        {
+                            <tr>
+                                <th scope="row">
+
+                                    <a class="d-inline-block" style="width: auto"
+                                       asp-area="analyst" asp-controller="Valuations" asp-action="PropertyDetailView" asp-route-id="@valuation.Id">
+                                        <i class="fa fa-eye"></i>
+                                    </a> | 
+                                    <a class="d-inline-block"
+                                       asp-area="analyst" asp-controller="Valuations"
+                                       asp-action="PropertyDetailEdit" asp-route-id="@valuation.Id">
+                                        <i class="fa fa-pencil-alt"></i>
+                                    </a>
+                                </th>
+                                <th>@Html.DisplayFor(m => valuation.AddedOn)</th>
+                                <th>@valuation.DataState</th>
+                                <th>@Html.DisplayFor(m => valuation.DateOfSale)</th>
+                                <th>@Html.DisplayFor(m => valuation.SalePrice)</th>
+                                <th>
+                                    @if (CachedStorageService.Cities.ContainsKey(@valuation.LocationId))
+                                    {
+                                        @CachedStorageService.Cities[@valuation.LocationId]
+                                    }
+                                </th>
+                                <th>
+                                    @if (@valuation.LocalityId != null && CachedStorageService.Localities.ContainsKey(@valuation.LocalityId.Value))
+                                    {
+                                        @CachedStorageService.Localities[@valuation.LocalityId.Value]
+                                    }
+                                </th>
+                                <th>@Html.DisplayFor(m => valuation.StreetName)</th>
+                                <th>@Html.DisplayFor(m => valuation.PlotNo)</th>
+                                <th>@Html.DisplayFor(m => valuation.PlotSize)</th>
+                                <th>@Html.DisplayFor(m => valuation.LandUse)</th>
+                                <th>@Html.DisplayFor(m => valuation.PropertyType)</th>
+                                <th>
+                                    @Html.DisplayFor(m =>  valuation.BandClass.BandName)
+                                </th>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Action</th>
+                        <th>Requested On</th>
+                        <th>DataState</th>
+                        <th>Sold On</th>
+                        <th>Price Sold (Pula)</th>
+                        <th>City</th>
+                        <th>Ward</th>
+                        <th>Street</th>
+                        <th>PlotNo</th>
+                        <th>PlotSize</th>
+                        <th>LandUse</th>
+                        <th>PropertyType</th>
+                        <th>BandClass</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready( function () {
+        $('#valuations').DataTable();
+    } );
+</script>

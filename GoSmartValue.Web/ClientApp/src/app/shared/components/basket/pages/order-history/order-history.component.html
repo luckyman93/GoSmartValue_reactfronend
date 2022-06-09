@@ -1,0 +1,29 @@
+<div class="panel">
+    <p-panel>
+        <p-header>
+            <h1>Order History</h1>
+        </p-header>
+        <div class="order" *ngFor="let basket of allBaskets">
+            <p-accordion>
+                <p-accordionTab>
+                    <ng-template pTemplate="header">
+                        <div class="accordion-header grid">
+                            <div class="xl:col-8 lg:col-10 md:col-6 sm:col-6 xs:col-6">
+                                <h3>OrderNo: {{basket.orderNo}}</h3>
+                            </div>
+                            <div class="xl:col-4 lg:col-2 md:col-6 sm:col-6 xs:col-6">
+                                <span class="date-span">Date: <span>{{basket.confirmedOn  | date: 'mediumDate'}}</span></span>
+                                <span class="status-label-span">Status: <span class="status">{{basket.status.name | titlecase}}</span></span>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="content">
+                        <div class="order-items lg:col-12 md:col-12 sm-col-12">
+                            <app-order [basket]="basket" ></app-order>
+                          </div>
+                    </ng-template>
+                </p-accordionTab>
+            </p-accordion>
+        </div>
+    </p-panel>
+</div>

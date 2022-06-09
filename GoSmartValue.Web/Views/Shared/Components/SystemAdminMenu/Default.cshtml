@@ -1,0 +1,25 @@
+﻿@if (Context.User.IsInRole("admin"))
+{
+    <ul class="collapse list-unstyled" id="systemAdminMenuItems">
+        <li>
+            <a class="dropdown-item" asp-area="admin" asp-controller="Administration" asp-action="ListRoles">
+                All Users
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-area="admin" asp-controller="UserManager" asp-action="Employees">
+                All Employees
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-area="admin" asp-controller="UserManager" asp-action="Create">
+                Add New Employee
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-area="admin" asp-controller="Administration" asp-action="ListRoles">
+                All UserRoless
+            </a>
+        </li>
+    </ul>
+}

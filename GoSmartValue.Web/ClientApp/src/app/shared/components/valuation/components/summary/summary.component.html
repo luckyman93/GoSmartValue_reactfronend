@@ -1,0 +1,43 @@
+<p-card class="col-12">
+  <ng-template pTemplate="title">
+    <h3>Summary</h3>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    <div class="grid">
+      <div class="xl:col-4 lg:col-4 sm:col-12 xs:col-12">
+        <h4 class="summary-title">General</h4>
+        <app-heading-description [heading]="'City'" [description]="instantValuationReportRequest.location.name"></app-heading-description>
+        <app-heading-description [heading]="'Ward'" [description]="instantValuationReportRequest.locality.name" *ngIf="instantValuationReportRequest.locality.name != ''"></app-heading-description>
+        <app-heading-description [heading]="'Street'" [description]="instantValuationReportRequest.streetName"></app-heading-description>
+        <app-heading-description [heading]="'Plot'" [description]="instantValuationReportRequest.plotNo"></app-heading-description>
+        <app-heading-description [heading]="'Size'" [description]="instantValuationReportRequest.plotSize.toString()"></app-heading-description>
+      </div>
+
+      <div class="xl:col-4 lg:col-4 sm:col-12 xs:col-12">
+        <h4 class="summary-title">Additional</h4>
+        <p>Bedroom {{instantValuationReportRequest.bedRooms}}</p>
+        <p>Sittingroom {{instantValuationReportRequest.SittingRooms}}</p>
+        <p>Kitchen {{instantValuationReportRequest.Kitchens}}</p>
+        <p>Bathroom {{instantValuationReportRequest.bathRooms}}</p>
+        <p>Toilets {{instantValuationReportRequest.toilets}}</p>
+        <p>Garage {{instantValuationReportRequest.garages}}</p>
+      </div>
+
+      <div class="xl:col-4 lg:col-4 sm:col-12 xs:col-12">
+        <h4 class="summary-title">Extra</h4>
+        <div *ngFor="let feature of instantValuationReportRequest.features">
+          <p *ngIf="feature.isSelected"><i class="pi pi-check-circle"></i> {{feature.name}}</p>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+
+    <div class="flex justify-content-end">
+      <button pButton type="button" (click)="edit()" label="Edit" icon="pi pi-angle-left" iconPos="left"></button>
+      <button pButton type="button" (click)="checkout()" label="Proceed to checkout"  icon="pi pi-angle-right" iconPos="right"></button>
+    </div>
+  </ng-template>
+</p-card>

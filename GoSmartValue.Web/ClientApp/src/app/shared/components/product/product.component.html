@@ -1,0 +1,24 @@
+
+<div class="card product">
+  <div class="grid">
+    <div class="header col-12">
+      <h3>{{product.name}}</h3>
+      <div class="flex justify-content-end">
+        <span class="price">BWP {{product.price}}</span>
+      </div>
+    </div>
+
+    <div>
+      <p class="description text-justify">
+        {{product.description}}
+      </p>
+    </div>
+
+    <div class="action-buttons flex justify-content-end">
+      <button class="button-sample" (click)="showSample(product.sample)">View Sample</button>
+      <button class="button-basket" (click)="openOrderDialog()">Purchase</button>
+    </div>
+  </div>
+
+</div>
+<app-report-sample [displayReport]="displayReport" [sampleUrl]="'assets\\report-samples\\'+product.sampleUrl" [reportType]="product.name"></app-report-sample>

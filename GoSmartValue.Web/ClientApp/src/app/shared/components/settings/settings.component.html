@@ -1,0 +1,16 @@
+<div class="grid">
+  <div class="card setting-menu xl:col-3 lg:col-3">
+    <p><a routerLink="/settings"><i class="pi pi-user"></i> Basic Information</a></p>
+    <p><a routerLink="/settings"><i class="pi pi-money-bill"></i> Billing</a></p>
+  </div>
+  <div class="card xl:col-9 lg:col-9">
+
+    <router-outlet name="details">
+      <app-profile-view></app-profile-view>
+    </router-outlet>
+
+    <router-outlet name="edit">
+      <app-profile-edit></app-profile-edit>
+    </router-outlet>
+  </div>
+</div>

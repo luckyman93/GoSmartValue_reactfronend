@@ -1,0 +1,46 @@
+﻿@model AV.Contracts.Models.Payment.Requests.MakePaymentRequest
+@{
+    ViewData["Title"] = "Complete Payment";
+
+    Layout = "_Layout";
+}
+
+<div class="outer container-fluid image-container set-full-height" style="background-image:url(/pay.jpg);background-size:cover;height:100vh">
+    <div class="middle container-fluid" style="padding-top:80px">
+        <div class=" inner container-fluid">
+            <div class="card shadow col-md-8 offset-md-2 container-fluid" style="background-color: #ffffff;">
+                <div style="padding:0;width:100%;padding:10px">
+					<form method="post" enctype="multipart/form-data" asp-controller="Payment" asp-action="MakePayment">
+						<div class=" col-sm-12 text-center">
+							<h3>Payment Confirmation</h3>
+						</div>
+						<div class="col-sm-12" style="color:#000">
+							<div class=" col-sm-12 text-center">
+								<p>Reference number: <strong> @Model.Reference</strong></p>
+								<p class="pt-5">You are about to pay <strong>@Model.Currency @Model.Amount.ToString("0,00.00")</strong> for a @Model.ServiceName service</p>
+
+							</div>
+							<div>
+								<p class="p-4"><img src="~/backgroundImages/Visa.jpg" height="30" /></p>
+							</div>
+						</div>
+						
+						<div class="col-sm-12 text-right">
+							<button type="submit" class="btn btn-blue text-right">Continue</button>
+						</div>
+
+						<input type="hidden" name="Reference" value="@Model.Reference" />
+						<input type="hidden" name="Amount" value="@Model.Amount" />
+						<input type="hidden" name="Currency" value="@Model.Currency" />
+						<input type="hidden" name="Type" value="@Model.Type" />
+						<input type="hidden" name="AccountId" value="@Model.AccountId" />
+						<input type="hidden" name="InitiatedByUserId" value="@Model.InitiatedByUserId" />
+						<input type="hidden" name="ServiceName" value="@Model.ServiceName" />
+						<input type="hidden" name="ServiceType" value="@Model.ServiceType" />
+					</form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

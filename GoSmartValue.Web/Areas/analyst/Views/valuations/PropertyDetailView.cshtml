@@ -1,0 +1,331 @@
+﻿@model AV.Contracts.Models.Valuation.ComparableViewModel
+
+@{
+    Layout = "_Layout";
+}
+<script src="~/js/bootstrap-select.js"></script>
+<div class="row mb-3">
+<div class="col-md-12 align-content-center">
+<form method="post">
+<fieldset>
+    <div class="card-title">
+        <div style="text-align: center;">
+            <h1>Transaction Entry</h1>
+        </div>
+    </div>
+</fieldset>
+<fieldset class="border p-2">
+<legend class="w-auto">Details</legend>
+<div class="row">
+    <div class="form-group col-sm-2">
+        <label>Data State</label>
+    </div>
+    <div class="form-group col-sm-10">
+        <input value="@Model?.DataState" readonly="readonly" class="form-control"/>
+    </div>
+</div>
+<div class="form-row">
+
+<div id="propertyDetails" class="col-sm-6">
+    <div class="card-header">
+        <h5 class="mb-0">
+            <a href="#" class="btn btn-link" data-toggle="collapse" data-target="#collapsePropertyDetail" aria-expanded="true" aria-controls="collapsePropertyDetail">
+                <i class="fa fa-folder-plus"></i>Property Details
+            </a>
+        </h5>
+    </div>
+    <fieldset class="border p-2 collapse show" id="collapsePropertyDetail" aria-labelledby="headingOne" data-parent="#propertyDetails">
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label asp-for="LandUse">Primary Use</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.LandUse" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label asp-for="PropertyType">Development</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.PropertyType" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label asp-for="Metric">Units/Metric</label>
+            </div>
+            <div class="form-group col-sm-4">
+                <input value="@Model?.Metric" readonly="readonly" class="form-control" />
+            </div>
+            <div class="form-group col-sm-1">
+                <label asp-for="PlotSize">Size</label>
+            </div>
+            <div class="form-group col-sm-4">
+                @Html.DisplayFor(m => m.PlotSize, new {@readonly="readonly", @class = "form-control"})
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label asp-for="Location.Name">City</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.Location.Name" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Ward</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.Locality.Name" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Street Name</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.StreetName" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Plot No</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.PlotNo" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Latitude</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.Latitude" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Longitude</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.Longitude" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+    </fieldset>
+</div>
+<div id="transactionInformation" class="col-sm-6">
+    <div class="card-header" id="transactionInformationHeader">
+        <h5 class="mb-0">
+            <a href="#" class="btn btn-link" data-toggle="collapse" data-target="#collapseTransactionInformation" aria-expanded="true" aria-controls="collapseTransactionInformation">
+                <i class="fa fa-folder-plus"></i>Transaction information
+            </a>
+        </h5>
+    </div>
+    <fieldset class="border p-2 collapse show" id="collapseTransactionInformation" aria-labelledby="headingOne" data-parent="#transactionInformation">
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Transaction Date</label>
+            </div>
+            <div class="form-group col-sm-9">
+                @Html.DisplayFor(m => m.DateOfSale, new { @class = "form-control", @readonly="readonly"})
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label asp-for="TransactionType">Transaction Type</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.TransactionType" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Value of transaction/Price</label>
+            </div>
+            <div class="form-group col-sm-9">
+                @Html.DisplayFor(m => m.SalePrice, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Bond Amount</label>
+            </div>
+            <div class="form-group col-sm-9">
+                @Html.DisplayFor(m => m.BondAmount, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Bank Name</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.BankName" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+    </fieldset>
+</div>
+<div id="sellerDetails" class="col-sm-6">
+    <div class="card-header" id="sellerDetailsHeader">
+        <h5 class="mb-0">
+            <a href="#" class="btn btn-link" data-toggle="collapse" data-target="#collapseSellerDetails" aria-expanded="true" aria-controls="collapseSellerDetails">
+                <i class="fa fa-folder-plus"></i>Seller Details
+            </a>
+        </h5>
+    </div>
+    <fieldset class="border p-2 collapse show" id="collapseSellerDetails" aria-labelledby="headingOne" data-parent="#sellerDetails">
+        <input type="hidden" asp-for="SellerId"/>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Title</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.SellerSalutation" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Seller</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.SellerName" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>First Name</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.SellerFirstName" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Last Name</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.SellerLastName" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Mobile Number</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.SellerMobileNumber" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Email</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.SellerEmail" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>ID Number</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.SellerIdentityNumber" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+    </fieldset>
+</div>
+<div id="buyerDetails" class="col-sm-6">
+    <div class="card-header" id="buyerDetailsHeader">
+        <h5 class="mb-0">
+            <a href="#" class="btn btn-link" data-toggle="collapse" data-target="#collapseBuyerDetails" aria-expanded="true" aria-controls="collapseBuyerDetails">
+                <i class="fa fa-folder-plus"></i>Buyer Details
+            </a>
+        </h5>
+    </div>
+    <fieldset class="border p-2 collapse show" id="collapseBuyerDetails" aria-labelledby="headingOne" data-parent="#buyerDetails">
+        <input type="hidden" asp-for="BuyerId"/>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Buyer</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.BuyerName" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Title</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.BuyerSalutation" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>First Name</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.BuyerFirstName" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Last Name</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.BuyerLastName" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Mobile Number</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.BuyerMobileNumber" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>Email</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.BuyerEmail" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label>ID Number</label>
+            </div>
+            <div class="form-group col-sm-9">
+                <input value="@Model?.BuyerIdentityNumber" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+    </fieldset>
+</div>
+</div>
+
+<fieldset class="p-2">
+    <legend class="w-auto">Data Quality</legend>
+    <div class="form-row  bg-info">
+        <div class="form-group col-sm-2">
+            <label class="p-2">Data State</label>
+        </div>
+        <div class="form-group col-sm-2 p-2">
+            <input value="@Model?.DataState" readonly="readonly" class="form-control"/>
+        </div>
+        <div class="col-sm-8">
+            <fieldset class="p-2 float-sm-right">
+                <a asp-area="analyst" asp-controller="Valuations" asp-action="Index" class="btn btn-primary">Comparables</a>
+                <a asp-area="analyst" asp-controller="Valuations" asp-action="PropertyDetailEdit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a>
+            </fieldset>
+        </div>
+    </div>
+</fieldset>
+<input type="checkbox" value="true" hidden="hidden" id="ownership"/>
+</fieldset>
+</form>
+</div>
+</div>

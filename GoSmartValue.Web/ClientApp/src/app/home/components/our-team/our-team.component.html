@@ -1,0 +1,10 @@
+<h2 class="section-title">Our Team</h2>
+<div fxLayoutAlign="center">
+  <p class="section-description">Need to discuss the value of your property? Our experienced team is happy To have a chat. Get in touch!</p>
+</div>
+
+<p-carousel [value]="teamMembers" [numVisible]="3"  [responsiveOptions]="responsiveOptions">
+    <ng-template let-member pTemplate="item" class="align-content-between align-items-center justify-content-center flex-wrap">
+        <app-our-team-member [member]="member"></app-our-team-member>
+    </ng-template>
+</p-carousel>

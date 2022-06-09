@@ -1,0 +1,87 @@
+﻿@model AV.Contracts.Models.Users.UserLoginViewModel
+
+@{
+	ViewBag.Title = "User Login";
+}
+<style>
+	#content {
+		margin: 0;
+	}
+</style>
+
+
+
+	<div class="outer container-fluid col-sm-12 image-container set-full-height" style="background-image:url(/Canva.jpg);">
+		<div class="middle container-fluid" style="padding-top:75px">
+			<div class=" inner container-fluid">
+				<form class="col-sm-12" method="post" asp-controller="Account" asp-action="Login" style="background-color:transparent!important">
+					<div class="shadow col-md-4 container-fluid" style="background-color: #ffffff;min-height:500px">
+						<div class="container-fluid">
+
+							<div class="row container-fluid" style="text-align:center">
+								<h3>Sign In</h3>
+							</div>
+							<div class=" row container-fluid">
+								<div class="row" style="padding-bottom: 20px;">
+									<asp:Label runat="server" ID="lblFailMessage"></asp:Label>
+								</div>
+
+								<div class="col-sm-12">
+									
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group label-floating ">
+										<label class="control-label">Email Address</label>
+										<input asp-for="UserName" type="email" required="required" class="form-control" />
+										<span asp-validation-for="UserName" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group label-floating ">
+										<label class="control-label">Password</label>
+										<input asp-for="Password" type="password" class="form-control" />
+										<span asp-validation-for="Password" class="text-danger"></span>
+									</div>
+								</div>
+
+								<div class="col-sm-12  ">
+									<div class="container-fluid text-center" style="margin-top: 10px;">
+
+										<button class="btn  btn-blue btn-block" type="submit" role="button" asp-action="Login" asp-controller="Account" style="color:#ffffff">Sign in</button>
+									</div>
+									<div class="container-fluid text-center" style="margin-top: 10px;">
+										<a class="btn  btn-black btn-block" type="button" asp-action="Register" asp-controller="Account" asp-route-returnUrl="@ViewBag.ReturnUrl" style="color:#ffffff">Create Account</a>
+									</div>
+									<div class="row col-sm-12 form-group">
+										@Html.ActionLink("Forgot Password", "ForgotPassword", "Account")
+									</div>
+
+								</div>
+							</div>
+							<input hidden="hidden" asp-for="ReturnUrl" value="@ViewBag.ReturnUrl" />
+							
+								<div class="row footer-checkbox">
+									<div class="col-sm-12">
+										<div class="checkbox">
+											<label>
+												<input asp-for="RememberMe" type="checkbox" value="remember-me" name="optionsCheckboxes">
+											</label>
+											Remember me
+										</div>
+									</div>
+								</div>
+								@*<div class="form-check mb-3">
+									<label asp-for="RememberMe" class="form-check-label">
+										<input asp-for="RememberMe" type="checkbox" value="remember-me" class="form-check-input"> Remember me
+									</label>
+								</div>*@
+							
+
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+

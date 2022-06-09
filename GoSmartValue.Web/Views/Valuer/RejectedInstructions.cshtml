@@ -1,0 +1,66 @@
+﻿@using GoSmartValue.Web.Services
+@model IEnumerable<AV.Contracts.Models.Valuation.InstructionModel>
+@inject CachedStorageService CachedStorage
+@{
+    ViewData["Title"] = "Rejected Instruction";
+
+    Layout = "Layouts/_ValuerLayout";
+}
+
+<div class="outer container-fluid image-container set-full-height" style="background-image:url(/valuationsIndex.jpg);background-size:cover;height:100vh">
+    <div class="middle container-fluid" style="padding-top:80px">
+		<div class=" inner container-fluid">
+			<div class="shadow col-md-12 container-fluid" style="background-color: #ffffff;">
+					<div style="padding:0;width:100%;padding:10px">
+						<table id="instructions" class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col">From</th>
+									<th scope="col">Client Name</th>
+									<th scope="col">Client Number</th>
+									<th scope="col">Location</th>
+									<th scope="col">Ward/Locality</th>
+									<th scope="col">Plot Number</th>
+									<th scope="col">Access Name</th>
+									<th scope="col">Access Number</th>
+									<th scope="col">Preferred Access Date</th>
+									<th scope="col">Preferred Access time</th>
+									<th scope="col">Rejection Reason</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var instruction in Model)
+								{
+									<tr>
+										<th scope="row">@instruction.Issuer.FirstName @instruction.Issuer.LastName</th>
+										<td>@instruction.ClientName</td>
+										<td>@instruction.ClientMobileNumber</td>
+										<td>@instruction.Location?.Name</td>
+										<td>@instruction.Locality?.Name</td>
+										<td>@instruction.PlotNumber</td>
+										<td>@instruction.AccessContactName</td>
+										<td>@instruction.AccessContactMobileNumber</td>
+										<td>@instruction.PreferredAccessDate?.ToString("d")</td>
+										<td>@instruction.PreferredAccessDate?.ToString("t")</td>
+										<td>@instruction.Comment</td>
+										<td>
+											<a class=""><i title="view" class="fa fa-eye"></i></a>
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+			</div>
+		</div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#instructions').DataTable({
+            responsive: true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

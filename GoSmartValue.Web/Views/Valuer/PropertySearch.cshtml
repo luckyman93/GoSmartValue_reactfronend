@@ -1,0 +1,100 @@
+﻿@using GoSmartValue.Web.Services
+@model AV.Contracts.Models.Market.ResponseModels.PropertySearchResponse
+@inject CachedStorageService CachedStorageService
+
+@{
+	ViewData["Title"] = "Property search";
+
+	Layout = "Layouts/_ValuerLayout";
+
+
+	var firstProperty = Model?.PropertyList.FirstOrDefault();
+}
+
+<div class="outer container-fluid image-container set-full-height" style="background-image:url(/smilingPhone.jpg);">
+	<div class="middle container-fluid" style="padding-top:75px">
+		<div class=" inner container-fluid">
+			<div class="card" style="margin-bottom:20px">
+				<form method="post" asp-action="PropertySearch" asp-controller="Valuer">
+					<div class="row col-sm-12">
+						<div class="col-sm-4">
+							<div class="autocomplete label-floating form-group">
+								<label class="control-label">Location:city/town*</label>
+								<input type="text" id="LocationName" asp-for="LocationName" name="LocationName" tabindex="1"
+									   required="required" class="form-control" autocomplete="off" />
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="label-floating form-group">
+								<label class="control-label">Plot Number*</label>
+								<input type="text" id="plotNumber" asp-for="PlotNo" name="PlotNo" tabindex="2"
+									   required="required" class="form-control" autocomplete="off" />
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<button type="submit" class="btn btn-blue">Search</button>
+						</div>
+					</div>
+					<input type="hidden" id="plotSize" asp-for="Size" name="Size" tabindex="3"
+						   class="form-control" value="0" autocomplete="off" />
+				</form>
+			</div>
+			<div class="col-sm-12 card">
+				<div class="container-fluid " style="padding:10px">
+					<div style="padding:0;width:100%">
+						<table id="propertyResponse" class="table  table-hover">
+							<thead>
+								<tr>
+									<th>City</th>
+									<th>Locality</th>
+									<th>Plot Size</th>
+									<th>Plot Number</th>
+                                    <th>Land Use</th>
+                                    <th>Sale Date</th>
+                                    <th>Sale Price</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								@if (Model != null)
+								{
+									@foreach (var comparable in Model?.PropertyList)
+									{
+										{
+										    <tr>
+												<th scope="row">@comparable.Location?.Name</th>
+												<td>@comparable?.Locality?.Name</td>
+												<td>@comparable.PlotSize.ToString("0.00")</td>
+												<td>@comparable.PlotNo</td>
+                                                <td>@comparable.LandUse</td>
+                                                <td> @comparable.DateOfSale?.ToString("dd-MM-yyyy")</td>
+                                                <td>BWP @comparable.SalePrice.ToString("#.##")</td>
+												<td>
+                                                    <a asp-controller="Valuer" asp-action="PropertySearchDetails" asp-route-id="@comparable.Id" class="col-sm-2" style="color: #000">
+                                                        <i title="View Details" class="fa fa-share"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+										}
+									}
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="~/js/valuations.min.js"></script>
+
+<script>
+	$(document).ready(function () {
+		$('#propertyResponse').DataTable({
+			responsive: true
+		});
+		$('.dataTables_length').addClass('bs-select');
+
+	});
+</script>

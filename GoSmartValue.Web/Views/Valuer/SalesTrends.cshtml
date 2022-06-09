@@ -1,0 +1,66 @@
+﻿@{
+	Layout = "Layouts/_GraphLayout";
+}
+
+<div class="outer container-fluid image-container set-full-height" style="background-image:url(/inviteuser.jpg);">
+	<div class="middle container-fluid" style="padding-top:80px">
+		<div class=" inner container-fluid">
+			<div class="row col-sm-12" style="padding:15px">
+
+				<div class="col-sm-6">
+					<div class="card">
+						<div id="instructionsSummary" style="width: 400px; height: 200px;"></div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="card">
+						<div id="instructionsValuerSummary" style="width: 500px; height: 400px;"></div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function () {
+	ShowProgress();
+		google.charts.load('current', { 'packages': ['corechart', 'controls'] });
+	google.setOnLoadCallback(drawVisualization);
+
+	});
+	function drawVisualization() {
+		$.ajax({
+			url: "/GraphReports/GetSalesValueTrends",
+		type: 'POST',
+			success: function (response) {
+
+				var datas = JSON.stringify(response);
+				var data = JSON.parse(datas);
+
+			var tdata = new google.visualization.DataTable();
+			tdata.addColumn('string', 'Description');
+			tdata.addColumn('number', 'Count');
+
+			for (var i = 0; i < data.length; i++) {
+				tdata.addRow([data[i].description, data[i].count]);
+			};
+			var options = {
+				title: 'Total Instructions Summary',
+				is3D: false,
+			};
+			// Create and draw the visualization.
+			var chart = new google.visualization.PieChart(document.getElementById('instructionsSummary'));
+			chart.draw(tdata, options);
+		},
+		error: function (error) {
+			alert("error");
+		},
+		cache: false,
+		contentType: false,
+		processData: false
+	});
+
+	};
+	
+</script>

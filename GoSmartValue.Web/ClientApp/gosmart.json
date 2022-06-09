@@ -1,0 +1,513 @@
+{
+  "reports": [
+    {
+      "id": "report1",
+      "headline": "Quarterly report for property",
+      "coverImage": "https://picsum.photos/200/100",
+      "report": "lorem ipsum dolor sit amet",
+      "date": "12/12/2021",
+      "reportedBy": "TongoonaT",
+      "type": "quarterly"
+    },
+    {
+      "id": "report2",
+      "headline": "Quarterly report for property 2",
+      "report": "lorem ipsum dolor sit amet",
+      "date": "31/12/2021",
+      "coverImage": "https://picsum.photos/200/100",
+      "reportedBy": "Robert Butler",
+      "type": "quarterly"
+    },
+    {
+      "id": "report3",
+      "headline": "Quarterly report for property 3",
+      "report": "lorem ipsum dolor sit amet",
+      "date": "31/12/2021",
+      "coverImage": "https://picsum.photos/200/100",
+      "reportedBy": "Robert Butler",
+      "type": "quarterly"
+    }
+  ],
+  "subscriptions": [
+    {
+      "id": "sub1",
+      "userId": "testUser1",
+      "expiryDate": "31/12/2021",
+      "subscriptionType": "White Monthly",
+      "datePurchased": "01/11/2012",
+      "amountPaid": 375
+    },
+    {
+      "id": "sub2",
+      "userId": "testUser2",
+      "expiryDate": "31/12/2021",
+      "subscriptionType": "White Monthly",
+      "datePurchased": "01/11/2012",
+      "amountPaid": 375
+    },
+    {
+      "id": "sub3",
+      "userId": "testUser3",
+      "expiryDate": "31/12/2021",
+      "subscriptionType": "White Monthly",
+      "datePurchased": "01/11/2012",
+      "amountPaid": 375
+    }
+  ],
+  "valuers": [
+    {
+      "firstName": "Tkaudzwa",
+      "lastName": "Tongoona",
+      "companyId": 1,
+      "description": "Best valuer ever",
+      "rating": 4.5,
+      "id": "valuer1",
+      "profilePicture": "picture"
+    },
+    {
+      "firstName": "Willard",
+      "lastName": "Spencer",
+      "companyId": 3,
+      "description": "Best valuer ever",
+      "rating": 4.5,
+      "id": "valuer2",
+      ".profilePicture": "picture"
+    },
+    {
+      "firstName": "Marlon",
+      "lastName": "Made",
+      "companyId": 4,
+      "description": "Best valuer ever",
+      "rating": 4.5,
+      "id": "valuer3",
+      "profilePicture": "picture"
+    },
+    {
+      "firstName": "Dave",
+      "lastName": "Wonder",
+      "companyId": 6,
+      "description": "Best valuer ever",
+      "rating": 4.5,
+      "id": "valuer4",
+      "profilePicture": "picture"
+    },
+    {
+      "firstName": "Mercedes",
+      "lastName": "Benz",
+      "companyId": 7,
+      "description": "Best valuer ever",
+      "rating": 4.5,
+      "id": "valuer5",
+      "profilePicture": "picture"
+    },
+    {
+      "firstName": "Marlon",
+      "lastName": "Made",
+      "companyId": 4,
+      "description": "Best valuer ever",
+      "rating": 4.5,
+      "id": "valuer6",
+      "profilePicture": "picture"
+    },
+    {
+      "firstName": "Dave",
+      "lastName": "Wonder",
+      "companyId": 6,
+      "description": "Best valuer ever",
+      "rating": 4.5,
+      "id": "valuer7",
+      "profilePicture": "picture"
+    },
+    {
+      "firstName": "Mercedes",
+      "lastName": "Benz",
+      "companyId": 7,
+      "description": "Best valuer ever",
+      "rating": 4.5,
+      "id": "valuer8",
+      "profilePicture": "picture"
+    }
+  ],
+  "companies": [
+    {
+      "name": "APEX",
+      "logo": "APEX.png",
+      "id": 1
+    },
+    {
+      "name": "Bright Break",
+      "logo": "brightbrack.png",
+      "id": 2
+    },
+    {
+      "name": "BTJ",
+      "logo": "btj.png",
+      "id": 3
+    },
+    {
+      "name": "Knight Frank",
+      "logo": "knight_frank.png",
+      "id": 4
+    },
+    {
+      "name": "Maruping",
+      "logo": "maruping.png",
+      "id": 5
+    },
+    {
+      "name": "Melwood",
+      "logo": "melwood.png",
+      "id": 6
+    },
+    {
+      "name": "New Ark",
+      "logo": "newark.png",
+      "id": 7
+    },
+    {
+      "name": "Solomon",
+      "logo": "solomon.jpg",
+      "id": 8
+    },
+    {
+      "name": "Temp Gold",
+      "logo": "tempgold.jpg",
+      "id": 9
+    }
+  ],
+  "standardValuations": [
+    {
+      "generalInfo": {
+        "city": "Gaborone",
+        "ward": "90",
+        "street": "900",
+        "plot": "90",
+        "plotSize": 900,
+        "developed": "Vacant",
+        "commercial": 4,
+        "isValid": true
+      },
+      "features": [
+        {
+          "name": "Fireplace",
+          "id": 0,
+          "isSelected": true
+        }
+      ],
+      "propertyDetails": [
+        {
+          "name": "bedroom",
+          "numberOfRooms": "01",
+          "id": 0
+        },
+        {
+          "name": "bathroom",
+          "numberOfRooms": "01",
+          "id": 0
+        },
+        {
+          "name": "port",
+          "numberOfRooms": "01",
+          "id": 0
+        }
+      ],
+      "valuationAppointment": {
+        "time": "10:10",
+        "attachments": [],
+        "date": "2021-03-24T22:00:00.000Z",
+        "valuer": {
+          "id": "valuer6",
+          "profilePicture": "picture",
+          "firstName": "Marlon",
+          "lastName": "Made",
+          "rating": 0,
+          "description": "Best valuer ever",
+          "companyId": 4,
+          "isSelected": true
+        }
+      },
+      "additionalInformation": "",
+      "reportTypeId": 1,
+      "paid": false,
+      "userId": "testUser",
+      "subscription": "BWP175 Quarterly",
+      "paymentId": "",
+      "isValid": true,
+      "completion": 39,
+      "status": "new",
+      "id": 1
+    },
+    {
+      "generalInfo": {
+        "city": "Thamaga",
+        "ward": "agriculture",
+        "street": "700",
+        "plot": "90",
+        "plotSize": 900,
+        "developed": "Vacant",
+        "commercial": 4,
+        "isValid": true
+      },
+      "features": [
+        {
+          "name": "Fireplace",
+          "id": 0,
+          "isSelected": true
+        }
+      ],
+      "propertyDetails": [
+        {
+          "name": "kitchen",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "bedroom",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "sittings",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "bathroom",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "toilet",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "port",
+          "numberOfRooms": "1",
+          "id": 0
+        }
+      ],
+      "valuationAppointment": {
+        "time": "09:05",
+        "attachments": [],
+        "date": "2021-03-17T22:00:00.000Z",
+        "valuer": {
+          "id": "valuer2",
+          "firstName": "Willard",
+          "lastName": "Spencer",
+          "rating": 0,
+          "description": "Best valuer ever",
+          "companyId": 3,
+          "isSelected": true
+        }
+      },
+      "additionalInformation": "",
+      "reportTypeId": 1,
+      "paid": false,
+      "userId": "testUser",
+      "subscription": "BWP1750 Yearly",
+      "paymentId": "",
+      "isValid": true,
+      "completion": 10,
+      "status": "pending",
+      "id": 2
+    },
+    {
+      "generalInfo": {
+        "city": "Gaborone",
+        "ward": "South Gaborone",
+        "street": "Makatsumoo way",
+        "plot": "13738",
+        "plotSize": 1000,
+        "developed": "Vacant",
+        "commercial": 1,
+        "isValid": true
+      },
+      "features": [
+        {
+          "name": "Electric fence",
+          "id": 0,
+          "isSelected": true
+        },
+        {
+          "name": "Motor gate",
+          "id": 0,
+          "isSelected": true
+        }
+      ],
+      "propertyDetails": [
+        {
+          "name": "kitchen",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "bedroom",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "sittings",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "bathroom",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "toilet",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "port",
+          "numberOfRooms": "1",
+          "id": 0
+        }
+      ],
+      "valuationAppointment": {
+        "time": "08:10",
+        "attachments": [],
+        "date": "2021-03-23T22:00:00.000Z",
+        "valuer": {
+          "id": "valuer7",
+          "profilePicture": "picture",
+          "firstName": "Dave",
+          "lastName": "Wonder",
+          "rating": 0,
+          "description": "Best valuer ever",
+          "companyId": 6,
+          "isSelected": true
+        }
+      },
+      "additionalInformation": "The house is splandid",
+      "reportTypeId": 1,
+      "paid": false,
+      "userId": "testUser",
+      "subscription": "BWP175 Quarterly",
+      "paymentId": "",
+      "isValid": true,
+      "completion": 0,
+      "status": "new",
+      "id": 3
+    },
+    {
+      "generalInfo": {
+        "city": "Gaborone",
+        "ward": "23",
+        "street": "23",
+        "plot": "23",
+        "plotSize": 1000,
+        "developed": "Developed",
+        "commercial": 3,
+        "isValid": true
+      },
+      "features": [
+        {
+          "name": "Fireplace",
+          "id": 0,
+          "isSelected": true
+        }
+      ],
+      "propertyDetails": [
+        {
+          "name": "kitchen",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "bedroom",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "sittings",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "bathroom",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "toilet",
+          "numberOfRooms": "1",
+          "id": 0
+        },
+        {
+          "name": "port",
+          "numberOfRooms": "1",
+          "id": 0
+        }
+      ],
+      "valuationAppointment": {
+        "time": "08:05",
+        "attachments": [
+          {}
+        ],
+        "date": "2021-03-23T22:00:00.000Z",
+        "valuer": {
+          "id": "valuer2",
+          "firstName": "Willard",
+          "lastName": "Spencer",
+          "rating": 0,
+          "description": "Best valuer ever",
+          "companyId": 3,
+          "isSelected": true
+        }
+      },
+      "additionalInformation": "",
+      "reportTypeId": 1,
+      "paid": false,
+      "userId": "testUser",
+      "subscription": "BWP250 Quarterly",
+      "paymentId": "",
+      "isValid": true,
+      "completion": 95,
+      "status": "new",
+      "id": 4
+    },
+    {
+      "generalInfo": {
+        "city": "",
+        "ward": "",
+        "street": "",
+        "plot": "",
+        "plotSize": 0,
+        "developed": "",
+        "commercial": "",
+        "isValid": false
+      },
+      "features": [],
+      "propertyDetails": [],
+      "valuationAppointment": {
+        "time": "10:15",
+        "attachments": [],
+        "date": "2021-04-06T22:00:00.000Z",
+        "valuer": {
+          "id": "valuer4",
+          "profilePicture": "picture",
+          "firstName": "Dave",
+          "lastName": "Wonder",
+          "rating": 0,
+          "description": "Best valuer ever",
+          "companyId": 6,
+          "isSelected": true
+        }
+      },
+      "additionalInformation": "",
+      "reportTypeId": 1,
+      "paid": false,
+      "userId": "",
+      "subscription": "BWP1000 Once-off",
+      "paymentId": "",
+      "isValid": true,
+      "completion": 0,
+      "status": "new",
+      "id": 5
+    }
+  ]
+}

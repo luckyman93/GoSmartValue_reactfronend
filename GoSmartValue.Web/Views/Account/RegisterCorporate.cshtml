@@ -1,0 +1,450 @@
+﻿@using AV.Common.Entities
+@using AV.Contracts.Enums
+@model GoSmartValue.Web.ViewModels.RegisterCorporateViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "User Registration";
+    var accountTypes = Enum.GetValues(typeof(UserAccountType))
+        .Cast<UserAccountType>()
+        .Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() })
+        .ToList();
+}
+
+<style>
+</style>
+<script src="~/js/bootstrap-select.js"></script>
+<div class="container-fluid image-container set-full-height" style="background-image:url(/team.jpg);">
+    <!-- MultiStep Form -->
+    <div class="container-fluid" id="multistep-form">
+        <div class="row">
+            <div class="col-12 text-center p-0 mt-3 mb-2">
+                <div class="px-0 pt-4 pb-0 mt-3 mb-3">
+                    <h4 style="color:#fff"><strong>Corporate Account</strong></h4>
+                    <div class="row container-fluid">
+                        <div class="container-fluid col-md-12 mx-0">
+                            <form class="col-sm-12 container-fluid" id="msform" method="post" style="background:none!important">
+                                <div class="row col-sm-12 container-fluid">
+                                    <!-- progressbar -->
+                                    <ul id="progressbar" class="col-sm-12">
+                                        <li class="active col-sm-3" id="personal"><strong>Personal</strong></li>
+                                        <li class="col-sm-3" id="account"><strong>Organisation</strong></li>
+                                        <li class="col-sm-3" id="payment"><strong>Payment</strong></li>
+                                    </ul>
+                                </div>
+                                <!-- fieldsets -->
+
+                                <fieldset style="background:none!important">
+                                    <div class="form-card">
+                                        <div class="text-danger">@Html.ValidationMessage("Error")</div>
+                                        <input type="text" asp-for="FirstName" placeholder="First Name" required />
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                                        <input type="text" asp-for="LastName" placeholder="Last Name" required />
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+
+                                        <input type="text" asp-for="PhoneNumber" placeholder="Contact Number" required />
+                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+                                        <input type="email" asp-for="UserName" placeholder="Contact Email" required />
+                                        <span asp-validation-for="UserName" class="text-danger"></span>
+
+                                        <input type="password" asp-for="Password" placeholder="Password" required />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+
+                                        <input type="password" asp-for="PasswordConfirm" placeholder="Confirm Password" required />
+                                        <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="button" name="next" class="next action-button" value="Next Step" />
+                                    </div>
+                                </fieldset>
+                                <fieldset style="background:none!important">
+                                    <div class="form-card">
+                                        <input type="text" placeholder="Organisation name" asp-for="CompanyName" required="required" class="form-control" />
+                                        <span asp-validation-for="CompanyName" class="text-danger">You must state your Organisation name</span>
+                                        <div class="form-group">
+                                            <h8>Main Business:</h8>
+                                        </div>
+
+                                        <div class="row col-sm-12 form-group">
+                                            <div class="form-check form-check-inline">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input " type="checkbox" asp-for="Banker">
+                                                    Bank
+                                                    <span class="form-check-sign">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+
+	                                        
+	                                      
+			                                        @*<div class="checkbox">
+				                                        <label>
+					                                        <input type="checkbox" class="form-check CorpType" asp-for="Banker" name="optionsCheckboxes">
+				                                        </label>
+				                                        Subscribe to our newsletter
+			                                        </div>*@
+		                                    
+	                                        
+
+                                            <div class="form-check form-check-inline">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input " type="checkbox" asp-for="Insurance">
+                                                    Insurance
+                                                    <span class="form-check-sign">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input " type="checkbox" asp-for="GovernmentAgency">
+                                                    Government Agency
+                                                    <span class="form-check-sign">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input " type="checkbox" asp-for="Developer">
+                                                    Developer
+                                                    <span class="form-check-sign">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+
+
+                                            <div class="col-sm-2">
+                                                <input type="text" placeholder="other" class="CorpType" />
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <h8>Authority to transact</h8>
+                                        <div class="input-group" id="IDDocument">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroupFileAddon01">Upload form of Authority</span>
+                                            </div>
+
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" asp-for="IDDocument" aria-describedby="inputGroupFileAddon01" onchange="UploadFile(event)">
+                                                <label class="custom-file-label" asp-for="IDDocument">Upload document</label>
+                                                <span asp-validation-for="IDDocument" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                        <input type="button" name="next" class="next action-button" value="Next Step" />
+                                    </div>
+                                </fieldset>
+
+                                <fieldset style="background:none!important">
+                                    <div class="form-card">
+                                        <h2 class="fs-title">Select Package</h2>
+
+										<div class="col-md-12">
+											<table class="table-bordered" style="table-layout: fixed; width: 100%;border:1px solid">
+												<thead>
+													<tr class="text-center">
+														<th colspan="3">Packages</th>
+													</tr>
+													
+												</thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td class="text-center">Green</td>
+                                                        <td class="text-center">Black</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Number of transactions</td>
+                                                        <td class="text-center">Less than 20</td>
+                                                        <td class="text-center">More than 20</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Requirements</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <p>Instant Estimates</p>
+                                                            <p>Instant estimates are an automated calculation of the median price of properties sold within 5km of your property, within the same location with similar plot sizes</p>
+                                                        </td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <p>Desktop Valuations</p>
+                                                            <p>Automated valuation of your property based on the inputs you have provided inline with typical market dynamics within the location and the locality of your property</p>
+                                                        </td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <p>Verified (Valuation by valuer selected)</p>
+                                                            <p>A hybrid valuation with the verification of a qualified valuer, having conducted an inspection of the property. Your verified report is cognisant of prevailing market conditions for the property's location, locality and specific features</p>
+                                                        </td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <p>Property Information </p>
+                                                        </td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            Sales Trends
+                                                        </td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            Building Costs
+                                                        </td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            Land Rates
+                                                        </td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            Property Searches
+                                                        </td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center"><i class="fa fa-check" style="color:green" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                   
+                                                    <tr>
+                                                        <td>
+                                                            Instructions to valuers
+                                                        </td>
+                                                        <td class="text-center">BWP 250</td>
+                                                        <td class="text-center"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Transaction based
+                                                        </td>
+                                                        <td class="text-center">BWP 500</td>
+                                                        <td class="text-center"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Monthly
+                                                        </td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center">BWP 10 000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Over 50 transactions
+                                                        </td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center">BWP 475/transaction</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Over 100 transactions
+                                                        </td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center">BWP 375/transaction</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="form-check form-check-inline">
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input Package" type="checkbox" asp-for="GreenAccount" >
+                                                                    Green
+                                                                    <span class="form-check-sign">
+                                                                        <span class="check"></span>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                            
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="form-check form-check-inline">
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input Package" type="checkbox" asp-for="BlackAccount" >
+                                                                    Black
+                                                                    <span class="form-check-sign">
+                                                                        <span class="check"></span>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                           
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+											</table>
+
+                                            <div class="row col-sm-12">
+                                                
+                                            </div>
+										</div>
+
+                                       
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                        <button class="btn action-button" asp-controller="Account" asp-action="RegisterCorporate" type="submit">Submit form</button>
+                                    </div>
+                                </fieldset>
+                                <input hidden="hidden" asp-for="ReturnUrl" value="@Context.Request.QueryString.Value" />
+                                <input hidden="hidden" asp-for="Active" value="true" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //Call file upload endpoint
+    var UploadFile = function (event) {
+        var files = event.target.files;
+
+        var formData = new FormData();
+        files.forEach(f => formData.append('files', f));
+
+        console.log(event);
+        $.ajax(
+            {
+                type: 'POST',
+                url: '/UploadFiles',
+                data: formData, // The form with the file inputs.
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    console.log(data);
+                    alert(data);
+                }
+            }).done(function () {
+                console.log("Success: Files sent!");
+            }).fail(function () {
+                console.log("An error occurred, the files couldn't be sent!");
+            });
+    };
+
+    //Form validation
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+            console.log(validation);
+        }, false);
+
+    })();
+
+    $(document).ready(function () {
+
+        //MultiPage
+
+        var current_fs, next_fs, previous_fs; //fieldsets
+        var opacity;
+
+        $(".next").click(function () {
+
+            current_fs = $(this).parent().parent();
+            next_fs = $(this).parent().parent().next();
+
+            //Add Class Active
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+            //show the next fieldset
+            next_fs.show();
+            //hide the current fieldset with style
+            current_fs.animate({ opacity: 0 }, {
+                step: function (now) {
+                    // for making fielset appear animation
+                    opacity = 1 - now;
+
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+                    next_fs.css({ 'opacity': opacity });
+                },
+                duration: 600
+            });
+        });
+
+        $(".previous").click(function () {
+
+            current_fs = $(this).parent().parent();
+            previous_fs = $(this).parent().parent().prev();
+
+            //Remove class active
+            $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+            //show the previous fieldset
+            previous_fs.show();
+
+            //hide the current fieldset with style
+            current_fs.animate({ opacity: 0 }, {
+                step: function (now) {
+                    // for making fielset appear animation
+                    opacity = 1 - now;
+
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+                    previous_fs.css({ 'opacity': opacity });
+                },
+                duration: 600
+            });
+        });
+
+        $('.radio-group .radio').click(function () {
+            $(this).parent().find('.radio').removeClass('selected');
+            $(this).addClass('selected');
+        });
+
+        $(".submit").click(function () {
+            return false;
+        });
+
+        $('input.CorpType').on('change', function () {
+            $('input.CorpType').not(this).prop('checked', false);
+        });
+
+        $('input.Package').on('change', function () {
+            $('input.Package').not(this).prop('checked', false);
+        });
+    });
+</script>

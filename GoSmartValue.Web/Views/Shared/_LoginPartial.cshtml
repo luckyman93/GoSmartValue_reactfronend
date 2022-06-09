@@ -1,0 +1,133 @@
+
+@using AV.Common.Entities
+@using AV.Contracts.Enums
+@using Microsoft.AspNetCore.Identity
+
+@inject RoleManager<Role> SignInManager
+@inject UserManager<User> userManager
+
+<div class="nav-wrapper">
+	<div class="grad-bar"></div>
+	<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100">
+		<a class="navbar-brand" asp-controller="Home" asp-action="Index" style="font-family: 'Segoe UI'; background-color: transparent; border-radius: 50px">
+			<img src="~/vantageHome.png" alt="GoSmartValue" />
+		</a>
+		<div class="menu-toggle" id="mobile-menu">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+		<ul class="nav no-search">
+			@if (User.Identity.IsAuthenticated)
+			{
+				var user = await userManager.GetUserAsync(User);
+			    var userRoles = await userManager.GetRolesAsync(user);
+				if (userRoles.Contains( AV.Common.Constants.UserRoles.Admin) || userRoles.Contains(AV.Common.Constants.UserRoles.Analyst))
+				{
+					<li class="nav-item active">
+						<a class="nav-link" asp-area="user" asp-controller="Account" asp-action="Index">
+							<i class="fa fa-user-tie"></i>
+							My Dashboard
+						</a>
+					</li>
+				}
+
+				@if (userRoles.Contains(AV.Common.Constants.UserRoles.Admin))
+				{
+					<li class="nav-item">
+						<a class="nav-link" asp-area="admin" asp-controller="UserManager" asp-action="Index">
+							<i class="fa fa-users-cog"></i>
+							User Admin
+						</a>
+					</li>
+				}
+				@if (Context.User.IsInRole("analyst") || Context.User.IsInRole("admin"))
+				{
+					//Dropdown
+					<li class="dropdown nav-item">
+						<a class="dropdown-toggle nav-link" id="analystsMenuItems" data-toggle="dropdown">
+							<i class="material-icons">apps</i> Analysts
+						</a>
+						<div class="dropdown-menu dropdown-with-icons">
+							<a class="dropdown-item" asp-area="analyst" asp-controller="Valuations" asp-action="PropertyDetailCreate">
+								<i class="material-icons">layers</i> Add New Sales
+							</a>
+							<a class="dropdown-item" asp-area="analyst" asp-controller="Valuations" asp-action="Index">
+								<i class="material-icons">layers</i> All Sales
+							</a>
+							<a class="dropdown-item" asp-area="analyst" asp-controller="Valuations" asp-action="Index" asp-route-filterBy=@DataState.Pending>
+								Pending/Drafts
+							</a>
+							<a class="dropdown-item" asp-area="analyst" asp-controller="Valuations" asp-action="Index" asp-route-filterBy=@DataState.Verified>
+								<i class="material-icons">layers</i> Verified Sales
+							</a>
+							<a class="dropdown-item" asp-area="analyst" asp-controller="Valuations" asp-action="Index" asp-route-filterBy=@DataState.Raw>
+								<i class="material-icons">layers</i> Raw Sales- Website
+							</a>
+							<a class="dropdown-item" asp-area="analyst" asp-controller="Valuations" asp-action="Index" asp-route-filterBy=@DataState.Discarded>
+								<i class="material-icons">layers</i> Discarded Sales
+							</a>
+							<a class="dropdown-item" asp-area="analyst" asp-controller="Users" asp-action="Index">
+								<i class="material-icons">layers</i> All Registrations
+							</a>
+
+						</div>
+					</li>
+
+				}
+				@if (userRoles.Contains(AV.Common.Constants.UserRoles.Corporate))
+				{
+					<li class="nav-item">
+						<a class="nav-link" asp-controller="Corporate" asp-action="Administration" title="Manage">
+							<i class="material-icons" style="color:#1a237e">settings</i>
+							@*@ViewBag.UserModel.FirstName*@ @*@ViewBag.UserModel.LastName*@
+						</a>
+					</li>
+				}
+				@if (userRoles.Contains( AV.Common.Constants.UserRoles.Valuer))
+				{
+					<li class="nav-item">
+						<a class="nav-link" asp-controller="Valuer" asp-action="Administration" title="Manage">
+							<i class="material-icons" style="color:#1a237e">settings</i>
+						</a>
+					</li>
+				}
+				@if (userRoles.Contains(AV.Common.Constants.UserRoles.Standard))
+				{
+					<li class="nav-item">
+						<a class="nav-link" asp-controller="Standard" asp-action="Administration" title="Manage">
+							<i class="material-icons" style="color:#1a237e">settings</i>
+						</a>
+					</li>
+				}
+
+				<li class="nav-item">
+					<a class="nav-link" onclick="localStorage.clear();" asp-action="Logout" asp-controller="Account" title="Sign Out" rel="tooltip" data-placement="bottom" data-original-title="Signout" rel="nofollow">
+						<i class="material-icons" style="color:#1a237e">exit_to_app</i>
+					</a>
+				</li>
+				
+			}
+		</ul>
+	</nav>
+</div>
+
+
+<script>
+	$(document).ready(function () {
+		$("#search-icon").click(function () {
+			$(".nav").toggleClass("search");
+			$(".nav").toggleClass("no-search");
+			$(".search-input").toggleClass("search-active");
+		});
+
+		$('.menu-toggle').click(function () {
+			$(".nav").toggleClass("mobile-nav");
+			$(this).toggleClass("is-active");
+		});
+
+	});</script>
+
+
+
+

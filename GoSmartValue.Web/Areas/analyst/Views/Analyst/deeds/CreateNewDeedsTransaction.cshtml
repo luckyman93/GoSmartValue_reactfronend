@@ -1,0 +1,310 @@
+﻿@using AV.Contracts.Enums
+@using GoSmartValue.Web.Services
+@model AV.Contracts.Models.Valuation.ComparableViewModel
+
+@{
+    ViewBag.Title = "Add New Deeds Property Sale Transaction";
+    Layout = "Layouts/_BackOffice";
+
+    var streets = new List<SelectListItem>();
+}
+
+<h2 class="text-center">Deeds Office - Add New Property Sale Transaction</h2>
+
+<div class="form-row">
+<div class="col-md-12 align-content-center mb-sm-5">
+    <form method="post" asp-area="analyst" asp-controller="Analyst" asp-action="CreateNewDeedsTransaction">
+<fieldset>
+    <div class="alert alert-warning">
+        All changes made will affect comparable results.
+    </div>
+</fieldset>
+
+<div class="form-row">
+
+    <div id="propertyDetails" class="col-sm-6">
+        <div class="card-header">
+            <h5 class="mb-0">
+                <a href="#" class="btn btn-link" data-toggle="collapse" data-target="#collapsePropertyDetail" aria-expanded="true" aria-controls="collapsePropertyDetail">
+                    <i class="fa fa-folder-plus"></i>Property Details
+                </a>
+            </h5>
+        </div>
+        <fieldset class="border p-2 collapse show" id="collapsePropertyDetail" aria-labelledby="headingOne" data-parent="#propertyDetails">
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label asp-for="LandUse">Primary Use</label>
+                </div>
+                <div class="form-group col-sm-9">
+                    @Html.DropDownList("LandUse",
+                        new SelectList(Enum.GetValues(typeof(AV.Contracts.Enums.LandUse)), @Model?.LandUse ?? LandUse.Residential),
+                        new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label asp-for="PropertyType">Development</label>
+                </div>
+                <div class="form-group col-sm-9">
+                    @Html.DropDownList("PropertyType",
+                        new SelectList(CachedStorageService.GetDevelopments(), @Model?.PropertyType),
+                        new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label asp-for="Metric">Units/Metric</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    @Html.DropDownList("Metric",
+                        new SelectList(Enum.GetValues(typeof(Metric)), @Model?.Metric ?? Metric.SquareMetres),
+                        new { @class = "form-control danger", required = true})
+                </div>
+                <div class="form-group col-sm-1">
+                    <label asp-for="PlotSize">Size</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="@Model.PlotSize" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label asp-for="Location.Name">City</label>
+                </div>
+                <div class="form-group col-sm-9">
+                    <input id="city" class="form-control" value="@Model?.Location?.Name">
+                    <input asp-for="LocationId" hidden="hidden">
+                    <a href="#" id="addLocationBtn" class="btn btn-success" style="display: none" onclick="AddLocation($('#city').val())">Add Location</a>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label>Ward</label>
+                </div>
+                <div class="form-group col-sm-9">
+                    <input id="ward" class="form-control" value="@Model?.Locality?.Name">
+                    <input asp-for="LocalityId" hidden="hidden" onchange="SetStreets($('#ward').val(), $('#ward').innerHTML)">
+                    <a href="#" id="addLocalityBtn" class="btn btn-success" style="display: none" onclick="AddLocality($('#ward').val())">Add Locality</a>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label>Street Name</label>
+                </div>
+                <div class="form-group col-sm-9">
+                    @* Candidate for auto complete *@
+                    <input asp-for="@Model.StreetName" class="form-control"/>
+                    @Html.DropDownList("street-list",
+                        streets.OrderBy(c => c.Text),
+                        new
+                        {
+                            @class = "form-control dropdown",
+                            @data_live_search = "true",
+                            @search = "true"
+                        })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label>Plot No</label>
+                </div>
+                <div class="form-group col-sm-9">
+                    <input asp-for="@Model.PlotNo" class="form-control"/>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div id="transactionInformation" class="col-sm-6">
+        <div class="card-header" id="transactionInformationHeader">
+            <h5 class="mb-0">
+                <a href="#" class="btn btn-link" data-toggle="collapse" data-target="#collapseTransactionInformation" aria-expanded="true" aria-controls="collapseTransactionInformation">
+                    <i class="fa fa-folder-plus"></i>Transaction information
+                </a>
+            </h5>
+        </div>
+        <fieldset class="border p-2 collapse show" id="collapseTransactionInformation" aria-labelledby="headingOne" data-parent="#transactionInformation">
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label>Sale Date</label>
+                </div>
+                <div class="form-group col-sm-9">
+                    <input type="date" asp-for="@Model.DateOfSale" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label asp-for="TransactionType">Transaction Type</label>
+                </div>
+                <div class="form-group col-sm-9">
+                    @Html.DropDownList("TransactionType",
+                        new SelectList(Enum.GetValues(typeof(TransactionType))),
+                        new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label>Sale Price</label>
+                </div>
+                <div class="form-group col-sm-9">
+                    <input asp-for="@Model.SalePrice" class="form-control fa-money"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label>Seller</label>
+                </div>
+                <div class="form-group col-sm-9">
+                    <input asp-for="@Model.SellerName" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label>Buyer</label>
+                </div>
+                <div class="form-group col-sm-9">
+                    <input asp-for="@Model.BuyerName" class="form-control"/>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+</div>
+<fieldset class="p-2">
+    <legend class="w-auto">Data Quality</legend>
+    <div class="form-row  bg-info">
+        <div class="form-group col-sm-1">
+            <label class="p-2">Data State</label>
+        </div>
+        <div class="form-group col-sm-2 p-2">
+            <input asp-for="@Model.DataState" value="@DataState.Pending" readonly="readonly"/>
+        </div>
+        <div class="col-sm-8">
+            <fieldset class="p-2 float-sm-right">
+                <a asp-area="analyst" asp-controller="Analyst" asp-action="DeedsTransactions" class="btn btn-danger btn-lg">Exit</a>
+                <button class="btn btn-primary btn-lg">Save Transaction</button>
+            </fieldset>
+        </div>
+    </div>
+</fieldset>
+    <input type="checkbox" value="true" hidden="hidden" id="ownership"/>
+    <input asp-for="@Model.ValuationSource" value="@ValuationSource.DeedsOffice" hidden="hidden"/>
+</form>
+</div>
+</div>
+<script type="text/javascript">
+    $(function() {
+        $("#city").autocomplete({
+            source: function(request, response) {
+                $.get({
+                    url: '/api/locations/location/search?textPart=' + $('#city').val(),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(data) {
+                        if (data.length === 0) {
+                            console.log('Show addLocationBtn');
+                            $('#addLocationBtn').show();
+                        } else {
+                            console.log('hide addLocationBtn');
+                            $('#addLocationBtn').hide();
+                        }
+                        response($.map(data,
+                            function(item) {
+                                return item;
+                            }));
+                    },
+                    error: function(response) {
+                        alert(response.responseText);
+                    },
+                    failure: function(response) {
+                        alert(response.responseText);
+                    }
+                });
+            },
+            select: function(e, i) {
+                console.log(i.item);
+                $('#LocationId').val(i.item.val);
+            },
+            minLength: 2
+        });
+    });
+
+    function AddLocation(locationName) {
+        $.post({
+            url: '/api/locations/location',
+            dataType: "json",
+            data: JSON.stringify({
+                Name: locationName
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function(result) {
+                console.log(result);
+                $('#addLocationBtn').hide();
+                $('#LocationId').val(result.id);
+            },
+            error: function(response) {
+                alert(response.responseText);
+            },
+            failure: function(response) {
+                alert(response.responseText);
+            }
+        });
+    }
+
+    $(function() {
+        $("#ward").autocomplete({
+            source: function(request, response) {
+                $.get({
+                    url: '/api/locations/locality/search?textPart=' + $('#ward').val(),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(data) {
+                        if (data.length === 0) {
+                            console.log('Show addLocationBtn');
+                            $('#addLocalityBtn').show();
+                        } else {
+                            console.log('hide addLocationBtn');
+                            $('#addLocalityBtn').hide();
+                        }
+                        response($.map(data,
+                            function(item) {
+                                return item;
+                            }));
+                    },
+                    error: function(response) {
+                        alert(response.responseText);
+                    },
+                    failure: function(response) {
+                        alert(response.responseText);
+                    }
+                });
+            },
+            select: function(e, i) {
+                console.log(i.item);
+                $('#LocalityId').val(i.item.val);
+            },
+            minLength: 2
+        });
+    });
+
+    function AddLocality(localityName) {
+        $.post({
+            url: '/api/locations/locality',
+            dataType: "json",
+            data: JSON.stringify({
+                Name: localityName
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function(result) {
+                console.log(result);
+                $('#addLocalityBtn').hide();
+                $('#LocalityId').val(result.id);
+            },
+            error: function(response) {
+                alert(response.responseText);
+            },
+            failure: function(response) {
+                alert(response.responseText);
+            }
+        });
+    }
+</script>

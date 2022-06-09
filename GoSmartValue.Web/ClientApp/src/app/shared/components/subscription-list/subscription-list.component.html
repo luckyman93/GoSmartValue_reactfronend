@@ -1,0 +1,35 @@
+<div class="card">
+  <p-tabView styleClass="tabview-custom">
+    <p-tabPanel>
+      <ng-template pTemplate = "header">
+        <span class="tabHeading">Standard</span>
+      </ng-template>
+      <div class="grid row subMain">
+        <div *ngFor="let subscriptionPackage of standardPackages" class="xl:col-4 lg:col-6 md:col-12 sm:col-12 xs:col-12 subContent">
+          <app-subscription [description]="subscriptionPackage.description" [price]="subscriptionPackage.price" [features]="subscriptionPackage.features"></app-subscription>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Header II">
+      <ng-template pTemplate = "header">
+        <span class="tabHeading">Valuer</span>
+      </ng-template>
+      <div class="grid row subMain">
+        <div *ngFor="let subscriptionPackage of valuerPackages" class="xl:col-4 lg:col-6 md:col-12 sm:col-12 xs:col-12 subContent">
+          <app-subscription [description]="subscriptionPackage.description" [price]="subscriptionPackage.price" [features]="subscriptionPackage.features"></app-subscription>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Header III">
+      <ng-template pTemplate = "header">
+        <span class="tabHeading" >Corporate</span>
+      </ng-template>
+      <div class="grid row subMain">
+        <div *ngFor="let subscriptionPackage of corporatePackages"  class="xl:col-4 lg:col-6 md:col-12 sm:col-12 xs:col-12 subContent">
+          <app-subscription [description]="subscriptionPackage.description" [price]="subscriptionPackage.price" [features]="subscriptionPackage.features"></app-subscription>
+        </div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+

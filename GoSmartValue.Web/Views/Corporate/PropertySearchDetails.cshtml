@@ -1,0 +1,97 @@
+﻿@using GoSmartValue.Web.Services
+@model AV.Common.Entities.Comparable
+@inject CachedStorageService CachedStorageService
+
+<div class="outer container-fluid" style="background-image:url(/smilingPhone.jpg);background-size:cover;height:100vh">
+	<div class="middle container-fluid" style="padding-top:75px">
+		<div class=" inner container-fluid">
+
+			<div class="col-sm-12 card">
+				<div class="text-center" style="padding-bottom:20px">
+					<h1>Property search Results</h1>
+				</div>
+				<div class="col-sm-12">
+					<a asp-controller="Corporate" asp-action="PropertySearch"  class="col-sm-2" style="color: #000">Back</a>
+				</div>
+				@if (Model != null)
+				{
+					var localityName = Model.LocalityId.HasValue ? CachedStorageService.GetLocalityName(Model.LocalityId.Value) : null;
+				<div class="row col-sm-12">
+					<div class="col-sm-6">
+						<div class="col-sm-12 row">
+							<div class="col-sm-6 "><label>Plot size:</label> @Model.PlotSize.ToString("0")</div>
+							<div class="col-sm-6 "><label>Metric:</label> @Model.Metric</div>
+						</div>
+						<div class="col-sm-12 row">
+							<div class="col-sm-6 "><label>Zoning:</label> @Model.PropertyType</div>
+							<div class="col-sm-6 "><label>Location:</label> @CachedStorageService.Cities[Model.LocationId]</div>
+						</div>
+						<div class="col-sm-12 row">
+							<div class="col-sm-6 "><label>Locality:</label> @localityName?.Result</div>
+							<div class="col-sm-6 "><label>Street:</label> @Model.StreetName</div>
+						</div>
+						<div class="col-sm-12 row">
+							<div class="col-sm-6 "><label>Land Use:</label> @Model.LandUse</div>
+							<div class="col-sm-6 "></div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="row">
+							<div style="padding:0;width:100%">
+								<label>Previous Transactions</label>
+								<table id="searchResultsTransactions" class="table table-hover">
+									<thead>
+										<tr>
+											<th>Date of Sale</th>
+											<th>Sale Price</th>
+										</tr>
+									</thead>
+									<tbody>
+										@if (Model != null)
+										{
+												<tr>
+													<td>@Model.DateOfSale?.ToString("dd/MM/yyy")</td>
+													<td>@Model.SalePrice?.ToString("0,00.00")</td>
+												</tr>
+											
+										}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12" style="padding:0;width:100%">
+								<label>Bond Information</label>
+								<table id="searchResultsBond" class="table table-hover">
+									<thead>
+										<tr>
+											<th>Title Deed No</th>
+											<th>Bond Number</th>
+											<th>Bond Amount</th>
+											<th>Bank Name</th>
+										</tr>
+									</thead>
+									<tbody>
+										@if (Model != null)
+										{
+												<tr>
+													<td>@Model.TitleDeedNo</td>
+													<td>@Model.BondNumber</td>
+													<td>@Model.BondAmount?.ToString("0,00.00")</td>
+													<td>@Model.BankName</td>
+
+												</tr>
+										}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+					
+				}
+			</div>
+
+		</div>
+	</div>
+</div>

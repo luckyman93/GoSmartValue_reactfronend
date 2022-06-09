@@ -1,0 +1,92 @@
+﻿@model AV.Common.Entities.Comparable
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_Layout";
+}
+
+<h1>Create</h1>
+
+<h4>Comparable details</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AddedOn" class="control-label"></label>
+                <input asp-for="AddedOn" class="form-control" />
+                <span asp-validation-for="AddedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataState" class="control-label"></label>
+                <select asp-for="DataState" class="form-control"></select>
+                <span asp-validation-for="DataState" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfSale" class="control-label"></label>
+                <input asp-for="DateOfSale" class="form-control" />
+                <span asp-validation-for="DateOfSale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalePrice" class="control-label"></label>
+                <input asp-for="SalePrice" class="form-control" />
+                <span asp-validation-for="SalePrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationId" class="control-label"></label>
+                <select asp-for="LocationId" class ="form-control" asp-items="ViewBag.LocationId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocalityId" class="control-label"></label>
+                <select asp-for="LocalityId" class ="form-control" asp-items="ViewBag.LocalityId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="StreetId" class="control-label"></label>
+                <input asp-for="StreetId" class="form-control" />
+                <span asp-validation-for="StreetId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StreetName" class="control-label"></label>
+                <input asp-for="StreetName" class="form-control" />
+                <span asp-validation-for="StreetName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlotSize" class="control-label"></label>
+                <input asp-for="PlotSize" class="form-control" />
+                <span asp-validation-for="PlotSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlotId" class="control-label"></label>
+                <input asp-for="PlotId" class="form-control" />
+                <span asp-validation-for="PlotId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LandUse" class="control-label"></label>
+                <select asp-for="LandUse" class="form-control"></select>
+                <span asp-validation-for="LandUse" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PropertyType" class="control-label"></label>
+                <select asp-for="PropertyType" class="form-control"></select>
+                <span asp-validation-for="PropertyType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlotNo" class="control-label"></label>
+                <input asp-for="PlotNo" class="form-control" />
+                <span asp-validation-for="PlotNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

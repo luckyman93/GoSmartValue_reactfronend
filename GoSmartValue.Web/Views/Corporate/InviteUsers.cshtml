@@ -1,0 +1,128 @@
+﻿@{
+	ViewData["Title"] = "Invite users";
+
+	Layout = "Layouts/_CorporateLayout";
+}
+
+	<div class="col-sm-12 container-fluid image-container set-full-height" style="padding-top: 90px;background-image:url('inviteuser.jpg');background-size:cover;height:10px">
+		<div class="row col-sm-12 form-group" style="background-color:#fff;padding:10px;margin:0">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Email</th>
+						<th>Full Control</th>
+						<th>Issue instructions only</th>
+						<th>View reports only</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<input type="text" id="firstname" name="firstname" class="form-control" placeholder="Firstname" />
+						</td>
+						<td>
+							<input type="text" id="lastname" name="lastname" class="form-control" placeholder="Lastname" />
+						</td>
+						<td>
+							<input type="email" id="email" name="email" class="form-control" placeholder="Email" />
+						</td>
+						<td>
+							<input type="checkbox" class="" />
+						</td>
+						<td>
+							<input type="checkbox" class="" />
+						</td>
+						<td>
+							<input type="checkbox" class="" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			@*<div class="col-sm-3">
+				<p class="col-sm-12" style="text-align:center">User email</p>
+				<div class="row"><input type="email" class="form-control" placeholder="Email" /></div>
+			</div>
+			<div class="col-sm-3" style="text-align:center">
+				<p class="col-sm-12" style="text-align:center">Full Control</p>
+				<input type="checkbox" class="" />
+			</div>
+
+			<div class="col-sm-3" style="text-align:center">
+				<p class="col-sm-12" style="text-align:center">Issue instructions only</p>
+				<input type="checkbox" class="" />
+			</div>
+			<div class="col-sm-3" style="text-align:center">
+				<p class="col-sm-12" style="text-align:center">View reports only</p>
+				<input type="checkbox" class="" />
+			</div>*@
+		</div>
+		<div class="col-sm-12" style="text-align:right;padding:0;margin:0">
+			<button type="submit" id="addUser" class="btn btn-blue">Invite</button>
+		</div>
+
+
+		<div class="row container-fluid form-group">
+			<h6>Current Users</h6>
+		</div>
+		<div class="row container-fluid form-group">
+			<table class="table table-hover table-sm">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Email</th>
+						<th scope="col">Full Control</th>
+						<th scope="col">Issue Instruction only</th>
+						<th scope="col">View Reports only</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<a class=""><i class="fa fa-eye"></i></a>
+
+
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<input type="hidden" id="accountId" value="@Model.Account.Id" />
+	</div>
+<script>
+	$(document).ready(function () {
+
+		$('#addUser').click(function (e) {
+			e.preventDefault(); // <------------------ stop default behaviour of button
+			//variables
+
+			ShowProgress();
+			var newUserData = {
+				AccountId: $('#accountId').val(),
+				Firstname: $('#firstname').val(),
+				Lastname: $('#lastname').val(),
+				Email: $('#email').val(),
+			};
+
+			var element = this;
+			$.post("/Corporate/adduser", newUserData)
+				.done(function (data) {
+					HideProgress();
+					
+					location.reload();
+				},
+					"json"
+				);
+
+		});
+});
+</script>

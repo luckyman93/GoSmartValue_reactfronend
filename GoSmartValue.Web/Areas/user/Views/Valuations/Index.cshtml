@@ -1,0 +1,59 @@
+﻿@using GoSmartValue.Web.Services
+@model ICollection<AV.Contracts.Models.Valuation.ComparableResultViewModel>
+@inject CachedStorageService CachedStorageService
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
+<h1>My Property Valuation Estimates</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th cope="col">
+            Reference No:
+        </th>
+        <th cope="col">
+            Estimated value:
+        </th>
+        <th cope="col">
+            Estimated On:
+        </th>
+        <th cope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var comparable in Model)
+    {
+        <tr>
+            <th scope="row">
+                @Html.DisplayFor(modelItem => comparable.ReferenceNumber)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => $"{comparable.EstimatedValue:C}")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => $"{comparable.EstimatedOn:d}")
+            </td>
+            <td>
+                @Html.ActionLink("Request Report", "FullReportRequest", "Valuations", new { comparableId = comparable.ReferenceNumber }, htmlAttributes: new { @class = "btn btn-success" })|
+                @Html.ActionLink("Delete", "Delete", "Valuations", new { Id = comparable.ReferenceNumber }, htmlAttributes: new { @class = "btn btn-primary" })|
+            </td>
+        </tr>
+        @if (comparable.PropertySaleDetail != null)
+        {
+            <tr>
+                <td colspan="4">
+                    <div>
+                        <h3>Property Summary</h3>
+                        <p>
+                            Plot No: @comparable.PropertySaleDetail.PlotNo | @CachedStorageService.Cities[@comparable.PropertySaleDetail.LocationId]
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

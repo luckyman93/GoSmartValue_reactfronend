@@ -1,0 +1,99 @@
+﻿@using GoSmartValue.Web.Controllers
+@using GoSmartValue.Web.Services
+@model List<AV.Contracts.Models.Valuation.ComparableResultViewModel>
+@inject CachedStorageService CachedStorage
+@{
+	ViewData["Title"] = "Bulk Results View";
+
+	Layout = "Layouts/_CorporateLayout";
+}
+
+<div class="outer container-fluid" style="background-image:url(/valuationsIndex.jpg);background-size:cover;height:100vh">
+	<div class="middle container-fluid" style="padding-top:85px">
+		<div class="inner container-fluid" style="">
+			<div class="shadow col-md-12 container-fluid">
+				<div class="container-fluid " style="padding:10px">
+					<form method="post" asp-controller="Document" asp-action="ExportToExcel">
+						<div style="padding:0;width:100%">
+							<div style="float:right">
+								@*<input type="submit" name="btnExport" class="btn btn-blue" id="btnExport" value="Export" />*@
+								<button type="submit" name="btnExport" class="btn btn-blue" id="btnExport" value="Export"><span class="material-icons">save_alt</span> Download File</button>
+							</div>
+							<table id="instructions" class="table  table-hover">
+								<thead>
+									<tr>
+										<th>Location</th>
+										<th>Locality</th>
+										<th>Plot Number</th>
+										<th>Plot size</th>
+										<th>Estimate</th>
+										<th>Property Type</th>
+										<th>Land use</th>
+										<th>Comparable 1</th>
+										<th>Comparable 2</th>
+										<th>Comparable 3</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var comparable in Model)
+									{
+										{
+											var localityName = comparable.ComparableRequest.LocalityId.HasValue ? CachedStorage.GetLocalityName(comparable.ComparableRequest.LocalityId.Value) : null;
+
+											<tr>
+												<th scope="row">@CachedStorageService.Cities[comparable.ComparableRequest.LocationId]</th>
+												<td>@localityName?.Result</td>
+												<td>@comparable.ComparableRequest.PlotNo</td>
+												<td>@comparable.ComparableRequest.Size?.ToString("0.00")</td>
+												<td>@comparable.EstimatedValue.ToString("0,00.00")</td>
+												<td>@comparable.ComparableRequest.PropertyType</td>
+												<td>
+													@comparable.ComparableRequest.LandUse
+												</td>
+												@foreach (var comp in comparable.Comparables)
+												{
+													<td>
+														@comp.SalePrice.ToString("0,00.00")
+													</td>
+
+												}
+											</tr>
+
+										}
+									}
+
+								</tbody>
+							</table>
+							@{ int count = 0; }
+
+							@foreach (var result in DocumentController.ConvertToExcelRows(Model))
+							{
+								<input type="hidden" name="[@count].Development" value="@result.Development" />
+								<input type="hidden" name="[@count].PlotSize" value="@result.PlotSize" />
+								<input type="hidden" name="[@count].PlotNo" value="@result.PlotNo" />
+								<input type="hidden" name="[@count].Location" value="@result.Location" />
+								<input type="hidden" name="[@count].Locality" value="@result.Locality" />
+								<input type="hidden" name="[@count].Estimate" value="@result.Estimate" />
+								<input type="hidden" name="[@count].Comp1" value="@result.Comp1" />
+								<input type="hidden" name="[@count].Comp2" value="@result.Comp2" />
+								<input type="hidden" name="[@count].Comp3" value="@result.Comp3" />count++;
+							}
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function () {
+		$('#instructions').DataTable({
+			responsive: true
+		});
+
+		$('.dataTables_length').addClass('bs-select');
+
+	});
+</script>

@@ -1,0 +1,27 @@
+
+  <div class="grid">
+    <div class="image-section col-5" style="width:30%">
+      <img [src]="'assets/images/promo/promo-1'" alt="Picture"/>
+    </div>
+
+    <div class="details-section col-8">
+      <p class="header" [ngClass]="classToUse">
+        <i [ngClass]="{'pi pi-star pi pi-star': classToUse == 'blue'}"></i>
+        <i [ngClass]="{'pi pi-star pi pi-star': classToUse == 'black' || classToUse == 'fasttrack' || classToUse == 'green'}"></i>
+        <i [ngClass]="{'pi pi-star pi pi-star': classToUse == 'black' || classToUse == 'fasttrack' || classToUse == 'green'}"></i>
+
+        <i [ngClass]="{'pi pi-star pi pi-star': classToUse == 'white' || classToUse == 'business' || classToUse == 'platinum'}"></i>
+        <i [ngClass]="{'pi pi-star pi pi-star': classToUse == 'white' || classToUse == 'business' || classToUse == 'platinum'}"></i>
+        <i [ngClass]="{'pi pi-star pi pi-star': classToUse == 'white' || classToUse == 'business' || classToUse == 'platinum'}"></i> {{description}}</p>
+      <p class="price">BWP {{price}} p/m</p>
+      <ul class="features">
+        <li  *ngFor="let feature of features | slice:0:5 "><i class="pi pi-check-circle"></i> {{feature.title}}</li>
+        <li  *ngFor="let feature of features | slice:5:100 "><i class="pi pi-check-circle"></i> {{feature.title}}</li>
+      </ul>
+    </div>
+   </div>
+
+  <div class="flex align-items-center justify-content-center center">
+    <button class="button-start"><span>Subscribe</span></button>
+  </div>
+

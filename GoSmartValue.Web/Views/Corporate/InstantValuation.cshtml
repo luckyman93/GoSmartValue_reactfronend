@@ -1,0 +1,242 @@
+﻿@using AV.Common.Entities
+@using GoSmartValue.Web.Services
+
+@model AV.Contracts.Models.Valuation.ComparableRequestViewModel
+@inject CachedStorageService CachedStorageService
+
+
+@{
+    ViewData["Title"] = "Complete Instructions";
+
+    Layout = "Layouts/_CorporateLayout";
+
+
+    SelectList locations = new SelectList(
+        CachedStorageService.Cities
+            .Select(c =>
+                new SelectListItem { Text = c.Value, Value = c.Key.ToString(), Selected = c.Key == 33 })
+        , "Value", "Text", "-");
+
+    var localities = new List<SelectListItem>();
+
+    var streets = new List<SelectListItem>();
+}
+
+<script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.0/dist/latest/bootstrap-autocomplete.min.js"></script>
+    <div class="outer container-fluid image-container set-full-height" style="background-image:url(/valuationsIndex.jpg);">
+        <div class="middle container-fluid" style="padding-top:75px">
+            <div class=" inner container-fluid" style="min-height:500px;margin:auto;max-height:100%;">
+
+                <div class="card shadow col-md-12 container-fluid" style="background-color: #ffffff;height:100%;">
+                    <div class="container-fluid">
+                        <div class="border border-danger" style="margin-bottom:20px;padding:15px">
+                            <div class="row form-group">
+                                
+                                <div class="col-sm-2">
+                                    <div class="autocomplete">
+                                        Town/City<input type="text" asp-for="LocationName" autocomplete="off" tabindex="1"
+                                                        required="required" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="autocomplete">
+                                        Ward<input type="text" asp-for="LocalityName" autocomplete="off" tabindex="2"
+                                                   onfocus="SetLocalities()"
+                                                   class="form-control" />
+                                        <span asp-validation-for="LocalityName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="autocomplete">
+                                        Street<input type="text" asp-for="StreetName" autocomplete="off" required="required" tabindex="3"
+                                                     onfocus="SetStreets()"
+                                                     class="form-control" />
+                                        <span asp-validation-for="StreetName" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <div>
+                                        Plot Number<input asp-for="PlotNo" class="form-control" tabindex="4" />
+                                        <span asp-validation-for="PlotNo" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div>
+                                        Size<input asp-for="Size" type="number" class="form-control" tabindex="5" />
+                                        <span asp-validation-for="Size" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    Development<div class="">
+                                        @Html.DropDownList("PropertyType",
+             new SelectList(CachedStorageService.GetDevelopments()),
+             new { @class = "form-control dropdown", @tabindex = "7" })
+                                        <span asp-validation-for="PropertyType" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <span id="message" style="color:red;font-weight:900"></span>
+                            <form>
+                                <div class="row">
+                                    <div class="p-2"><button type="submit" asp-controller="Corporate" asp-action="ImportInstantValuationFile" class="btn btn-blue">Upload File</button></div>
+                                    <div class="col text-right"><button type="button" id="AddNextEntry" class="btn btn-blue">Add record</button></div>
+                                </div>
+                            </form>
+                        </div>
+                        <form method="post" asp-controller="Corporate" asp-action="InstantValuationResult" enctype="application/x-www-form-urlencoded">
+                            <div class=" col-sm-12 alert alert-dark" role="alert">
+                                <div class="col-sm-12 row">
+                                    <div class="col-sm-6 text-left">
+                                        <h3>Property details</h3>
+                                    </div>
+                                    <div class="col-sm-6 text-right">
+                                        <button type="button" id="deleteAllPropertyDetails" name="deleteAllPropertyDetails" class="btn btn-red">Delete All</button>
+                                        <button type="button" class="delete-row btn btn-red">Delete Row</button>
+                                        <input type="submit" value="Evaluate" class="btn btn-blue" />
+                                    </div>
+                                </div>
+                                <table id="propertyDetails" class="table table-hover table-sm table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Town/City</th>
+                                            <th scope="col">Ward</th>
+                                            <th scope="col">Street</th>
+                                            <th scope="col">Plot Number</th>
+                                            <th scope="col">Size</th>
+                                            <th scope="col">Development</th>
+                                            <th scope="col">Select</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <input type="hidden" asp-for="Comparables" id="comparables" name="comparables" />
+                        </form>
+
+                        </div>
+
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="zeroResultcontainer" tabindex="-1" role="dialog" aria-labelledby="swiffycontainer" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content p-2">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Not Enough Comparables</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <p>
+                            The system could not find enough comparables to generate an estimate,please instruct a
+                            valuer to get a detailed valuation.
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#AddNextEntry').click(function (e) {
+                //e.preventDefault(); // <------------------ stop default behaviour of button
+                //variables
+                
+                let locationName = $('#LocationName').val();
+                let localityName = $('#LocalityName').val();
+                let streetName = $('#StreetName').val();
+                let plotNo = $('#PlotNo').val();
+                let size = $('#Size').val();
+				let proptyType = $('#PropertyType').val();
+
+				if (!locationName || !plotNo || !size) {
+                    $('#message').html('Please ensure all mandatory columns are filled.Mandatory columns include :Location,Plot Number,Plot Size');
+                    return false;
+				};
+
+
+                AddRowToPropertyDetails(locationName, localityName, streetName, plotNo, size, proptyType);
+
+                $('#LocationName').val("");
+                $('#LocalityName').val("");
+                $('#StreetName').val("");
+                $('#PlotNo').val("");
+                $('#Size').val("");
+
+                var comparables = new Array();
+
+                //e.preventDefault();
+                $("#propertyDetails tbody tr").each(function () {
+                    var self = $(this);
+                    var locationName = self.find("td:eq(0)").text().trim();
+                    var localityName = self.find("td:eq(1)").text().trim();
+                    var streetName = self.find("td:eq(2)").text().trim();
+                    var plotNumber = self.find("td:eq(3)").text().trim();
+                    var plotSize = self.find("td:eq(4)").text().trim();
+                    var development = self.find("td:eq(5)").text().trim();
+
+                    comparables.push({
+                        LocationName: locationName,
+                        LocalityName: localityName,
+                        StreetName: streetName,
+                        PlotNo: plotNumber,
+                        Size: plotSize,
+                        PropertyType: development
+                    });
+                    //comparables.push({ 'LocationName': locationName, 'LocalityName': localityName, 'StreetName': streetName, 'PlotNo': plotNumber, 'Size': plotSize, 'PropertyType': development });
+
+                });
+                console.log(comparables)
+                $('#comparables').val(JSON.stringify(comparables));
+                var value = $('#comparables').val(); //retrieve array
+                comparables = JSON.stringify(comparables);
+
+                console.log(value)
+
+            });
+
+
+
+            $('#deleteAllPropertyDetails').click(function (e) {
+                e.preventDefault(); // <------------------ stop default behaviour of button
+                //variables
+                $('#propertyDetails').find('tbody').empty();
+            });
+
+            // Find and remove selected table rows
+            $(".delete-row").click(function () {
+                $("table tbody").find('input[name="record"]').each(function () {
+                    if ($(this).is(":checked")) {
+                        $(this).parents("tr").remove();
+                    }
+                });
+            });
+        });
+
+        function AddRowToPropertyDetails(locationName, localityName, streetName, plotNo, size, proptyType) {
+
+            let propertyRow = '<tr><td>' + locationName + '</td><td>' + localityName + '</td><td>' + streetName + '</td><td>' + plotNo + '</td><td>' + size + '</td><td>' + proptyType + '</td><td><input type="checkbox" name="record"></td></tr> ';
+
+            // find the tbody in the proptyDetails table and append a row
+            $('#propertyDetails').find('tbody').append(propertyRow);
+
+
+        }
+
+        function ZeroResult() {
+            $('#zeroResultcontainer').modal('show');
+        }
+    </script>
+
+    <script type="text/javascript" src="~/js/valuations.min.js"></script>

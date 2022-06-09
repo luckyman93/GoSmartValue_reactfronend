@@ -1,0 +1,66 @@
+﻿@model IEnumerable<GoSmartValue.Web.ViewModels.LandRateViewModel>
+@{
+	ViewData["Title"] = "Land Rates";
+
+	Layout = "Layouts/_CorporateLayout";
+}
+
+<div class="outer container-fluid image-container set-full-height" style="background-image:url(/valuationsIndex.jpg);">
+	<div class="middle container-fluid" style="padding-top:75px">
+		<div class=" inner container-fluid">
+
+			<div class="shadow col-md-12 container-fluid">
+				<div class="container-fluid" style="padding:10px">
+					<div style="padding:0;width:100%">
+						<h1>Land Rates</h1>
+						<table id="instructions" class="table  table-hover">
+							<thead>
+								<tr>
+									<th>Country</th>
+									<th>District</th>
+									<th>Location</th>
+									<th>Locality</th>
+									<th>Low Income</th>
+									<th>Middle Income</th>
+									<th>High Income</th>
+									<th>Average rate</th>
+									<th>Metric</th>
+									<th>Zoning</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var landrate in Model.OrderBy(item => item.Location.Name))
+								{
+								    <tr>
+										<td>@landrate?.Country?.Name</td>
+										<td>@landrate?.District?.Name</td>
+										<td>@landrate?.Location?.Name</td>
+										<td>@landrate?.Locality?.Name</td>
+										<td>@landrate.LowIncome</td>
+										<td>@landrate.MiddleIncome</td>
+										<td>@landrate.HighIncome</td>
+										<td>@landrate.AveragePrice?.ToString("0.00")</td>
+										<td>@landrate.Metric</td>
+										<td>@landrate.Zoning</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+						<p style="font-style:italic">generated through www.gosmartvalue.com</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+    $(document).ready(function () {
+         $('#instructions').DataTable({
+            responsive: true
+		});
+        $('.dataTables_length').addClass('bs-select');
+
+    });
+</script>
+

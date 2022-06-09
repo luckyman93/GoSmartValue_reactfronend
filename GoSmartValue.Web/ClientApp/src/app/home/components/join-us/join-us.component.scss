@@ -1,0 +1,80 @@
+section{
+  max-width:300rem;
+}
+
+.section-title {
+  text-align: center;
+  font: normal normal 300 50px/65px Gilroy Regular;
+  color: #1A2E49;
+  opacity: 1;
+  text-decoration: underline #FF8800;
+  text-underline-offset: 1rem;
+  margin-top:2rem;
+}
+
+.section-sub-title {
+  text-align: left;
+  font: normal normal 200 2rem/2.5rem Gilroy Heavy;
+  opacity: 1;
+  margin-left: 1rem;
+}
+
+.section-description {
+  text-align: center;
+  font: normal normal 200 25px/65px Gilroy Regular;
+  opacity: 1;
+}
+
+.section-sub-description {
+  text-align: left;
+  font: normal normal 200 1.6rem/3rem Gilroy Regular;
+  opacity: 1;
+  margin-left:1rem;
+}
+
+.join-us {
+  overflow:hidden;
+}
+
+.join-us-text .image-container {
+  overflow:hidden;
+  white-space: nowrap;
+}
+
+.blue-container, .image-container, img {
+  min-height:40rem;
+  height: auto;
+}
+
+.image-container, img {
+  height: 40rem;
+}
+
+@media all and (max-width: 1024px) {
+  .image-container, img {
+    display:none;
+    height:0;
+  }
+
+  .section-sub-title {
+    text-align: center;
+    margin-left: 1rem;
+  }
+
+  .section-sub-description {
+    text-align: center;
+    margin-left:1rem;
+  }
+}
+
+.button-start {
+  width: 300px;
+  height: 78px;
+  font: normal normal 200 25px/65px Gilroy Heavy;
+  color: #ffffff;
+  background: #FD4F64 0% 0% no-repeat padding-box;
+  border: 1px solid #FEDDE0;
+  border-radius: 14px;
+  opacity: 1;
+  margin-bottom: 1rem;
+}

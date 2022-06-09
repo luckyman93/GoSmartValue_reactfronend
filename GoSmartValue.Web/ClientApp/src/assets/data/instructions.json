@@ -1,0 +1,37 @@
+{
+    "instructions": [
+        {
+            "Id" : "08d7e21c-12ac-6710-72ac-6101465f18fc",
+            "LocationId" : "33",
+            "ValuerId": "08d7d89a-6913-c9be-7a9a-c8219044cde6",
+            "Status":  "2",
+            "AccountId": "08d7db85-0327-90dd-7458-4e5976565963",
+            "AccessContactMobileNumber": "",
+            "AccessContactName":"",
+            "LocalityId": "57",
+            "LocalityName" :"",
+            "LocationName" :  "GABORONE",
+            "PlotNumber" : "19210",
+            "PreferredAccessDate": "2020-04-17 00:00:00.000000",
+            "IssuerId": "08d7d61e-4baf-db42-8109-254fc66a5715",
+            "CreatedDate":  "2020-04-16 15:37:29.647175",
+            "UpdatedDate":  "2020-06-18 15:10:13.532984",
+            "Comment":"",
+            "CanBeReIssued": 1,
+            "ParentInstructionId":"",
+            "AppointmentStatus": 0,
+            "ValuerAccepted": 1,
+            "UpdatedBy": "08d7d89a-6913-c9be-7a9a-c8219044cde6",
+            "ClientName": "LOYD SUNGIRIRAI",
+            "ClientMobileNumber":71880898,
+            "ClientOrganisationName" :"",
+            "StreetId": 0,
+            "StreetName" :"",
+            "ValuationId": "08d7e21c-12ac-6710-72ac-6101465f18fc",
+            "WhatsAppNumber" :"",
+            "IsVideoWalkthroughPossible": 0,
+            "Cost": 0,
+            "paymentStatus": 0
+        }
+    ]
+}

@@ -1,0 +1,119 @@
+[
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "assets/css/site.min.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/font-awesome.min.css",
+    "inputFiles": [
+      "Content/css/font-awesome.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/editor.dataTables.min.css",
+    "inputFiles": [
+      "assets/css/components/tables/editor.dataTables.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/print-preview.min.css",
+    "inputFiles": [
+      "assets/css/print-preview.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/bootstrap-bundle.min.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      //"wwwroot/css/nouislider.min.css",
+      "assets/css/bootstrap.min.css",
+      //"wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "assets/css/material-bootstrap-wizard.css",
+      "wwwroot/css/bootstrap-datepicker.min.css",
+      //"wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "wwwroot/lib/DataTables-1.10.20/css/dataTables.bootstrap.min.css",
+      "wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "Content/css/bootstrap-select.css",
+      "Content/css/datatables.css",
+      "assets/css/material-kit.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/mdb.min.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap-material/css/mdb.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "Scripts/js/site.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/jquery.print-preview.min.js",
+    "inputFiles": [
+      "Scripts/jquery.print-preview.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/valuations.min.js",
+    "inputFiles": [
+      "Scripts/js/valuations.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/bootstrap-bundle.min.js",
+    "inputFiles": [
+      "scripts/js/bootstrap.bundle.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/font-awesome.min.js",
+    "inputFiles": [
+      "Scripts/js/font-awesome.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/common.min.js",
+    "inputFiles": [
+      "Scripts/js/common.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/jquery.circle-progress.bare.js",
+    "inputFiles": [ "Scripts/js/jquery.circle-progress.bare.js" ]
+  },
+  {
+    "outputFileName": "wwwroot/js/googlecharts.js",
+    "inputFiles": [ "assets/js/loader.js" ]
+  },
+  {
+    "outputFileName": "wwwroot/js/jquery.circle-progress.js",
+    "inputFiles": [ "Scripts/js/jquery.circle-progress.js" ]
+  },
+  {
+    "outputFileName": "wwwroot/js/jquery-bundle.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery/dist/jquery.min.js",
+      "Scripts/js/popper.js",
+      "assets/js/jquery.rating.js",
+      "assets/js/bootstrap-material-design.min.js",
+      "wwwroot/lib/jquery-ui/jquery.timepicker.min.js",
+      "wwwroot/lib/DataTables-1.10.20/js/jquery.dataTables.js",
+      "wwwroot/lib/DataTables-1.10.20/js/dataTables.responsive.min.js",
+      "wwwroot/js/bootstrap-datepicker.min.js",
+      "assets/js/bootstrap.min.js",
+      "assets/js/jquery.bootstrap.js",
+      "assets/js/material-bootstrap-wizard.js",
+      "wwwroot/js/nouislider.min.js",
+      "assets/js/material-kit.min.js",
+      "wwwroot/js/jquery.circle-progress.min.js",
+      "wwwroot/lib/jquery-validate/jquery.validate.js",
+      "wwwroot/lib/jquery-validate/additional-methods.js",
+      "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+    ]
+  }
+]

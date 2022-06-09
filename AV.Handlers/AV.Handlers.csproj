@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="CsvHelper" Version="27.2.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AV.Common\AV.Common.csproj" />
+    <ProjectReference Include="..\AV.Persistence.EntityFramework\AV.Persistence.EntityFramework.csproj" />
+    <ProjectReference Include="..\AV.Contracts\AV.Contracts.csproj" />
+    <ProjectReference Include="..\AV.Persistence\AV.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

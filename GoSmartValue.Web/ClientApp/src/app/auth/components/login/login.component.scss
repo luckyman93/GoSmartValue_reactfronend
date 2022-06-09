@@ -1,0 +1,57 @@
+.p-field {
+  margin-top: 2rem;
+  width:100%;
+}
+
+input{
+  width: 80%
+}
+
+.welcome, .passWord{
+  font: normal normal 200 1.4rem Gilroy Regular;
+}
+
+i {
+  width: 1.5rem !important;
+  font-size: 1.5rem !important;
+}
+
+.button-login {
+  width: 80%;
+  height: 78px;
+  font: normal normal 200 1.83rem Gilroy Heavy;
+  color: #ffffff;
+  background: #FD4F64 0% 0% no-repeat padding-box;
+  border: 1px solid #FEDDE0;
+  border-radius: 14px;
+  opacity: 1;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+
+input{
+  font: normal normal 200 1.83rem Gilroy Regular;
+  font-size: 1rem;
+  color: #000001;
+  background: #ffffff;
+  padding: 1rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.38);
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
+  appearance: none;
+  border-radius: 4px;
+}
+
+a{
+  padding-top:1rem;
+  color:dodgerblue;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: none;
+}

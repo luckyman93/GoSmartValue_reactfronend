@@ -1,0 +1,29 @@
+<form [formGroup]="profileEditForm" (ngSubmit)="editProfileDetails()">
+  <div class="p-field">
+      <span class="p-float-label">
+          <input type="text" id="firstName" formControlName="firstName" pInputText>
+          <label for="firstName">First Name</label>
+          <p class="p-error" *ngIf="f.firstName.hasError('required') && f.firstName.dirty">First Name is required.</p>
+      </span>
+  </div>
+
+  <div class="p-field">
+      <span class="p-float-label">
+          <input type="text" id="lastName" formControlName="lastName" pInputText>
+          <label for="lastName">Last Name</label>
+          <p class="p-error" *ngIf="f.lastName.hasError('required') && f.lastName.dirty">Last Name is required.</p>
+      </span>
+  </div>
+
+  <div class="p-field">
+      <span class="p-float-label">
+          <input type="text" id="phoneNumber" formControlName="phoneNumber" pInputText>
+          <label for="phoneNumber">Phone</label>
+          <p class="p-error" *ngIf="f.phoneNumber.hasError('required') && f.phoneNumber.dirty">Phone Number is required.</p>
+      </span>
+  </div>
+
+  <div class="flex align-items-center">
+    <button class="button-save" [disabled] = "!profileEditForm.valid">Save</button>
+  </div>
+</form>
